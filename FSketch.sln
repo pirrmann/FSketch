@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSketch", "FSketch\FSketch.fsproj", "{6945C705-AF0A-41D5-9772-2BBB62FE4497}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSketch.Winforms", "FSketch.Winforms\FSketch.Winforms.fsproj", "{EE35567D-2EBD-4858-B705-5950BFB4C39D}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test", "Test\Test.fsproj", "{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6945C705-AF0A-41D5-9772-2BBB62FE4497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6945C705-AF0A-41D5-9772-2BBB62FE4497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6945C705-AF0A-41D5-9772-2BBB62FE4497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6945C705-AF0A-41D5-9772-2BBB62FE4497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE35567D-2EBD-4858-B705-5950BFB4C39D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE35567D-2EBD-4858-B705-5950BFB4C39D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE35567D-2EBD-4858-B705-5950BFB4C39D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE35567D-2EBD-4858-B705-5950BFB4C39D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
