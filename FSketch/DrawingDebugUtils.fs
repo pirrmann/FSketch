@@ -131,9 +131,19 @@ module internal DrawingDebugUtilsInternal =
     let fromClosedShape mapper (options:ListDrawerOptions) =
         mapper >> toShape options >> (at origin) >> List.singleton
 
+    let defaultFormatter o = Text(sprintf "%A" o, Brushes.Black)
+    let defaultDebugShapes o =
+        match box o with
+        | :? string as s -> [RefSpace.Origin, Text(s, Brushes.Black)]
+        | :? char as c -> [RefSpace.Origin, Text(c.ToString(), Brushes.Black)]
+        | _ -> [RefSpace.Origin, defaultFormatter o]
+
 open DrawingDebugUtilsInternal
 
 type DrawingDebugUtils =
+
+    static member FromList<'a> (?options: ListDrawerOptions) : 'a list -> Shapes =
+        Transform options (fromShapes defaultDebugShapes)
 
     static member FromList<'a> (mapper: 'a -> Shapes, ?options: ListDrawerOptions) =
         Transform options (fromShapes mapper)
@@ -147,6 +157,9 @@ type DrawingDebugUtils =
     static member FromList<'a> (mapper: 'a -> ClosedShape, ?options: ListDrawerOptions) =
         Transform options (fromClosedShape mapper)
 
+    static member FromArray2D<'a> (?options: ListDrawerOptions) : 'a[,] -> Shapes =
+        Transform2D options (fromShapes defaultDebugShapes)
+
     static member FromArray2D<'a> (mapper: 'a -> Shapes, ?options: ListDrawerOptions) =
         Transform2D options (fromShapes mapper)
 
@@ -158,3 +171,7 @@ type DrawingDebugUtils =
 
     static member FromArray2D<'a> (mapper: 'a -> ClosedShape, ?options: ListDrawerOptions) =
         Transform2D options (fromClosedShape mapper)
+
+    static member AutoDraw(list) = DrawingDebugUtils.FromList() list
+    static member AutoDraw(array2D) = DrawingDebugUtils.FromArray2D() array2D
+    static member AutoDraw(o:obj) = defaultDebugShapes o
