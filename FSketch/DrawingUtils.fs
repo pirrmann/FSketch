@@ -1,7 +1,18 @@
 ﻿namespace FSketch
 
 module DrawingUtils =
-    
+
+    let measureText =    
+        let i = new System.Drawing.Bitmap(1, 1)
+        let g = System.Drawing.Graphics.FromImage(i)
+        g.TextRenderingHint <- System.Drawing.Text.TextRenderingHint.AntiAlias
+
+        let font = new System.Drawing.Font("Arial", 12.f)
+
+        fun text ->
+            let size = g.MeasureString(text, font)
+            float size.Width, float size.Height
+
     let boundariesReducer b1 b2 =
         match b1, b2 with
         | Some (left1, top1, right1, bottom1), Some (left2, top2, right2, bottom2) ->
@@ -40,7 +51,14 @@ module DrawingUtils =
                 1., 1.
                 0., 1.
             ]
-        
+        | Text (text, _) ->
+            let w, h = measureText text
+            [
+                -w/2., -h/2.
+                w/2. , -h/2.
+                w/2. , h/2.
+                -w/2., h/2.
+            ]        
 
     let computeShapeBoundingBox (refSpace, shape) =
         let boundingPolygon =

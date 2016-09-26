@@ -17,6 +17,7 @@ module Dsl =
     let withFill brush (space, shape) = space, ClosedShape(shape, Fill(brush))
     let withContourAndFill (pen, brush) (space, shape) = space, ClosedShape(shape, ContourAndFill(pen, brush))
     let withPen pen (space, path) = space, Path(path, pen)
+    let writtenWith brush (space, text) = space, Text(text, brush)
 
     let transform matrix refSpace = RefSpace.Transform(matrix) + refSpace
 

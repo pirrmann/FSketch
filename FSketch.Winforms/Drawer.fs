@@ -82,6 +82,11 @@ let drawShape (graphics:Graphics) (space:RefSpace, shape:Shape) =
         let graphicsPath = path |> toSystemPath 
         use pen = pen |> toSystemPen
         graphics.DrawPath(pen, graphicsPath)
+    | Text(text, brush) ->
+        let w, h = measureText text
+        use font = new Font("Arial", 12.f)
+        use brush = brush |> toSystemBrush
+        graphics.DrawString(text, font, brush, new PointF(single(-w/2.), single(-h/2.)))
 
 let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
 
@@ -97,6 +102,8 @@ let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
                 double displayWidth / (right - left)
 
         graphics.SmoothingMode <- SmoothingMode.HighQuality
+        graphics.TextRenderingHint <- Text.TextRenderingHint.AntiAlias
+
         for shape in shapes |> Seq.sortBy (fun (s, _) -> s.z) do
             graphics.ResetTransform()
             graphics.TranslateTransform(single width/2.f, single height/2.f)

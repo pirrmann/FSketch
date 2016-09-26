@@ -82,6 +82,7 @@ type DrawType =
 
 type Shape =
     | ClosedShape of ClosedShape * DrawType
-    | Path of Path * Pen with
+    | Path of Path * Pen
+    | Text of string * Brush with
     override this.ToString() = sprintf "%A" this
 and Shapes = (RefSpace * Shape) list

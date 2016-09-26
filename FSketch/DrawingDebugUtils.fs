@@ -2,7 +2,7 @@
 
 open Dsl
 
-type GridCellSizes = | SameHeight | SameWidth | AllSquare | Unconstrained
+type GridCellSizes = | SameHeight | SameWidth | AllSame | AllSquare | Unconstrained
 
 type ListDrawerOptions (?defaultPen:Pen,
                         ?defaultBrush:Brush,
@@ -57,24 +57,31 @@ module internal DrawingDebugUtilsInternal =
                     yield (cellLeft + cellRight) / 2., cellRight - cellLeft }
                 |> Seq.toArray
 
-            let adjustLimits limits =
-                let maxSpace = limits |> Seq.map snd |> Seq.max
+            let adjustLimits maxSpace limits =
+                let maxSpace =
+                    match maxSpace with
+                    | Some m -> m
+                    | None -> limits |> Seq.map snd |> Seq.max
                 limits
                 |> Array.map (fun (center, space) -> center, maxSpace)
 
             match options.GridCellSizes with
-            | AllSquare ->
-                rowLimits |> adjustLimits,
-                colLimits |> adjustLimits
-            | SameHeight ->
-                rowLimits |> adjustLimits,
-                colLimits
-            | SameWidth ->
-                rowLimits,
-                colLimits |> adjustLimits
             | Unconstrained ->
                 rowLimits,
                 colLimits
+            | SameHeight ->
+                rowLimits |> adjustLimits None,
+                colLimits
+            | SameWidth ->
+                rowLimits,
+                colLimits |> adjustLimits None
+            | AllSame ->
+                rowLimits |> adjustLimits None,
+                colLimits |> adjustLimits None
+            | AllSquare ->
+                let maxSpace =  [rowLimits; colLimits] |> Seq.concat |> Seq.map snd |> Seq.max
+                rowLimits |> adjustLimits (Some maxSpace),
+                colLimits |> adjustLimits (Some maxSpace)
 
         [
             for y in 0 .. maxY do
