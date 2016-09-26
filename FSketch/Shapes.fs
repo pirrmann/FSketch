@@ -80,9 +80,11 @@ type DrawType =
     member x.Brush = match x with | Fill(b) | ContourAndFill(_, b) -> Some b | _ -> None
     override this.ToString() = sprintf "%A" this
 
+type Text = { Text:string; Size: float }
+
 type Shape =
     | ClosedShape of ClosedShape * DrawType
     | Path of Path * Pen
-    | Text of string * Brush with
+    | Text of Text * Brush with
     override this.ToString() = sprintf "%A" this
 and Shapes = (RefSpace * Shape) list

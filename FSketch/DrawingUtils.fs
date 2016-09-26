@@ -7,10 +7,9 @@ module DrawingUtils =
         let g = System.Drawing.Graphics.FromImage(i)
         g.TextRenderingHint <- System.Drawing.Text.TextRenderingHint.AntiAlias
 
-        let font = new System.Drawing.Font("Arial", 12.f)
-
         fun text ->
-            let size = g.MeasureString(text, font)
+            use font = new System.Drawing.Font("Arial", single text.Size)
+            let size = g.MeasureString(text.Text, font)
             float size.Width, float size.Height
 
     let boundariesReducer b1 b2 =

@@ -131,11 +131,11 @@ module internal DrawingDebugUtilsInternal =
     let fromClosedShape mapper (options:ListDrawerOptions) =
         mapper >> toShape options >> (at origin) >> List.singleton
 
-    let defaultFormatter o = Text(sprintf "%A" o, Brushes.Black)
+    let defaultFormatter o = Text(text "%A" o, Brushes.Black)
     let defaultDebugShapes o =
         match box o with
-        | :? string as s -> [RefSpace.Origin, Text(s, Brushes.Black)]
-        | :? char as c -> [RefSpace.Origin, Text(c.ToString(), Brushes.Black)]
+        | :? string as s -> [RefSpace.Origin, Text(text "%s" s, Brushes.Black)]
+        | :? char as c -> [RefSpace.Origin, Text(text "%O" c, Brushes.Black)]
         | _ -> [RefSpace.Origin, defaultFormatter o]
 
 open DrawingDebugUtilsInternal

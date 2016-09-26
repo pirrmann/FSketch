@@ -84,9 +84,9 @@ let drawShape (graphics:Graphics) (space:RefSpace, shape:Shape) =
         graphics.DrawPath(pen, graphicsPath)
     | Text(text, brush) ->
         let w, h = measureText text
-        use font = new Font("Arial", 12.f)
+        use font = new Font("Arial", single text.Size)
         use brush = brush |> toSystemBrush
-        graphics.DrawString(text, font, brush, new PointF(single(-w/2.), single(-h/2.)))
+        graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.)))
 
 let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
 

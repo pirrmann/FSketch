@@ -12,6 +12,8 @@ module Dsl =
     let bezierTo (x, y) (tx1, ty1) (tx2, ty2) = Bezier(Vector(x, y), Vector(tx1, ty1), Vector(tx2, ty2))
     let toPath = CompositePath
     let toClosedPath = CompositePath >> ClosedPath
+    let text format = Printf.ksprintf (fun s -> { Text = s; Size = 10. }) format
+    let withSize size text = { text with Size = size }
 
     let withContour pen (space, shape) = space, ClosedShape(shape, Contour(pen))
     let withFill brush (space, shape) = space, ClosedShape(shape, Fill(brush))

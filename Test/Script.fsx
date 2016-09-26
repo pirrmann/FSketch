@@ -40,15 +40,15 @@ let products =
         | 0, i
         | i, 0 ->
             [
-                sprintf "%X" i |> at origin |> writtenWith Brushes.Blue
+                text "%X" i |> at origin |> writtenWith Brushes.Blue
             ]
         | i, j when i = j ->
             [
-                sprintf "%X" (i*j) |> at origin |> writtenWith Brushes.Red
+                text "%X" (i*j) |> at origin |> writtenWith Brushes.Red
             ]
         | i, j ->
             [
-                sprintf "%X" (i*j) |> at origin |> writtenWith Brushes.Black
+                text "%X" (i*j) |> at origin |> writtenWith Brushes.Black
             ]
 
     Array2D.init 17 17 (fun x y -> x, y)
@@ -61,3 +61,9 @@ let testWithDefaultFormatter =
 let aliceWonderlandCypherTable =
     Array2D.init 27 27 (fun x y -> if x = 0 && y = 0 then ' ' else (x + y - 1) % 26 + (int 'A') |> char)
     |> DrawingDebugUtils.AutoDraw
+
+let testWithTextSizes = 
+    Array2D.init 8 8 (fun x y -> x * y + 40)
+    |> DrawingDebugUtils.FromArray2D((fun size -> [circle (float size + 15.) |> at origin |> withContourAndFill(Pens.Black, Brushes.Blue)
+                                                   text "%i" size |> withSize (float size) |> at origin |> writtenWith Brushes.White]),
+                                     ListDrawerOptions(bordersEnabled = false))
