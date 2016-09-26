@@ -4,7 +4,13 @@ open Dsl
 
 type GridCellSizes = | SameHeight | SameWidth | AllSquare | Unconstrained
 
-type ListDrawerOptions (?defaultPen:Pen, ?defaultBrush:Brush, ?bordersEnabled:bool, ?bordersPen:Pen, ?gridCellSizes:GridCellSizes) =
+type ListDrawerOptions (?defaultPen:Pen,
+                        ?defaultBrush:Brush,
+                        ?bordersEnabled:bool,
+                        ?bordersPen:Pen,
+                        ?gridCellSizes:GridCellSizes,
+                        ?alwaysCenterOnOrigin:bool) =
+
     let defaultPen = defaultArg defaultPen Pens.Black
 
     member val DefaultPen = defaultPen
@@ -12,6 +18,7 @@ type ListDrawerOptions (?defaultPen:Pen, ?defaultBrush:Brush, ?bordersEnabled:bo
     member val BordersEnabled = defaultArg bordersEnabled true
     member val BordersPen = defaultArg bordersPen defaultPen
     member val GridCellSizes = defaultArg gridCellSizes AllSquare
+    member val AlwaysCenterOnOrigin = defaultArg alwaysCenterOnOrigin false
     
     static member Default = ListDrawerOptions()
 
@@ -23,7 +30,7 @@ module internal DrawingDebugUtilsInternal =
 
         let shapesAndBoundaries =
             itemsShapes
-            |> Array2D.map (fun shapes -> shapes, DrawingUtils.computeBoundingBox shapes)
+            |> Array2D.map (fun shapes -> shapes, DrawingUtils.computeBoundingBox options.AlwaysCenterOnOrigin shapes)
 
         let getMaxBoundaries xRange yRange =
             seq {
@@ -33,48 +40,61 @@ module internal DrawingDebugUtilsInternal =
             |> Seq.map snd
             |> Seq.reduce DrawingUtils.boundariesReducer
 
-        let rowHeights, colWidths =
-            let rowHeights' =
+        let rowLimits, colLimits =
+            let rowLimits =
                 seq {
                     for y in [0..maxY] do
-                    let _, cellTop, _, cellBottom = getMaxBoundaries [0..maxX] [y..y]
-                    yield cellBottom - cellTop }
+                    let _, cellTop, _, cellBottom =
+                        defaultArg (getMaxBoundaries [0..maxX] [y..y]) (0., 0., 0., 0.)
+                    yield (cellTop + cellBottom) / 2., cellBottom - cellTop }
                 |> Seq.toArray
 
-            let colWidths' =
+            let colLimits =
                 seq {
                     for x in [0..maxX] do
-                    let cellLeft, _, cellRight, _ = getMaxBoundaries [x..x] [0..maxY]
-                    yield cellRight - cellLeft }
+                    let cellLeft, _, cellRight, _ =
+                        defaultArg (getMaxBoundaries [x..x] [0..maxY]) (0., 0., 0., 0.)
+                    yield (cellLeft + cellRight) / 2., cellRight - cellLeft }
                 |> Seq.toArray
+
+            let adjustLimits limits =
+                let maxSpace = limits |> Seq.map snd |> Seq.max
+                limits
+                |> Array.map (fun (center, space) -> center, maxSpace)
 
             match options.GridCellSizes with
             | AllSquare ->
-                let maxHeight, maxWidth = Seq.max rowHeights', Seq.max colWidths'
-                rowHeights' |> Array.map (fun _ -> maxHeight), colWidths' |> Array.map (fun _ -> maxWidth)
+                rowLimits |> adjustLimits,
+                colLimits |> adjustLimits
             | SameHeight ->
-                let maxHeight = Seq.max rowHeights'
-                rowHeights' |> Array.map (fun _ -> maxHeight), colWidths'
+                rowLimits |> adjustLimits,
+                colLimits
             | SameWidth ->
-                let maxWidth = Seq.max colWidths'
-                rowHeights', colWidths' |> Array.map (fun _ -> maxWidth)
+                rowLimits,
+                colLimits |> adjustLimits
             | Unconstrained ->
-                rowHeights', colWidths'
+                rowLimits,
+                colLimits
 
         [
             for y in 0 .. maxY do
             for x in 0 .. maxX do
-                let shapes, (shapesLeft, shapesTop, shapesRight, shapesBottom) = shapesAndBoundaries.[y, x]
+                let shapes, shapesBoundaries = shapesAndBoundaries.[y, x]
 
-                let shift =
-                    colWidths |> Seq.take x |> Seq.sum,
-                    rowHeights |> Seq.take y |> Seq.sum
+                let (shiftX, shiftY) as shift =
+                    (colLimits |> Seq.take x |> Seq.map snd |> Seq.sum) + (snd colLimits.[x] - snd colLimits.[0]) / 2.,
+                    (rowLimits |> Seq.take y |> Seq.map snd |> Seq.sum) + (snd rowLimits.[y] - snd rowLimits.[0]) / 2.
 
-                for shape in shapes do
-                    if options.BordersEnabled then
-                        yield rectangle (colWidths.[x], rowHeights.[y]) |> at shift |> withContour options.BordersPen
+                if options.BordersEnabled then
+                    yield rectangle (snd colLimits.[x], snd rowLimits.[y]) |> at shift |> withContour options.BordersPen
 
-                    yield shape |> translatedBy shift
+                match shapesBoundaries with
+                | Some (shapesLeft, shapesTop, shapesRight, shapesBottom) ->
+                    let centerX, centerY = fst colLimits.[x], fst rowLimits.[y]
+                    let shapesShift = shiftX - centerX, shiftY - centerY
+                    for shape in shapes do
+                        yield shape |> translatedBy shapesShift
+                | None -> ()
         ]
 
     let Transform options mapper input =

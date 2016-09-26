@@ -85,22 +85,22 @@ let drawShape (graphics:Graphics) (space:RefSpace, shape:Shape) =
 
 let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
 
-    let left, top, right, bottom = computeBoundingBox shapes
+    match computeBoundingBox false shapes with
+    | None -> ()
+    | Some (left, top, right, bottom) -> 
 
-    let displayWidth, displayHeight = width - 50, height - 50
-    let scaleRatio =
-        if (right - left) / (bottom - top) < (double displayWidth / double displayHeight) then
-            double displayHeight / (bottom - top)
-        else
-            double displayWidth / (right - left)
+        let displayWidth, displayHeight = width - 50, height - 50
+        let scaleRatio =
+            if (right - left) / (bottom - top) < (double displayWidth / double displayHeight) then
+                double displayHeight / (bottom - top)
+            else
+                double displayWidth / (right - left)
 
-    graphics.SmoothingMode <- SmoothingMode.HighQuality
-    for shape in shapes |> Seq.sortBy (fun (s, _) -> s.z) do
+        graphics.SmoothingMode <- SmoothingMode.HighQuality
+        for shape in shapes |> Seq.sortBy (fun (s, _) -> s.z) do
+            graphics.ResetTransform()
+            graphics.TranslateTransform(single width/2.f, single height/2.f)
+            graphics.ScaleTransform(single scaleRatio, single scaleRatio)
+            graphics.TranslateTransform(-(single left + single right)/2.f, -(single top + single bottom)/2.f)
+            shape |> drawShape graphics
         graphics.ResetTransform()
-        graphics.TranslateTransform(single width/2.f, single height/2.f)
-        graphics.ScaleTransform(single scaleRatio, single scaleRatio)
-        graphics.TranslateTransform(-(single left + single right)/2.f, -(single top + single bottom)/2.f)
-        shape |> drawShape graphics
-
-    graphics.ResetTransform()
-
