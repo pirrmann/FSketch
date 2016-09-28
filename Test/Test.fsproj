@@ -54,7 +54,9 @@
   <ItemGroup>
     <Compile Include="DrawingDebugUtilsTests.fs" />
     <Compile Include="Program.fs" />
-    <None Include="Script.fsx" />
+    <None Include="Sandbox.fsx" />
+    <None Include="ToolsForIntro.fsx" />
+    <None Include="Intro.fsx" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

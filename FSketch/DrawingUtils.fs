@@ -22,6 +22,27 @@ module DrawingUtils =
 
     let minMaxReducer (min1, max1) (min2, max2) = min min1 min2, max max1 max2
 
+    let getPathPoints path =
+        //TODO: get boundaries points, not only for lines (this means handle the Bezier case for real)
+        let offset = ref Vector.Zero
+        let toPoint (Vector(x, y)) = x, y
+        let rec getPoints path = seq {
+            for segment in path do
+            match segment with
+            | Line v ->
+                offset := !offset + v
+                yield !offset |> toPoint
+            | Bezier (v, _, _) ->
+                offset := !offset + v
+                yield !offset |> toPoint
+            | CompositePath (path) ->
+                yield! getPoints path }
+
+        [
+            yield !offset |> toPoint
+            yield! getPoints [path]
+        ]
+
     let computeBoundingPolygon shape =
         match shape with
         | ClosedShape (cs, _) ->
@@ -34,22 +55,8 @@ module DrawingUtils =
                     w/2. , h/2.
                     -w/2., h/2.
                 ]
-            | ClosedPath p ->
-                //TODO
-                [
-                    0., 0.
-                    1., 0.
-                    1., 1.
-                    0., 1.
-                ]
-        | Path (p, _) ->
-            //TODO
-            [
-                0., 0.
-                1., 0.
-                1., 1.
-                0., 1.
-            ]
+            | ClosedPath p -> getPathPoints p
+        | Path (p, _) -> getPathPoints p
         | Text (text, _) ->
             let w, h = measureText text
             [
