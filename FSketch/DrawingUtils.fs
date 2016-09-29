@@ -23,7 +23,6 @@ module DrawingUtils =
     let minMaxReducer (min1, max1) (min2, max2) = min min1 min2, max max1 max2
 
     let getPathPoints path =
-        //TODO: get boundaries points, not only for lines (this means handle the Bezier case for real)
         let offset = ref Vector.Zero
         let toPoint (Vector(x, y)) = x, y
         let rec getPoints path = seq {
@@ -32,8 +31,11 @@ module DrawingUtils =
             | Line v ->
                 offset := !offset + v
                 yield !offset |> toPoint
-            | Bezier (v, _, _) ->
+            | Bezier (v, cp1, cp2) ->
+                //TODO: get tighter boundaries for Bezier curves
+                yield !offset + cp1 |> toPoint
                 offset := !offset + v
+                yield !offset + cp2 |> toPoint
                 yield !offset |> toPoint
             | CompositePath (path) ->
                 yield! getPoints path }
