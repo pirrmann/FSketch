@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{644A8E
 		paket.lock = paket.lock
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSketch.Behaviours", "FSketch.Behaviours\FSketch.Behaviours.fsproj", "{FC888272-0A6B-449F-A49E-E4A054B36CFC}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSketch.Drawing", "FSketch.Drawing\FSketch.Drawing.fsproj", "{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C326EB1D-3704-4F3B-BA3B-B7B29DFDA052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC888272-0A6B-449F-A49E-E4A054B36CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC888272-0A6B-449F-A49E-E4A054B36CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC888272-0A6B-449F-A49E-E4A054B36CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC888272-0A6B-449F-A49E-E4A054B36CFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,16 +10,21 @@ let colors =
     |> Seq.toList
 
 let genLines = seq {
+    yield "#if BEHAVIOURS"
+    yield "namespace FSketch.Behaviours"
+    yield "#else"
     yield "namespace FSketch"
+    yield "#endif"
     yield ""
     yield "module Colors ="
+    yield ""
     for (name, (a, r, g, b), _) in colors do
-        yield sprintf "   let %s = { Alpha = %f; R = %f; G = %f; B = %f }" name a r g b
+        yield sprintf "    let %s = { Alpha = ofFloat %f; R = ofFloat %f; G = ofFloat %f; B = ofFloat %f }" name a r g b
     yield ""
     yield "module Pens ="
     for (name, _, gen) in colors do
         if gen then
-            yield sprintf "   let %s = { Color = Colors.%s; Thickness = 1.0 }" name name
+            yield sprintf "   let %s = { Color = Colors.%s; Thickness = ofFloat 1.0 }" name name
     yield ""
     yield "module Brushes ="
     for (name, _, gen) in colors do

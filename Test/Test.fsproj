@@ -71,6 +71,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FSketch.Drawing\FSketch.Drawing.fsproj">
+      <Name>FSketch.Drawing</Name>
+      <Project>{e5c3dd95-38bc-43d6-af68-4acd97f95a7a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\FSketch.Winforms\FSketch.Winforms.fsproj">
       <Name>FSketch.Winforms</Name>
       <Project>{ee35567d-2ebd-4858-b705-5950bfb4c39d}</Project>

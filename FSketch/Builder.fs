@@ -1,4 +1,8 @@
-﻿namespace FSketch
+﻿#if BEHAVIOURS
+namespace FSketch.Behaviours
+#else
+namespace FSketch
+#endif
 
 module Builder =
     type ShapesBuilder() =

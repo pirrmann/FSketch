@@ -1,18 +1,22 @@
-﻿namespace FSketch
+﻿#if BEHAVIOURS
+namespace FSketch.Behaviours
+#else
+namespace FSketch
+#endif
 
 module Dsl =
 
     let rectangle (width, height) = ClosedShape.Rectangle(Vector(width, height))
     let square (width) = ClosedShape.Rectangle(Vector(width, width))
     let ellipse (width, height) = ClosedShape.Ellipse(Vector(width, height))
-    let circle (radius) = ClosedShape.Ellipse(Vector(radius * 2.0, radius * 2.0))
-    let line (x1, y1) (x2, y2) = RefSpace.At(x1, y1), Line(Vector(x2 - x1, y2 - y1))
-    let bezier (x1, y1) (x2, y2) (tx1, ty1) (tx2, ty2) = RefSpace.At(x1, y1), Bezier(Vector(x2 - x1, y2 - y1), Vector(tx1, ty1), Vector(tx2, ty2))
+    let circle (radius) = ClosedShape.Ellipse(Vector(multiply (radius, ofFloat 2.0), multiply(radius, ofFloat 2.0)))
+    let line (x1, y1) (x2, y2) = RefSpace.At(x1, y1), Line(Vector(substract(x2, x1), substract(y2, y1)))
+    let bezier (x1, y1) (x2, y2) (tx1, ty1) (tx2, ty2) = RefSpace.At(x1, y1), Bezier(Vector(substract(x2, x1), substract(y2, y1)), Vector(tx1, ty1), Vector(tx2, ty2))
     let lineTo (x, y) = Line(Vector(x, y))
     let bezierTo (x, y) (tx1, ty1) (tx2, ty2) = Bezier(Vector(x, y), Vector(tx1, ty1), Vector(tx2, ty2))
     let toPath = CompositePath
     let toClosedPath = CompositePath >> ClosedPath
-    let text format = Printf.ksprintf (fun s -> { Text = s; Size = 10. }) format
+    let text format = Printf.ksprintf (fun s -> { Text = s; Size = ofFloat 10. }) format
     let withSize size text = { text with Size = size }
 
     let withContour pen (space, shape) = space, ClosedShape(shape, Contour(pen))
@@ -30,10 +34,10 @@ module Dsl =
     let scaledBy ratio (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scale ratio) * refSpace.transform}, element)
     let scaledByX ratio (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleX ratio) * refSpace.transform}, element)
     let scaledByY ratio (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleY ratio) * refSpace.transform}, element)
-    let xFlipped (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleX -1.0) * refSpace.transform}, element)
-    let yFlipped (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleY -1.0) * refSpace.transform}, element)
-    let origin = (0.0, 0.0)
+    let xFlipped (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleX (negate One)) * refSpace.transform}, element)
+    let yFlipped (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleY (negate One)) * refSpace.transform}, element)
+    let origin = (Zero, Zero)
 
     let placedMap f (r, s) = r, f(s)
 
-    let Pi = System.Math.PI
+    let Pi = ofFloat System.Math.PI

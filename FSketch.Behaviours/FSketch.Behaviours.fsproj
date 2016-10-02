@@ -5,14 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>6945c705-af0a-41d5-9772-2bbb62fe4497</ProjectGuid>
+    <ProjectGuid>fc888272-0a6b-449f-a49e-e4a054b36cfc</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>FSketch</RootNamespace>
-    <AssemblyName>FSketch</AssemblyName>
+    <RootNamespace>FSketch.Behaviours</RootNamespace>
+    <AssemblyName>FSketch.Behaviours</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>FSketch</Name>
+    <Name>FSketch.Behaviours</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,11 +20,9 @@
     <Optimize>false</Optimize>
     <Tailcalls>false</Tailcalls>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;BEHAVIOURS</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\FSketch.XML</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
+    <DocumentationFile>bin\Debug\FSketch.Behaviours.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,7 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\FSketch.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\FSketch.Behaviours.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -53,12 +51,20 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Behaviour.fs" />
     <Compile Include="Numeric.fs" />
-    <Compile Include="Shapes.fs" />
-    <None Include="ColorsGenerator.fsx" />
-    <Compile Include="Colors.fs" />
-    <Compile Include="Builder.fs" />
-    <Compile Include="Dsl.fs" />
+    <Compile Include="..\FSketch\Shapes.fs">
+      <Link>Shapes.fs</Link>
+    </Compile>
+    <Compile Include="..\FSketch\Colors.fs">
+      <Link>Colors.fs</Link>
+    </Compile>
+    <Compile Include="..\FSketch\Builder.fs">
+      <Link>Builder.fs</Link>
+    </Compile>
+    <Compile Include="..\FSketch\Dsl.fs">
+      <Link>Dsl.fs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
