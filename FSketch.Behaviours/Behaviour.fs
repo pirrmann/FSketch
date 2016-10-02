@@ -12,4 +12,8 @@ module Behaviours =
 
     let forever x = Behaviour (fun _ -> x)
     let time = Behaviour (fun ctx -> ctx.Time)
-    let wiggle = Behaviour (fun ctx -> sin (ctx.Time * System.Math.PI))
+
+    let ( >+> ) = lift (*)
+    let ( >-> ) = lift (*)
+    let ( >/> ) = lift (*)
+    let ( >*> ) = lift (*)

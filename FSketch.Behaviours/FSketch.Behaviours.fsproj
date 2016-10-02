@@ -65,6 +65,7 @@
     <Compile Include="..\FSketch\Dsl.fs">
       <Link>Dsl.fs</Link>
     </Compile>
+    <Compile Include="Snapshot.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -73,6 +74,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FSketch\FSketch.fsproj">
+      <Name>FSketch</Name>
+      <Project>{6945c705-af0a-41d5-9772-2bbb62fe4497}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

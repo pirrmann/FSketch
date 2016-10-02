@@ -57,6 +57,7 @@
     <None Include="Samples.fsx" />
     <None Include="ToolsForIntro.fsx" />
     <None Include="Intro.fsx" />
+    <None Include="Sandbox.fsx" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
