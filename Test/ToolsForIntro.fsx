@@ -1,5 +1,6 @@
-﻿#r "../FSketch/bin/debug/FSketch.dll"
-#r "../FSketch.Winforms/bin/debug/FSketch.Winforms.dll"
+﻿#r "bin/debug/FSketch.dll"
+#r "bin/debug/FSketch.Drawing.dll"
+#r "bin/debug/FSketch.Winforms.dll"
 
 open FSketch
 open FSketch.Dsl
