@@ -52,6 +52,11 @@
     <Compile Include="WinformsDrawer.fs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FSketch.Behaviours\FSketch.Behaviours.fsproj">
+      <Name>FSketch.Behaviours</Name>
+      <Project>{fc888272-0a6b-449f-a49e-e4a054b36cfc}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\FSketch.Drawing\FSketch.Drawing.fsproj">
       <Name>FSketch.Drawing</Name>
       <Project>{e5c3dd95-38bc-43d6-af68-4acd97f95a7a}</Project>

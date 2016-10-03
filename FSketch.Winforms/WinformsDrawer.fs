@@ -4,6 +4,10 @@ open FSketch
 open System.Drawing
 open System.Windows.Forms
 
+type ThingsToDisplay =
+    | Shapes of Shapes
+    | Scene of FSketch.Behaviours.Scene
+
 type private Canvas() =
     inherit Control()
     do
@@ -16,11 +20,20 @@ type CanvasForm () as this =
     inherit Form()
 
     let canvas = new Canvas()
-    let mutable shapes:Shapes = []
+    let mutable thingsToDisplay:ThingsToDisplay = ThingsToDisplay.Shapes([])
+    let mutable startTime = System.DateTime.Now
+
+    let timer = new System.Windows.Forms.Timer()
 
     let repaint (o:obj) (e:PaintEventArgs) =
         let graphics = e.Graphics
         graphics.Clear(Color.White)
+        let shapes =
+            match thingsToDisplay with
+            | Shapes shapes -> shapes
+            | Scene scene ->
+                let time = (System.DateTime.Now - startTime).TotalSeconds % scene.Duration |> scene.TimeTransform
+                scene.Shapes |> FSketch.Behaviours.Camera.atTime time
         shapes |> Drawer.Draw graphics (canvas.Width, canvas.Height)
 
     do
@@ -35,11 +48,21 @@ type CanvasForm () as this =
         canvas.Paint.AddHandler(new PaintEventHandler(repaint))
         this.Resize.Add(fun _ -> canvas.Invalidate())
 
-    member this.Shapes
-        with get() = shapes
+        timer.Interval <- 1000 / 24
+        timer.Tick.Add(fun _ -> canvas.Invalidate())
+
+    member this.ThingsToDisplay
+        with get() = thingsToDisplay
         and set(value) =
-            shapes <- value
+            thingsToDisplay <- value
             canvas.Invalidate()
+
+    member this.RestartTimer() =
+        startTime <- System.DateTime.Now
+        timer.Start()
+
+    member this.StopTimer() =
+        timer.Stop()
 
 module WinformsDrawer =
     let mutable (window:CanvasForm) = null
@@ -53,5 +76,12 @@ module WinformsDrawer =
 
     let Draw (shapes:Shapes) =
         let window = ensureWindowExists()
-        window.Shapes <- shapes
+        window.ThingsToDisplay <- ThingsToDisplay.Shapes shapes
+        window.StopTimer()
+        window
+
+    let Play (scene:FSketch.Behaviours.Scene) =
+        let window = ensureWindowExists()
+        window.ThingsToDisplay <- ThingsToDisplay.Scene scene
+        window.RestartTimer()
         window

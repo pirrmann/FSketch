@@ -7,19 +7,14 @@ open FSketch.Behaviours
 open FSketch.Behaviours.Dsl
 open FSketch.Behaviours.Builder
 
-fsi.AddPrintTransformer(fun (shapes: FSketch.Shapes) ->
-                            shapes |> FSketch.Winforms.WinformsDrawer.Draw |> ignore
+fsi.AddPrintTransformer(fun (scene: FSketch.Behaviours.Scene) ->
+                            scene |> FSketch.Winforms.WinformsDrawer.Play |> ignore
                             null)
 
 let bouncingCircle = shapes {
+    yield square (forever 10.) |> at origin |> withContour Pens.Black
     let y = time >>> (fun t -> abs(sin(t * System.Math.PI)) * -10.)
     yield circle (forever 2.) |> at (forever 0., y) |> withFill Brushes.Red
-}
-
-let rec fractal size = shapes {
-    if size > 5. then
-        yield square (forever size) |> at origin |> withContour Pens.Black
-        yield! fractal (size * 0.72) |> at origin |> rotatedBy (time >*> Pi)
 }
 
 let scene1 = {
@@ -28,15 +23,16 @@ let scene1 = {
     Shapes = bouncingCircle
 }
 
-let scene2 = {
-    Duration = 1.
-    TimeTransform = id
-    Shapes = fractal 100.
+let ratio = sqrt 2. / 2.
+
+let rec fractal size = shapes {
+    if size > 4. then
+        yield square (forever size) |> at origin |> withContour Pens.Black
+        yield! fractal (size * ratio) |> at origin |> rotatedBy (time >*> Pi >/> forever 2.)
 }
 
-open FSketch
-
-scene2
-|> Camera.toFrames 18
-|> Seq.toList
-|> DrawingDebugUtils.FromList(fun (shapes:Shapes) -> shapes)
+let scene2 = {
+    Duration = 3.
+    TimeTransform = fun t -> t / 3.
+    Shapes = fractal 100.
+}
