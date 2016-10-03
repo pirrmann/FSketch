@@ -1,6 +1,6 @@
 ﻿namespace FSketch.Behaviours
 
-module Snapshot =
+module Camera =
     type private CS = FSketch.ClosedShape
 
     let rec internal takeSnapshot eval (shapes:Shapes) =
@@ -69,3 +69,10 @@ module Snapshot =
         let context = { Time = time }
         let eval (Behaviour(f)) = f context
         shapes |> takeSnapshot eval
+
+    let toFrames (frameRate:int) (scene:Scene) = seq {
+        let framesCount = scene.Duration * float frameRate |> floor |> int
+        for index in 0 .. framesCount - 1 do
+        let time = (float index / float (framesCount - 1)) |> scene.TimeTransform
+        yield scene.Shapes |> atTime time
+    }

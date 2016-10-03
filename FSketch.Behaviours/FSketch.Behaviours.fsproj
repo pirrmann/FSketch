@@ -65,7 +65,8 @@
     <Compile Include="..\FSketch\Dsl.fs">
       <Link>Dsl.fs</Link>
     </Compile>
-    <Compile Include="Snapshot.fs" />
+    <Compile Include="Scene.fs" />
+    <Compile Include="Camera.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
