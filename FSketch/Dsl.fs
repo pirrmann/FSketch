@@ -29,13 +29,13 @@ module Dsl =
 
     let at (x, y) element = RefSpace.At(x, y), element
     let withZ z (refSpace, element) = { refSpace with z = z }, element
-    let translatedBy (x, y) (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.translate (x, y)) * refSpace.transform}, element)
-    let rotatedBy alpha (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.rotate alpha) * refSpace.transform}, element)
-    let scaledBy ratio (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scale ratio) * refSpace.transform}, element)
-    let scaledByX ratio (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleX ratio) * refSpace.transform}, element)
-    let scaledByY ratio (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleY ratio) * refSpace.transform}, element)
-    let xFlipped (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleX (negate One)) * refSpace.transform}, element)
-    let yFlipped (refSpace:RefSpace, element) = ({refSpace with transform = (Transforms.scaleY (negate One)) * refSpace.transform}, element)
+    let translatedBy (x, y) (refSpace:RefSpace, element) = ({refSpace with transform = (refSpace.transform * Transforms.translate (x, y))}, element)
+    let rotatedBy alpha (refSpace:RefSpace, element) = ({refSpace with transform = refSpace.transform * (Transforms.rotate alpha)}, element)
+    let scaledBy ratio (refSpace:RefSpace, element) = ({refSpace with transform = refSpace.transform * (Transforms.scale ratio)}, element)
+    let scaledByX ratio (refSpace:RefSpace, element) = ({refSpace with transform = refSpace.transform * (Transforms.scaleX ratio)}, element)
+    let scaledByY ratio (refSpace:RefSpace, element) = ({refSpace with transform = refSpace.transform * (Transforms.scaleY ratio)}, element)
+    let xFlipped (refSpace:RefSpace, element) = ({refSpace with transform = refSpace.transform * (Transforms.scaleX (negate One))}, element)
+    let yFlipped (refSpace:RefSpace, element) = ({refSpace with transform = refSpace.transform * (Transforms.scaleY (negate One))}, element)
     let origin = (Zero, Zero)
 
     let placedMap f (r, s) = r, f(s)
