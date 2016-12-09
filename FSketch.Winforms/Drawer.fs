@@ -77,10 +77,12 @@ let drawShape (graphics:Graphics) (space:RefSpace, shape:Shape) =
         drawType.Pen |> Option.iter (fun pen ->
             let path = getOuterPath shape
             use pen = pen |> toSystemPen
+            pen.LineJoin <- LineJoin.Round
             graphics.DrawPath(pen, path))
     | Path(path, pen) ->
-        let graphicsPath = path |> toSystemPath 
+        let graphicsPath = path |> toSystemPath
         use pen = pen |> toSystemPen
+        pen.LineJoin <- LineJoin.Round
         graphics.DrawPath(pen, graphicsPath)
     | Text(text, brush) ->
         let w, h = measureText text
