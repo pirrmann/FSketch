@@ -1,7 +1,7 @@
 ﻿namespace FSketch.Behaviours
 
 module Camera =
-    type private CS = FSketch.ClosedShape
+    type private CS = FSketch.Shape
 
     let rec internal takeSnapshot eval (shapes:Shapes) =
         let evalTransformMatrix (TransformMatrix((m11, m12), (m21, m22), (mx, my))) =
@@ -18,15 +18,6 @@ module Camera =
             | Line v -> FSketch.Line (evalVector v)
             | Bezier (v, t1, t2) -> FSketch.Bezier (evalVector v, evalVector t1, evalVector t2)
             | CompositePath paths -> FSketch.CompositePath (paths |> List.map evalPath)
-
-        let evalClosedShape (closedShape: ClosedShape) : CS =
-            match closedShape with
-            | Rectangle size ->
-                CS.Rectangle(evalVector size)
-            | Ellipse size ->
-                CS.Ellipse(evalVector size)
-            | ClosedPath path ->
-                CS.ClosedPath(evalPath path)
 
         let evalColor (color:Color) : FSketch.Color = {
             Alpha = eval color.Alpha
@@ -53,15 +44,23 @@ module Camera =
 
         let evalShape (shape:Shape) : FSketch.Shape =
             match shape with
-            | ClosedShape (closedShape, drawType) ->
-                FSketch.Shape.ClosedShape(evalClosedShape closedShape, evalDrawType drawType)
-            | Path (path, pen) ->
-                FSketch.Shape.Path(evalPath path, evalPen pen)
-            | Text (text, brush) ->
-                FSketch.Shape.Text(evalText text, evalBrush brush)
-        
-        let evalPlacedShape (refSpace:RefSpace, shape:Shape) =
-            evalRefSpace refSpace, evalShape shape
+            | Rectangle size ->
+                CS.Rectangle(evalVector size)
+            | Ellipse size ->
+                CS.Ellipse(evalVector size)
+            | Path (path) ->
+                FSketch.Shape.Path(evalPath path)
+            | Text (text) ->
+                FSketch.Shape.Text(evalText text)
+
+        let evalStyledShape (styledShape:StyledShape) =
+            {
+                FSketch.StyledShape.Shape = evalShape styledShape.Shape
+                FSketch.StyledShape.DrawType = evalDrawType styledShape.DrawType
+            }
+
+        let evalPlacedShape (refSpace:RefSpace, styledShape:StyledShape) =
+            evalRefSpace refSpace, evalStyledShape styledShape
 
         shapes |> List.map evalPlacedShape
 

@@ -147,17 +147,16 @@ module internal ParsingHelper =
         | "path" ->
             let origin, path, closed = e.Attribute(xName "d").Value |> parsePath
             let style = e.Attribute(xName "style").Value
-            match parsePenAndBrush style with
-            | Some pen, Some brush ->
-                origin, ClosedShape(ClosedPath(path), ContourAndFill(pen, brush))
-            | None, Some brush ->
-                origin, ClosedShape(ClosedPath(path), Fill(brush))
-            | Some pen, None ->
-                if closed then
-                    origin, ClosedShape(ClosedPath(path), Contour(pen))
-                else
-                    origin, Path(path, pen)
-            | _ -> failwithf "Cannot parse path style %s" style
+            let drawType =
+                match parsePenAndBrush style with
+                | Some pen, Some brush ->
+                    ContourAndFill(pen, brush)
+                | None, Some brush ->
+                    Fill(brush)
+                | Some pen, None ->
+                    Contour(pen)
+                | _ -> failwithf "Cannot parse path style %s" style
+            origin, { Shape = Path(path); DrawType = drawType }
         | name -> failwithf "Cannot parse element %s" name
 
 module SvgParser =

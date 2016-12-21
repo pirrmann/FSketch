@@ -50,45 +50,50 @@ let toSystemPath path =
 
     new System.Drawing.Drawing2D.GraphicsPath(systemPoints, pathPointTypes)
 
-let rec getOuterPath shape =
-    match shape with
-    | ClosedPath p -> p |> toSystemPath
-    | Rectangle(Vector(width, height)) ->
-        let path = new System.Drawing.Drawing2D.GraphicsPath()
-        path.AddRectangle(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
-        path
-    | Ellipse(Vector(width, height)) ->
-        let path = new System.Drawing.Drawing2D.GraphicsPath()
-        path.AddEllipse(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
-        path
-
-let rec getRegion shape =
-    match shape with
-    | _ -> new Region(getOuterPath shape)
-
-let drawShape (graphics:Graphics) (space:RefSpace, shape:Shape) =
+let drawShape (graphics:Graphics) (space:RefSpace, styledShape:StyledShape) =
     graphics.MultiplyTransform(space.transform |> toSystemTransform)
-    match shape with
-    | ClosedShape(shape, drawType) ->
+    let drawType = styledShape.DrawType
+    match styledShape.Shape with
+    | Rectangle(size) ->
+        let width, height = size.X, size.Y
+        let graphicsPath = new System.Drawing.Drawing2D.GraphicsPath()
+        graphicsPath.AddRectangle(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
         drawType.Brush |> Option.iter (fun brush ->
-            let region = getRegion shape
+            let region = new Region(graphicsPath)
             use brush = brush |> toSystemBrush
             graphics.FillRegion(brush, region))
         drawType.Pen |> Option.iter (fun pen ->
-            let path = getOuterPath shape
             use pen = pen |> toSystemPen
             pen.LineJoin <- LineJoin.Round
-            graphics.DrawPath(pen, path))
-    | Path(path, pen) ->
+            graphics.DrawPath(pen, graphicsPath))
+    | Ellipse(size) ->
+        let width, height = size.X, size.Y
+        let graphicsPath = new System.Drawing.Drawing2D.GraphicsPath()
+        graphicsPath.AddEllipse(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
+        drawType.Brush |> Option.iter (fun brush ->
+            let region = new Region(graphicsPath)
+            use brush = brush |> toSystemBrush
+            graphics.FillRegion(brush, region))
+        drawType.Pen |> Option.iter (fun pen ->
+            use pen = pen |> toSystemPen
+            pen.LineJoin <- LineJoin.Round
+            graphics.DrawPath(pen, graphicsPath))
+    | Path(path) ->
         let graphicsPath = path |> toSystemPath
-        use pen = pen |> toSystemPen
-        pen.LineJoin <- LineJoin.Round
-        graphics.DrawPath(pen, graphicsPath)
-    | Text(text, brush) ->
+        drawType.Brush |> Option.iter (fun brush ->
+            let region = new Region(graphicsPath)
+            use brush = brush |> toSystemBrush
+            graphics.FillRegion(brush, region))
+        drawType.Pen |> Option.iter (fun pen ->
+            use pen = pen |> toSystemPen
+            pen.LineJoin <- LineJoin.Round
+            graphics.DrawPath(pen, graphicsPath))
+    | Text(text) ->
         let w, h = measureText text
         use font = new Font("Arial", single text.Size)
-        use brush = brush |> toSystemBrush
-        graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.)))
+        drawType.Brush |> Option.iter (fun brush ->
+            use brush = brush |> toSystemBrush
+            graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.))))
 
 let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
 

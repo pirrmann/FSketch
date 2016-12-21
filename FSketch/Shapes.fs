@@ -77,12 +77,6 @@ type Path =
                         | Bezier (v, _, _) -> v
                         | CompositePath path -> path |> List.map (fun p -> p.End) |> List.sum
 
-type ClosedShape =
-    | Rectangle of Size:Vector
-    | Ellipse of Size:Vector
-    | ClosedPath of Path with
-    override this.ToString() = sprintf "%A" this
-
 type DrawType =
     | Contour of Pen
     | Fill of Brush
@@ -94,8 +88,14 @@ type DrawType =
 type Text = { Text:string; Size: Numeric }
 
 type Shape =
-    | ClosedShape of ClosedShape * DrawType
-    | Path of Path * Pen
-    | Text of Text * Brush with
+    | Rectangle of Size:Vector
+    | Ellipse of Size:Vector
+    | Path of Path
+    | Text of Text with
     override this.ToString() = sprintf "%A" this
-and Shapes = (RefSpace * Shape) list
+
+type StyledShape = {
+    Shape: Shape
+    DrawType: DrawType }
+
+and Shapes = (RefSpace * StyledShape) list

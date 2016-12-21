@@ -47,19 +47,16 @@ module DrawingUtils =
 
     let computeBoundingPolygon shape =
         match shape with
-        | ClosedShape (cs, _) ->
-            match cs with
-            | Rectangle(Vector(w, h))
-            | Ellipse(Vector(w, h)) ->
-                [
-                    -w/2., -h/2.
-                    w/2. , -h/2.
-                    w/2. , h/2.
-                    -w/2., h/2.
-                ]
-            | ClosedPath p -> getPathPoints p
-        | Path (p, _) -> getPathPoints p
-        | Text (text, _) ->
+        | Rectangle(Vector(w, h))
+        | Ellipse(Vector(w, h)) ->
+            [
+                -w/2., -h/2.
+                w/2. , -h/2.
+                w/2. , h/2.
+                -w/2., h/2.
+            ]
+        | Path p -> getPathPoints p
+        | Text text ->
             let w, h = measureText text
             [
                 -w/2., -h/2.
@@ -70,7 +67,7 @@ module DrawingUtils =
 
     let computeShapeBoundingBox (refSpace, shape) =
         let boundingPolygon =
-            computeBoundingPolygon shape
+            computeBoundingPolygon shape.Shape
             |> List.map (fun p -> p * refSpace.transform)
 
         (
