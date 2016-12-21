@@ -58,7 +58,7 @@
     <None Include="ToolsForIntro.fsx" />
     <None Include="Intro.fsx" />
     <None Include="Sandbox.fsx" />
-    <None Include="SvgParser.fsx" />
+    <None Include="Svg.fsx" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

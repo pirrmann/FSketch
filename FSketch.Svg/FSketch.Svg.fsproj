@@ -46,8 +46,14 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="SvgParser.fs" />
+    <Compile Include="SvgDrawer.fs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FSketch.Drawing\FSketch.Drawing.fsproj">
+      <Name>FSketch.Drawing</Name>
+      <Project>{e5c3dd95-38bc-43d6-af68-4acd97f95a7a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\FSketch\FSketch.fsproj">
       <Name>FSketch</Name>
       <Project>{6945c705-af0a-41d5-9772-2bbb62fe4497}</Project>

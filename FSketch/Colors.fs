@@ -149,146 +149,146 @@ module Colors =
     let YellowGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.603922; G = ofFloat 0.803922; B = ofFloat 0.196078 }
 
 module Pens =
-   let AliceBlue = { Color = Colors.AliceBlue; Thickness = ofFloat 1.0 }
-   let AntiqueWhite = { Color = Colors.AntiqueWhite; Thickness = ofFloat 1.0 }
-   let Aqua = { Color = Colors.Aqua; Thickness = ofFloat 1.0 }
-   let Aquamarine = { Color = Colors.Aquamarine; Thickness = ofFloat 1.0 }
-   let Azure = { Color = Colors.Azure; Thickness = ofFloat 1.0 }
-   let Beige = { Color = Colors.Beige; Thickness = ofFloat 1.0 }
-   let Bisque = { Color = Colors.Bisque; Thickness = ofFloat 1.0 }
-   let Black = { Color = Colors.Black; Thickness = ofFloat 1.0 }
-   let BlanchedAlmond = { Color = Colors.BlanchedAlmond; Thickness = ofFloat 1.0 }
-   let Blue = { Color = Colors.Blue; Thickness = ofFloat 1.0 }
-   let BlueViolet = { Color = Colors.BlueViolet; Thickness = ofFloat 1.0 }
-   let Brown = { Color = Colors.Brown; Thickness = ofFloat 1.0 }
-   let BurlyWood = { Color = Colors.BurlyWood; Thickness = ofFloat 1.0 }
-   let CadetBlue = { Color = Colors.CadetBlue; Thickness = ofFloat 1.0 }
-   let Chartreuse = { Color = Colors.Chartreuse; Thickness = ofFloat 1.0 }
-   let Chocolate = { Color = Colors.Chocolate; Thickness = ofFloat 1.0 }
-   let Coral = { Color = Colors.Coral; Thickness = ofFloat 1.0 }
-   let CornflowerBlue = { Color = Colors.CornflowerBlue; Thickness = ofFloat 1.0 }
-   let Cornsilk = { Color = Colors.Cornsilk; Thickness = ofFloat 1.0 }
-   let Crimson = { Color = Colors.Crimson; Thickness = ofFloat 1.0 }
-   let Cyan = { Color = Colors.Cyan; Thickness = ofFloat 1.0 }
-   let DarkBlue = { Color = Colors.DarkBlue; Thickness = ofFloat 1.0 }
-   let DarkCyan = { Color = Colors.DarkCyan; Thickness = ofFloat 1.0 }
-   let DarkGoldenrod = { Color = Colors.DarkGoldenrod; Thickness = ofFloat 1.0 }
-   let DarkGray = { Color = Colors.DarkGray; Thickness = ofFloat 1.0 }
-   let DarkGreen = { Color = Colors.DarkGreen; Thickness = ofFloat 1.0 }
-   let DarkKhaki = { Color = Colors.DarkKhaki; Thickness = ofFloat 1.0 }
-   let DarkMagenta = { Color = Colors.DarkMagenta; Thickness = ofFloat 1.0 }
-   let DarkOliveGreen = { Color = Colors.DarkOliveGreen; Thickness = ofFloat 1.0 }
-   let DarkOrange = { Color = Colors.DarkOrange; Thickness = ofFloat 1.0 }
-   let DarkOrchid = { Color = Colors.DarkOrchid; Thickness = ofFloat 1.0 }
-   let DarkRed = { Color = Colors.DarkRed; Thickness = ofFloat 1.0 }
-   let DarkSalmon = { Color = Colors.DarkSalmon; Thickness = ofFloat 1.0 }
-   let DarkSeaGreen = { Color = Colors.DarkSeaGreen; Thickness = ofFloat 1.0 }
-   let DarkSlateBlue = { Color = Colors.DarkSlateBlue; Thickness = ofFloat 1.0 }
-   let DarkSlateGray = { Color = Colors.DarkSlateGray; Thickness = ofFloat 1.0 }
-   let DarkTurquoise = { Color = Colors.DarkTurquoise; Thickness = ofFloat 1.0 }
-   let DarkViolet = { Color = Colors.DarkViolet; Thickness = ofFloat 1.0 }
-   let DeepPink = { Color = Colors.DeepPink; Thickness = ofFloat 1.0 }
-   let DeepSkyBlue = { Color = Colors.DeepSkyBlue; Thickness = ofFloat 1.0 }
-   let DimGray = { Color = Colors.DimGray; Thickness = ofFloat 1.0 }
-   let DodgerBlue = { Color = Colors.DodgerBlue; Thickness = ofFloat 1.0 }
-   let Firebrick = { Color = Colors.Firebrick; Thickness = ofFloat 1.0 }
-   let FloralWhite = { Color = Colors.FloralWhite; Thickness = ofFloat 1.0 }
-   let ForestGreen = { Color = Colors.ForestGreen; Thickness = ofFloat 1.0 }
-   let Fuchsia = { Color = Colors.Fuchsia; Thickness = ofFloat 1.0 }
-   let Gainsboro = { Color = Colors.Gainsboro; Thickness = ofFloat 1.0 }
-   let GhostWhite = { Color = Colors.GhostWhite; Thickness = ofFloat 1.0 }
-   let Gold = { Color = Colors.Gold; Thickness = ofFloat 1.0 }
-   let Goldenrod = { Color = Colors.Goldenrod; Thickness = ofFloat 1.0 }
-   let Gray = { Color = Colors.Gray; Thickness = ofFloat 1.0 }
-   let Green = { Color = Colors.Green; Thickness = ofFloat 1.0 }
-   let GreenYellow = { Color = Colors.GreenYellow; Thickness = ofFloat 1.0 }
-   let Honeydew = { Color = Colors.Honeydew; Thickness = ofFloat 1.0 }
-   let HotPink = { Color = Colors.HotPink; Thickness = ofFloat 1.0 }
-   let IndianRed = { Color = Colors.IndianRed; Thickness = ofFloat 1.0 }
-   let Indigo = { Color = Colors.Indigo; Thickness = ofFloat 1.0 }
-   let Ivory = { Color = Colors.Ivory; Thickness = ofFloat 1.0 }
-   let Khaki = { Color = Colors.Khaki; Thickness = ofFloat 1.0 }
-   let Lavender = { Color = Colors.Lavender; Thickness = ofFloat 1.0 }
-   let LavenderBlush = { Color = Colors.LavenderBlush; Thickness = ofFloat 1.0 }
-   let LawnGreen = { Color = Colors.LawnGreen; Thickness = ofFloat 1.0 }
-   let LemonChiffon = { Color = Colors.LemonChiffon; Thickness = ofFloat 1.0 }
-   let LightBlue = { Color = Colors.LightBlue; Thickness = ofFloat 1.0 }
-   let LightCoral = { Color = Colors.LightCoral; Thickness = ofFloat 1.0 }
-   let LightCyan = { Color = Colors.LightCyan; Thickness = ofFloat 1.0 }
-   let LightGoldenrodYellow = { Color = Colors.LightGoldenrodYellow; Thickness = ofFloat 1.0 }
-   let LightGreen = { Color = Colors.LightGreen; Thickness = ofFloat 1.0 }
-   let LightGray = { Color = Colors.LightGray; Thickness = ofFloat 1.0 }
-   let LightPink = { Color = Colors.LightPink; Thickness = ofFloat 1.0 }
-   let LightSalmon = { Color = Colors.LightSalmon; Thickness = ofFloat 1.0 }
-   let LightSeaGreen = { Color = Colors.LightSeaGreen; Thickness = ofFloat 1.0 }
-   let LightSkyBlue = { Color = Colors.LightSkyBlue; Thickness = ofFloat 1.0 }
-   let LightSlateGray = { Color = Colors.LightSlateGray; Thickness = ofFloat 1.0 }
-   let LightSteelBlue = { Color = Colors.LightSteelBlue; Thickness = ofFloat 1.0 }
-   let LightYellow = { Color = Colors.LightYellow; Thickness = ofFloat 1.0 }
-   let Lime = { Color = Colors.Lime; Thickness = ofFloat 1.0 }
-   let LimeGreen = { Color = Colors.LimeGreen; Thickness = ofFloat 1.0 }
-   let Linen = { Color = Colors.Linen; Thickness = ofFloat 1.0 }
-   let Magenta = { Color = Colors.Magenta; Thickness = ofFloat 1.0 }
-   let Maroon = { Color = Colors.Maroon; Thickness = ofFloat 1.0 }
-   let MediumAquamarine = { Color = Colors.MediumAquamarine; Thickness = ofFloat 1.0 }
-   let MediumBlue = { Color = Colors.MediumBlue; Thickness = ofFloat 1.0 }
-   let MediumOrchid = { Color = Colors.MediumOrchid; Thickness = ofFloat 1.0 }
-   let MediumPurple = { Color = Colors.MediumPurple; Thickness = ofFloat 1.0 }
-   let MediumSeaGreen = { Color = Colors.MediumSeaGreen; Thickness = ofFloat 1.0 }
-   let MediumSlateBlue = { Color = Colors.MediumSlateBlue; Thickness = ofFloat 1.0 }
-   let MediumSpringGreen = { Color = Colors.MediumSpringGreen; Thickness = ofFloat 1.0 }
-   let MediumTurquoise = { Color = Colors.MediumTurquoise; Thickness = ofFloat 1.0 }
-   let MediumVioletRed = { Color = Colors.MediumVioletRed; Thickness = ofFloat 1.0 }
-   let MidnightBlue = { Color = Colors.MidnightBlue; Thickness = ofFloat 1.0 }
-   let MintCream = { Color = Colors.MintCream; Thickness = ofFloat 1.0 }
-   let MistyRose = { Color = Colors.MistyRose; Thickness = ofFloat 1.0 }
-   let Moccasin = { Color = Colors.Moccasin; Thickness = ofFloat 1.0 }
-   let NavajoWhite = { Color = Colors.NavajoWhite; Thickness = ofFloat 1.0 }
-   let Navy = { Color = Colors.Navy; Thickness = ofFloat 1.0 }
-   let OldLace = { Color = Colors.OldLace; Thickness = ofFloat 1.0 }
-   let Olive = { Color = Colors.Olive; Thickness = ofFloat 1.0 }
-   let OliveDrab = { Color = Colors.OliveDrab; Thickness = ofFloat 1.0 }
-   let Orange = { Color = Colors.Orange; Thickness = ofFloat 1.0 }
-   let OrangeRed = { Color = Colors.OrangeRed; Thickness = ofFloat 1.0 }
-   let Orchid = { Color = Colors.Orchid; Thickness = ofFloat 1.0 }
-   let PaleGoldenrod = { Color = Colors.PaleGoldenrod; Thickness = ofFloat 1.0 }
-   let PaleGreen = { Color = Colors.PaleGreen; Thickness = ofFloat 1.0 }
-   let PaleTurquoise = { Color = Colors.PaleTurquoise; Thickness = ofFloat 1.0 }
-   let PaleVioletRed = { Color = Colors.PaleVioletRed; Thickness = ofFloat 1.0 }
-   let PapayaWhip = { Color = Colors.PapayaWhip; Thickness = ofFloat 1.0 }
-   let PeachPuff = { Color = Colors.PeachPuff; Thickness = ofFloat 1.0 }
-   let Peru = { Color = Colors.Peru; Thickness = ofFloat 1.0 }
-   let Pink = { Color = Colors.Pink; Thickness = ofFloat 1.0 }
-   let Plum = { Color = Colors.Plum; Thickness = ofFloat 1.0 }
-   let PowderBlue = { Color = Colors.PowderBlue; Thickness = ofFloat 1.0 }
-   let Purple = { Color = Colors.Purple; Thickness = ofFloat 1.0 }
-   let Red = { Color = Colors.Red; Thickness = ofFloat 1.0 }
-   let RosyBrown = { Color = Colors.RosyBrown; Thickness = ofFloat 1.0 }
-   let RoyalBlue = { Color = Colors.RoyalBlue; Thickness = ofFloat 1.0 }
-   let SaddleBrown = { Color = Colors.SaddleBrown; Thickness = ofFloat 1.0 }
-   let Salmon = { Color = Colors.Salmon; Thickness = ofFloat 1.0 }
-   let SandyBrown = { Color = Colors.SandyBrown; Thickness = ofFloat 1.0 }
-   let SeaGreen = { Color = Colors.SeaGreen; Thickness = ofFloat 1.0 }
-   let SeaShell = { Color = Colors.SeaShell; Thickness = ofFloat 1.0 }
-   let Sienna = { Color = Colors.Sienna; Thickness = ofFloat 1.0 }
-   let Silver = { Color = Colors.Silver; Thickness = ofFloat 1.0 }
-   let SkyBlue = { Color = Colors.SkyBlue; Thickness = ofFloat 1.0 }
-   let SlateBlue = { Color = Colors.SlateBlue; Thickness = ofFloat 1.0 }
-   let SlateGray = { Color = Colors.SlateGray; Thickness = ofFloat 1.0 }
-   let Snow = { Color = Colors.Snow; Thickness = ofFloat 1.0 }
-   let SpringGreen = { Color = Colors.SpringGreen; Thickness = ofFloat 1.0 }
-   let SteelBlue = { Color = Colors.SteelBlue; Thickness = ofFloat 1.0 }
-   let Tan = { Color = Colors.Tan; Thickness = ofFloat 1.0 }
-   let Teal = { Color = Colors.Teal; Thickness = ofFloat 1.0 }
-   let Thistle = { Color = Colors.Thistle; Thickness = ofFloat 1.0 }
-   let Tomato = { Color = Colors.Tomato; Thickness = ofFloat 1.0 }
-   let Turquoise = { Color = Colors.Turquoise; Thickness = ofFloat 1.0 }
-   let Violet = { Color = Colors.Violet; Thickness = ofFloat 1.0 }
-   let Wheat = { Color = Colors.Wheat; Thickness = ofFloat 1.0 }
-   let White = { Color = Colors.White; Thickness = ofFloat 1.0 }
-   let WhiteSmoke = { Color = Colors.WhiteSmoke; Thickness = ofFloat 1.0 }
-   let Yellow = { Color = Colors.Yellow; Thickness = ofFloat 1.0 }
-   let YellowGreen = { Color = Colors.YellowGreen; Thickness = ofFloat 1.0 }
+   let AliceBlue = { Color = Colors.AliceBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let AntiqueWhite = { Color = Colors.AntiqueWhite; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Aqua = { Color = Colors.Aqua; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Aquamarine = { Color = Colors.Aquamarine; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Azure = { Color = Colors.Azure; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Beige = { Color = Colors.Beige; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Bisque = { Color = Colors.Bisque; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Black = { Color = Colors.Black; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let BlanchedAlmond = { Color = Colors.BlanchedAlmond; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Blue = { Color = Colors.Blue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let BlueViolet = { Color = Colors.BlueViolet; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Brown = { Color = Colors.Brown; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let BurlyWood = { Color = Colors.BurlyWood; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let CadetBlue = { Color = Colors.CadetBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Chartreuse = { Color = Colors.Chartreuse; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Chocolate = { Color = Colors.Chocolate; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Coral = { Color = Colors.Coral; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let CornflowerBlue = { Color = Colors.CornflowerBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Cornsilk = { Color = Colors.Cornsilk; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Crimson = { Color = Colors.Crimson; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Cyan = { Color = Colors.Cyan; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkBlue = { Color = Colors.DarkBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkCyan = { Color = Colors.DarkCyan; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkGoldenrod = { Color = Colors.DarkGoldenrod; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkGray = { Color = Colors.DarkGray; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkGreen = { Color = Colors.DarkGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkKhaki = { Color = Colors.DarkKhaki; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkMagenta = { Color = Colors.DarkMagenta; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkOliveGreen = { Color = Colors.DarkOliveGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkOrange = { Color = Colors.DarkOrange; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkOrchid = { Color = Colors.DarkOrchid; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkRed = { Color = Colors.DarkRed; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkSalmon = { Color = Colors.DarkSalmon; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkSeaGreen = { Color = Colors.DarkSeaGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkSlateBlue = { Color = Colors.DarkSlateBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkSlateGray = { Color = Colors.DarkSlateGray; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkTurquoise = { Color = Colors.DarkTurquoise; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DarkViolet = { Color = Colors.DarkViolet; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DeepPink = { Color = Colors.DeepPink; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DeepSkyBlue = { Color = Colors.DeepSkyBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DimGray = { Color = Colors.DimGray; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let DodgerBlue = { Color = Colors.DodgerBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Firebrick = { Color = Colors.Firebrick; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let FloralWhite = { Color = Colors.FloralWhite; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let ForestGreen = { Color = Colors.ForestGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Fuchsia = { Color = Colors.Fuchsia; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Gainsboro = { Color = Colors.Gainsboro; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let GhostWhite = { Color = Colors.GhostWhite; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Gold = { Color = Colors.Gold; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Goldenrod = { Color = Colors.Goldenrod; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Gray = { Color = Colors.Gray; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Green = { Color = Colors.Green; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let GreenYellow = { Color = Colors.GreenYellow; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Honeydew = { Color = Colors.Honeydew; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let HotPink = { Color = Colors.HotPink; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let IndianRed = { Color = Colors.IndianRed; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Indigo = { Color = Colors.Indigo; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Ivory = { Color = Colors.Ivory; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Khaki = { Color = Colors.Khaki; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Lavender = { Color = Colors.Lavender; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LavenderBlush = { Color = Colors.LavenderBlush; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LawnGreen = { Color = Colors.LawnGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LemonChiffon = { Color = Colors.LemonChiffon; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightBlue = { Color = Colors.LightBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightCoral = { Color = Colors.LightCoral; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightCyan = { Color = Colors.LightCyan; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightGoldenrodYellow = { Color = Colors.LightGoldenrodYellow; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightGreen = { Color = Colors.LightGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightGray = { Color = Colors.LightGray; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightPink = { Color = Colors.LightPink; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightSalmon = { Color = Colors.LightSalmon; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightSeaGreen = { Color = Colors.LightSeaGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightSkyBlue = { Color = Colors.LightSkyBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightSlateGray = { Color = Colors.LightSlateGray; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightSteelBlue = { Color = Colors.LightSteelBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LightYellow = { Color = Colors.LightYellow; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Lime = { Color = Colors.Lime; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let LimeGreen = { Color = Colors.LimeGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Linen = { Color = Colors.Linen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Magenta = { Color = Colors.Magenta; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Maroon = { Color = Colors.Maroon; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumAquamarine = { Color = Colors.MediumAquamarine; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumBlue = { Color = Colors.MediumBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumOrchid = { Color = Colors.MediumOrchid; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumPurple = { Color = Colors.MediumPurple; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumSeaGreen = { Color = Colors.MediumSeaGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumSlateBlue = { Color = Colors.MediumSlateBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumSpringGreen = { Color = Colors.MediumSpringGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumTurquoise = { Color = Colors.MediumTurquoise; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MediumVioletRed = { Color = Colors.MediumVioletRed; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MidnightBlue = { Color = Colors.MidnightBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MintCream = { Color = Colors.MintCream; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let MistyRose = { Color = Colors.MistyRose; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Moccasin = { Color = Colors.Moccasin; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let NavajoWhite = { Color = Colors.NavajoWhite; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Navy = { Color = Colors.Navy; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let OldLace = { Color = Colors.OldLace; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Olive = { Color = Colors.Olive; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let OliveDrab = { Color = Colors.OliveDrab; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Orange = { Color = Colors.Orange; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let OrangeRed = { Color = Colors.OrangeRed; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Orchid = { Color = Colors.Orchid; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let PaleGoldenrod = { Color = Colors.PaleGoldenrod; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let PaleGreen = { Color = Colors.PaleGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let PaleTurquoise = { Color = Colors.PaleTurquoise; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let PaleVioletRed = { Color = Colors.PaleVioletRed; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let PapayaWhip = { Color = Colors.PapayaWhip; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let PeachPuff = { Color = Colors.PeachPuff; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Peru = { Color = Colors.Peru; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Pink = { Color = Colors.Pink; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Plum = { Color = Colors.Plum; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let PowderBlue = { Color = Colors.PowderBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Purple = { Color = Colors.Purple; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Red = { Color = Colors.Red; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let RosyBrown = { Color = Colors.RosyBrown; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let RoyalBlue = { Color = Colors.RoyalBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SaddleBrown = { Color = Colors.SaddleBrown; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Salmon = { Color = Colors.Salmon; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SandyBrown = { Color = Colors.SandyBrown; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SeaGreen = { Color = Colors.SeaGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SeaShell = { Color = Colors.SeaShell; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Sienna = { Color = Colors.Sienna; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Silver = { Color = Colors.Silver; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SkyBlue = { Color = Colors.SkyBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SlateBlue = { Color = Colors.SlateBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SlateGray = { Color = Colors.SlateGray; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Snow = { Color = Colors.Snow; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SpringGreen = { Color = Colors.SpringGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let SteelBlue = { Color = Colors.SteelBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Tan = { Color = Colors.Tan; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Teal = { Color = Colors.Teal; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Thistle = { Color = Colors.Thistle; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Tomato = { Color = Colors.Tomato; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Turquoise = { Color = Colors.Turquoise; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Violet = { Color = Colors.Violet; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Wheat = { Color = Colors.Wheat; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let White = { Color = Colors.White; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let WhiteSmoke = { Color = Colors.WhiteSmoke; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let Yellow = { Color = Colors.Yellow; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
+   let YellowGreen = { Color = Colors.YellowGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }
 
 module Brushes =
    let Solid = { Color = Colors.Transparent }

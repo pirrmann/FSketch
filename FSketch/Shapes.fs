@@ -63,7 +63,9 @@ type RefSpace = { transform:TransformMatrix; z:Numeric } with
 
 type Color = { Alpha:Numeric; R: Numeric; G: Numeric; B: Numeric}
 
-type Pen = { Color:Color; Thickness:Numeric }
+type [<RequireQualifiedAccess>] LineJoin = | Miter | Round
+
+type Pen = { Color:Color; Thickness:Numeric; LineJoin:LineJoin }
 
 type Brush = { Color:Color } with
     static member FromColor(color) = { Color = color }

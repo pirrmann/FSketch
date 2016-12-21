@@ -25,9 +25,15 @@ module Camera =
             G = eval color.G
             B = eval color.B }
 
+        let evalLineJoin (lineJoin:LineJoin) : FSketch.LineJoin =
+            match lineJoin with
+            | LineJoin.Miter -> FSketch.LineJoin.Miter
+            | LineJoin.Round -> FSketch.LineJoin.Round
+
         let evalPen (pen:Pen) : FSketch.Pen = {
             Color = evalColor pen.Color
-            Thickness = eval pen.Thickness }
+            Thickness = eval pen.Thickness
+            LineJoin = evalLineJoin pen.LineJoin }
 
         let evalBrush (brush:Brush) : FSketch.Brush = {
             Color = evalColor brush.Color }

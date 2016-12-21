@@ -122,12 +122,18 @@ module internal ParsingHelper =
         else
             parseFloat s
 
+    let parseLineJoin (s:string) =
+        match s with
+        | "round" -> LineJoin.Round
+        | _ -> failwithf "Cannot parse linejoin value '%s'" s
+
     let parsePenAndBrush s =
         let properties = getCssProperties s
         try
             let fillColor = properties.TryFind("fill") |> Option.map parseColor
             let strokeColor = properties.TryFind("stroke") |> Option.map parseColor
             let strokeWidth = properties.TryFind("stroke-width") |> Option.map parseSize
+            let strokeLineJoin = properties.TryFind("stroke-linejoin") |> Option.map parseLineJoin
 
             let fillColor =
                 match fillColor with
@@ -135,7 +141,7 @@ module internal ParsingHelper =
                 | Some c -> Some c
                 | None -> strokeColor
 
-            let pen = strokeColor |> Option.map (fun c -> {Color = c; Thickness = defaultArg strokeWidth 1.})
+            let pen = strokeColor |> Option.map (fun c -> {Color = c; Thickness = defaultArg strokeWidth 1.; LineJoin = defaultArg strokeLineJoin LineJoin.Miter })
             let brush = fillColor |> Option.map (fun c -> {Color = c})
             pen, brush
         with _ -> failwithf "Cannot parse properties %A" properties
