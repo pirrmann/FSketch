@@ -22,8 +22,8 @@ module internal SvgDrawerHelper =
             match path with
             | Line v ->
                 yield sprintf "l %f,%f" v.X v.Y
-            | Bezier (v, t1, t2) ->
-                yield sprintf "c %f,%f %f,%f %f,%f" t1.X t1.Y (v.X+t2.X) (v.Y+t2.Y) v.X v.Y
+            | Bezier (v, cp1, cp2) ->
+                yield sprintf "c %f,%f %f,%f %f,%f" cp1.X cp1.Y cp2.X cp2.Y v.X v.Y
             | CompositePath ps ->
                 yield! ps |> Seq.collect getPathStringParts }
         path |> getPathStringParts |> String.concat " "

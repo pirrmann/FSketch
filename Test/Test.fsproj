@@ -54,11 +54,13 @@
   <ItemGroup>
     <Compile Include="DrawingDebugUtilsTests.fs" />
     <Compile Include="Program.fs" />
+    <Compile Include="HandDrawer.fs" />
     <None Include="Samples.fsx" />
     <None Include="ToolsForIntro.fsx" />
     <None Include="Intro.fsx" />
     <None Include="Sandbox.fsx" />
     <None Include="Svg.fsx" />
+    <None Include="Boxes.fsx" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

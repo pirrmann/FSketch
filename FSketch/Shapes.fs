@@ -75,7 +75,7 @@ type Brush = { Color:Color } with
 
 type Path =
     | Line of Vector:Vector
-    | Bezier of Vector:Vector * tangent1:Vector * tangent2:Vector
+    | Bezier of Vector:Vector * cp1:Vector * cp2:Vector
     | CompositePath of Path list
     with member x.End = match x with
                         | Line v -> v

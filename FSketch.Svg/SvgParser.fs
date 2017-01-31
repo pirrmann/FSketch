@@ -72,10 +72,10 @@ module internal ParsingHelper =
             s |> parseNextCommand state
         | (Some CurveToRelative, s), _
         | (None, s), Some CurveToRelative ->
-            let (dx1, dy1), s = s |> readCoordinates
-            let (dx2, dy2), s = s |> readCoordinates
+            let (cx1, cy1), s = s |> readCoordinates
+            let (cx2, cy2), s = s |> readCoordinates
             let (x, y), s = s |> readCoordinates
-            let part = Bezier(Vector(x, y), Vector(dx1, dy1), Vector(dx2 - x, dy2 - y))
+            let part = Bezier(Vector(x, y), Vector(cx1, cy1), Vector(cx2, cy2))
             let state = { state with LastCommand = Some CurveToRelative; Parts = part :: state.Parts }
             s |> parseNextCommand state
         | _ -> failwithf "Cannot parse '%s'" (stringOfChars s)

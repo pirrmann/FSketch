@@ -11,9 +11,8 @@ module Dsl =
     let ellipse (width, height) = Ellipse(Vector(width, height))
     let circle (radius) = Ellipse(Vector(multiply (radius, ofFloat 2.0), multiply(radius, ofFloat 2.0)))
     let line (x1, y1) (x2, y2) = RefSpace.At(x1, y1), Line(Vector(substract(x2, x1), substract(y2, y1)))
-    let bezier (x1, y1) (x2, y2) (tx1, ty1) (tx2, ty2) = RefSpace.At(x1, y1), Bezier(Vector(substract(x2, x1), substract(y2, y1)), Vector(tx1, ty1), Vector(tx2, ty2))
     let lineTo (x, y) = Line(Vector(x, y))
-    let bezierTo (x, y) (tx1, ty1) (tx2, ty2) = Bezier(Vector(x, y), Vector(tx1, ty1), Vector(tx2, ty2))
+    let bezierTo (x, y) (cx1, cy1) (cx2, cy2) = Bezier(Vector(x, y), Vector(cx1, cy1), Vector(cx2, cy2))
     let toPath = CompositePath
     let toClosedPath = CompositePath >> Path
     let text format = Printf.ksprintf (fun s -> { Text = s; Size = ofFloat 10. }) format

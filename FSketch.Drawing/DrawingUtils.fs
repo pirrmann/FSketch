@@ -34,8 +34,8 @@ module DrawingUtils =
             | Bezier (v, cp1, cp2) ->
                 //TODO: get tighter boundaries for Bezier curves
                 yield !offset + cp1 |> toPoint
-                offset := !offset + v
                 yield !offset + cp2 |> toPoint
+                offset := !offset + v
                 yield !offset |> toPoint
             | CompositePath (path) ->
                 yield! getPoints path }

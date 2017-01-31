@@ -38,10 +38,10 @@ let toSystemPath path =
         | Line v ->
             offset := !offset + v
             yield !offset, PathPointType.Line
-        | Bezier (v, t1, t2) ->
-            yield !offset + t1, PathPointType.Bezier
+        | Bezier (v, cp1, cp2) ->
+            yield !offset + cp1, PathPointType.Bezier
+            yield !offset + cp2, PathPointType.Bezier
             offset := !offset + v
-            yield !offset + t2, PathPointType.Bezier
             yield !offset, PathPointType.Bezier
         | CompositePath (path) ->
             yield! getPoints path
