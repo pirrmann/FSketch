@@ -6,147 +6,147 @@ namespace FSketch
 
 module Colors =
 
-    let Transparent = { Alpha = ofFloat 0.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
-    let AliceBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 0.972549; B = ofFloat 1.000000 }
-    let AntiqueWhite = { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.921569; B = ofFloat 0.843137 }
-    let Aqua = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
-    let Aquamarine = { Alpha = ofFloat 1.000000; R = ofFloat 0.498039; G = ofFloat 1.000000; B = ofFloat 0.831373 }
-    let Azure = { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 1.000000; B = ofFloat 1.000000 }
-    let Beige = { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 0.960784; B = ofFloat 0.862745 }
-    let Bisque = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.894118; B = ofFloat 0.768627 }
-    let Black = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.000000 }
-    let BlanchedAlmond = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.921569; B = ofFloat 0.803922 }
-    let Blue = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 1.000000 }
-    let BlueViolet = { Alpha = ofFloat 1.000000; R = ofFloat 0.541176; G = ofFloat 0.168627; B = ofFloat 0.886275 }
-    let Brown = { Alpha = ofFloat 1.000000; R = ofFloat 0.647059; G = ofFloat 0.164706; B = ofFloat 0.164706 }
-    let BurlyWood = { Alpha = ofFloat 1.000000; R = ofFloat 0.870588; G = ofFloat 0.721569; B = ofFloat 0.529412 }
-    let CadetBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.372549; G = ofFloat 0.619608; B = ofFloat 0.627451 }
-    let Chartreuse = { Alpha = ofFloat 1.000000; R = ofFloat 0.498039; G = ofFloat 1.000000; B = ofFloat 0.000000 }
-    let Chocolate = { Alpha = ofFloat 1.000000; R = ofFloat 0.823529; G = ofFloat 0.411765; B = ofFloat 0.117647 }
-    let Coral = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.498039; B = ofFloat 0.313725 }
-    let CornflowerBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.392157; G = ofFloat 0.584314; B = ofFloat 0.929412 }
-    let Cornsilk = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.972549; B = ofFloat 0.862745 }
-    let Crimson = { Alpha = ofFloat 1.000000; R = ofFloat 0.862745; G = ofFloat 0.078431; B = ofFloat 0.235294 }
-    let Cyan = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
-    let DarkBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.545098 }
-    let DarkCyan = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.545098; B = ofFloat 0.545098 }
-    let DarkGoldenrod = { Alpha = ofFloat 1.000000; R = ofFloat 0.721569; G = ofFloat 0.525490; B = ofFloat 0.043137 }
-    let DarkGray = { Alpha = ofFloat 1.000000; R = ofFloat 0.662745; G = ofFloat 0.662745; B = ofFloat 0.662745 }
-    let DarkGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.392157; B = ofFloat 0.000000 }
-    let DarkKhaki = { Alpha = ofFloat 1.000000; R = ofFloat 0.741176; G = ofFloat 0.717647; B = ofFloat 0.419608 }
-    let DarkMagenta = { Alpha = ofFloat 1.000000; R = ofFloat 0.545098; G = ofFloat 0.000000; B = ofFloat 0.545098 }
-    let DarkOliveGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.333333; G = ofFloat 0.419608; B = ofFloat 0.184314 }
-    let DarkOrange = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.549020; B = ofFloat 0.000000 }
-    let DarkOrchid = { Alpha = ofFloat 1.000000; R = ofFloat 0.600000; G = ofFloat 0.196078; B = ofFloat 0.800000 }
-    let DarkRed = { Alpha = ofFloat 1.000000; R = ofFloat 0.545098; G = ofFloat 0.000000; B = ofFloat 0.000000 }
-    let DarkSalmon = { Alpha = ofFloat 1.000000; R = ofFloat 0.913725; G = ofFloat 0.588235; B = ofFloat 0.478431 }
-    let DarkSeaGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.560784; G = ofFloat 0.737255; B = ofFloat 0.545098 }
-    let DarkSlateBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.282353; G = ofFloat 0.239216; B = ofFloat 0.545098 }
-    let DarkSlateGray = { Alpha = ofFloat 1.000000; R = ofFloat 0.184314; G = ofFloat 0.309804; B = ofFloat 0.309804 }
-    let DarkTurquoise = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.807843; B = ofFloat 0.819608 }
-    let DarkViolet = { Alpha = ofFloat 1.000000; R = ofFloat 0.580392; G = ofFloat 0.000000; B = ofFloat 0.827451 }
-    let DeepPink = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.078431; B = ofFloat 0.576471 }
-    let DeepSkyBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.749020; B = ofFloat 1.000000 }
-    let DimGray = { Alpha = ofFloat 1.000000; R = ofFloat 0.411765; G = ofFloat 0.411765; B = ofFloat 0.411765 }
-    let DodgerBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.117647; G = ofFloat 0.564706; B = ofFloat 1.000000 }
-    let Firebrick = { Alpha = ofFloat 1.000000; R = ofFloat 0.698039; G = ofFloat 0.133333; B = ofFloat 0.133333 }
-    let FloralWhite = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.980392; B = ofFloat 0.941176 }
-    let ForestGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.133333; G = ofFloat 0.545098; B = ofFloat 0.133333 }
-    let Fuchsia = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.000000; B = ofFloat 1.000000 }
-    let Gainsboro = { Alpha = ofFloat 1.000000; R = ofFloat 0.862745; G = ofFloat 0.862745; B = ofFloat 0.862745 }
-    let GhostWhite = { Alpha = ofFloat 1.000000; R = ofFloat 0.972549; G = ofFloat 0.972549; B = ofFloat 1.000000 }
-    let Gold = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.843137; B = ofFloat 0.000000 }
-    let Goldenrod = { Alpha = ofFloat 1.000000; R = ofFloat 0.854902; G = ofFloat 0.647059; B = ofFloat 0.125490 }
-    let Gray = { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.501961; B = ofFloat 0.501961 }
-    let Green = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.501961; B = ofFloat 0.000000 }
-    let GreenYellow = { Alpha = ofFloat 1.000000; R = ofFloat 0.678431; G = ofFloat 1.000000; B = ofFloat 0.184314 }
-    let Honeydew = { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 1.000000; B = ofFloat 0.941176 }
-    let HotPink = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.411765; B = ofFloat 0.705882 }
-    let IndianRed = { Alpha = ofFloat 1.000000; R = ofFloat 0.803922; G = ofFloat 0.360784; B = ofFloat 0.360784 }
-    let Indigo = { Alpha = ofFloat 1.000000; R = ofFloat 0.294118; G = ofFloat 0.000000; B = ofFloat 0.509804 }
-    let Ivory = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 0.941176 }
-    let Khaki = { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 0.901961; B = ofFloat 0.549020 }
-    let Lavender = { Alpha = ofFloat 1.000000; R = ofFloat 0.901961; G = ofFloat 0.901961; B = ofFloat 0.980392 }
-    let LavenderBlush = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.941176; B = ofFloat 0.960784 }
-    let LawnGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.486275; G = ofFloat 0.988235; B = ofFloat 0.000000 }
-    let LemonChiffon = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.980392; B = ofFloat 0.803922 }
-    let LightBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.678431; G = ofFloat 0.847059; B = ofFloat 0.901961 }
-    let LightCoral = { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 0.501961; B = ofFloat 0.501961 }
-    let LightCyan = { Alpha = ofFloat 1.000000; R = ofFloat 0.878431; G = ofFloat 1.000000; B = ofFloat 1.000000 }
-    let LightGoldenrodYellow = { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.980392; B = ofFloat 0.823529 }
-    let LightGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.564706; G = ofFloat 0.933333; B = ofFloat 0.564706 }
-    let LightGray = { Alpha = ofFloat 1.000000; R = ofFloat 0.827451; G = ofFloat 0.827451; B = ofFloat 0.827451 }
-    let LightPink = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.713725; B = ofFloat 0.756863 }
-    let LightSalmon = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.627451; B = ofFloat 0.478431 }
-    let LightSeaGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.125490; G = ofFloat 0.698039; B = ofFloat 0.666667 }
-    let LightSkyBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.529412; G = ofFloat 0.807843; B = ofFloat 0.980392 }
-    let LightSlateGray = { Alpha = ofFloat 1.000000; R = ofFloat 0.466667; G = ofFloat 0.533333; B = ofFloat 0.600000 }
-    let LightSteelBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.690196; G = ofFloat 0.768627; B = ofFloat 0.870588 }
-    let LightYellow = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 0.878431 }
-    let Lime = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 0.000000 }
-    let LimeGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.196078; G = ofFloat 0.803922; B = ofFloat 0.196078 }
-    let Linen = { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.941176; B = ofFloat 0.901961 }
-    let Magenta = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.000000; B = ofFloat 1.000000 }
-    let Maroon = { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.000000; B = ofFloat 0.000000 }
-    let MediumAquamarine = { Alpha = ofFloat 1.000000; R = ofFloat 0.400000; G = ofFloat 0.803922; B = ofFloat 0.666667 }
-    let MediumBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.803922 }
-    let MediumOrchid = { Alpha = ofFloat 1.000000; R = ofFloat 0.729412; G = ofFloat 0.333333; B = ofFloat 0.827451 }
-    let MediumPurple = { Alpha = ofFloat 1.000000; R = ofFloat 0.576471; G = ofFloat 0.439216; B = ofFloat 0.858824 }
-    let MediumSeaGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.235294; G = ofFloat 0.701961; B = ofFloat 0.443137 }
-    let MediumSlateBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.482353; G = ofFloat 0.407843; B = ofFloat 0.933333 }
-    let MediumSpringGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.980392; B = ofFloat 0.603922 }
-    let MediumTurquoise = { Alpha = ofFloat 1.000000; R = ofFloat 0.282353; G = ofFloat 0.819608; B = ofFloat 0.800000 }
-    let MediumVioletRed = { Alpha = ofFloat 1.000000; R = ofFloat 0.780392; G = ofFloat 0.082353; B = ofFloat 0.521569 }
-    let MidnightBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.098039; G = ofFloat 0.098039; B = ofFloat 0.439216 }
-    let MintCream = { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 1.000000; B = ofFloat 0.980392 }
-    let MistyRose = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.894118; B = ofFloat 0.882353 }
-    let Moccasin = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.894118; B = ofFloat 0.709804 }
-    let NavajoWhite = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.870588; B = ofFloat 0.678431 }
-    let Navy = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.501961 }
-    let OldLace = { Alpha = ofFloat 1.000000; R = ofFloat 0.992157; G = ofFloat 0.960784; B = ofFloat 0.901961 }
-    let Olive = { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.501961; B = ofFloat 0.000000 }
-    let OliveDrab = { Alpha = ofFloat 1.000000; R = ofFloat 0.419608; G = ofFloat 0.556863; B = ofFloat 0.137255 }
-    let Orange = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.647059; B = ofFloat 0.000000 }
-    let OrangeRed = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.270588; B = ofFloat 0.000000 }
-    let Orchid = { Alpha = ofFloat 1.000000; R = ofFloat 0.854902; G = ofFloat 0.439216; B = ofFloat 0.839216 }
-    let PaleGoldenrod = { Alpha = ofFloat 1.000000; R = ofFloat 0.933333; G = ofFloat 0.909804; B = ofFloat 0.666667 }
-    let PaleGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.596078; G = ofFloat 0.984314; B = ofFloat 0.596078 }
-    let PaleTurquoise = { Alpha = ofFloat 1.000000; R = ofFloat 0.686275; G = ofFloat 0.933333; B = ofFloat 0.933333 }
-    let PaleVioletRed = { Alpha = ofFloat 1.000000; R = ofFloat 0.858824; G = ofFloat 0.439216; B = ofFloat 0.576471 }
-    let PapayaWhip = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.937255; B = ofFloat 0.835294 }
-    let PeachPuff = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.854902; B = ofFloat 0.725490 }
-    let Peru = { Alpha = ofFloat 1.000000; R = ofFloat 0.803922; G = ofFloat 0.521569; B = ofFloat 0.247059 }
-    let Pink = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.752941; B = ofFloat 0.796078 }
-    let Plum = { Alpha = ofFloat 1.000000; R = ofFloat 0.866667; G = ofFloat 0.627451; B = ofFloat 0.866667 }
-    let PowderBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.690196; G = ofFloat 0.878431; B = ofFloat 0.901961 }
-    let Purple = { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.000000; B = ofFloat 0.501961 }
-    let Red = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.000000; B = ofFloat 0.000000 }
-    let RosyBrown = { Alpha = ofFloat 1.000000; R = ofFloat 0.737255; G = ofFloat 0.560784; B = ofFloat 0.560784 }
-    let RoyalBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.254902; G = ofFloat 0.411765; B = ofFloat 0.882353 }
-    let SaddleBrown = { Alpha = ofFloat 1.000000; R = ofFloat 0.545098; G = ofFloat 0.270588; B = ofFloat 0.074510 }
-    let Salmon = { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.501961; B = ofFloat 0.447059 }
-    let SandyBrown = { Alpha = ofFloat 1.000000; R = ofFloat 0.956863; G = ofFloat 0.643137; B = ofFloat 0.376471 }
-    let SeaGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.180392; G = ofFloat 0.545098; B = ofFloat 0.341176 }
-    let SeaShell = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.960784; B = ofFloat 0.933333 }
-    let Sienna = { Alpha = ofFloat 1.000000; R = ofFloat 0.627451; G = ofFloat 0.321569; B = ofFloat 0.176471 }
-    let Silver = { Alpha = ofFloat 1.000000; R = ofFloat 0.752941; G = ofFloat 0.752941; B = ofFloat 0.752941 }
-    let SkyBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.529412; G = ofFloat 0.807843; B = ofFloat 0.921569 }
-    let SlateBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.415686; G = ofFloat 0.352941; B = ofFloat 0.803922 }
-    let SlateGray = { Alpha = ofFloat 1.000000; R = ofFloat 0.439216; G = ofFloat 0.501961; B = ofFloat 0.564706 }
-    let Snow = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.980392; B = ofFloat 0.980392 }
-    let SpringGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 0.498039 }
-    let SteelBlue = { Alpha = ofFloat 1.000000; R = ofFloat 0.274510; G = ofFloat 0.509804; B = ofFloat 0.705882 }
-    let Tan = { Alpha = ofFloat 1.000000; R = ofFloat 0.823529; G = ofFloat 0.705882; B = ofFloat 0.549020 }
-    let Teal = { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.501961; B = ofFloat 0.501961 }
-    let Thistle = { Alpha = ofFloat 1.000000; R = ofFloat 0.847059; G = ofFloat 0.749020; B = ofFloat 0.847059 }
-    let Tomato = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.388235; B = ofFloat 0.278431 }
-    let Turquoise = { Alpha = ofFloat 1.000000; R = ofFloat 0.250980; G = ofFloat 0.878431; B = ofFloat 0.815686 }
-    let Violet = { Alpha = ofFloat 1.000000; R = ofFloat 0.933333; G = ofFloat 0.509804; B = ofFloat 0.933333 }
-    let Wheat = { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 0.870588; B = ofFloat 0.701961 }
-    let White = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
-    let WhiteSmoke = { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 0.960784; B = ofFloat 0.960784 }
-    let Yellow = { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 0.000000 }
-    let YellowGreen = { Alpha = ofFloat 1.000000; R = ofFloat 0.603922; G = ofFloat 0.803922; B = ofFloat 0.196078 }
+    let Transparent = ArgbColor { Alpha = ofFloat 0.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
+    let AliceBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 0.972549; B = ofFloat 1.000000 }
+    let AntiqueWhite = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.921569; B = ofFloat 0.843137 }
+    let Aqua = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
+    let Aquamarine = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.498039; G = ofFloat 1.000000; B = ofFloat 0.831373 }
+    let Azure = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 1.000000; B = ofFloat 1.000000 }
+    let Beige = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 0.960784; B = ofFloat 0.862745 }
+    let Bisque = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.894118; B = ofFloat 0.768627 }
+    let Black = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.000000 }
+    let BlanchedAlmond = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.921569; B = ofFloat 0.803922 }
+    let Blue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 1.000000 }
+    let BlueViolet = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.541176; G = ofFloat 0.168627; B = ofFloat 0.886275 }
+    let Brown = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.647059; G = ofFloat 0.164706; B = ofFloat 0.164706 }
+    let BurlyWood = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.870588; G = ofFloat 0.721569; B = ofFloat 0.529412 }
+    let CadetBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.372549; G = ofFloat 0.619608; B = ofFloat 0.627451 }
+    let Chartreuse = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.498039; G = ofFloat 1.000000; B = ofFloat 0.000000 }
+    let Chocolate = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.823529; G = ofFloat 0.411765; B = ofFloat 0.117647 }
+    let Coral = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.498039; B = ofFloat 0.313725 }
+    let CornflowerBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.392157; G = ofFloat 0.584314; B = ofFloat 0.929412 }
+    let Cornsilk = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.972549; B = ofFloat 0.862745 }
+    let Crimson = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.862745; G = ofFloat 0.078431; B = ofFloat 0.235294 }
+    let Cyan = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
+    let DarkBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.545098 }
+    let DarkCyan = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.545098; B = ofFloat 0.545098 }
+    let DarkGoldenrod = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.721569; G = ofFloat 0.525490; B = ofFloat 0.043137 }
+    let DarkGray = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.662745; G = ofFloat 0.662745; B = ofFloat 0.662745 }
+    let DarkGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.392157; B = ofFloat 0.000000 }
+    let DarkKhaki = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.741176; G = ofFloat 0.717647; B = ofFloat 0.419608 }
+    let DarkMagenta = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.545098; G = ofFloat 0.000000; B = ofFloat 0.545098 }
+    let DarkOliveGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.333333; G = ofFloat 0.419608; B = ofFloat 0.184314 }
+    let DarkOrange = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.549020; B = ofFloat 0.000000 }
+    let DarkOrchid = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.600000; G = ofFloat 0.196078; B = ofFloat 0.800000 }
+    let DarkRed = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.545098; G = ofFloat 0.000000; B = ofFloat 0.000000 }
+    let DarkSalmon = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.913725; G = ofFloat 0.588235; B = ofFloat 0.478431 }
+    let DarkSeaGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.560784; G = ofFloat 0.737255; B = ofFloat 0.545098 }
+    let DarkSlateBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.282353; G = ofFloat 0.239216; B = ofFloat 0.545098 }
+    let DarkSlateGray = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.184314; G = ofFloat 0.309804; B = ofFloat 0.309804 }
+    let DarkTurquoise = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.807843; B = ofFloat 0.819608 }
+    let DarkViolet = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.580392; G = ofFloat 0.000000; B = ofFloat 0.827451 }
+    let DeepPink = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.078431; B = ofFloat 0.576471 }
+    let DeepSkyBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.749020; B = ofFloat 1.000000 }
+    let DimGray = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.411765; G = ofFloat 0.411765; B = ofFloat 0.411765 }
+    let DodgerBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.117647; G = ofFloat 0.564706; B = ofFloat 1.000000 }
+    let Firebrick = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.698039; G = ofFloat 0.133333; B = ofFloat 0.133333 }
+    let FloralWhite = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.980392; B = ofFloat 0.941176 }
+    let ForestGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.133333; G = ofFloat 0.545098; B = ofFloat 0.133333 }
+    let Fuchsia = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.000000; B = ofFloat 1.000000 }
+    let Gainsboro = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.862745; G = ofFloat 0.862745; B = ofFloat 0.862745 }
+    let GhostWhite = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.972549; G = ofFloat 0.972549; B = ofFloat 1.000000 }
+    let Gold = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.843137; B = ofFloat 0.000000 }
+    let Goldenrod = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.854902; G = ofFloat 0.647059; B = ofFloat 0.125490 }
+    let Gray = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.501961; B = ofFloat 0.501961 }
+    let Green = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.501961; B = ofFloat 0.000000 }
+    let GreenYellow = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.678431; G = ofFloat 1.000000; B = ofFloat 0.184314 }
+    let Honeydew = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 1.000000; B = ofFloat 0.941176 }
+    let HotPink = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.411765; B = ofFloat 0.705882 }
+    let IndianRed = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.803922; G = ofFloat 0.360784; B = ofFloat 0.360784 }
+    let Indigo = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.294118; G = ofFloat 0.000000; B = ofFloat 0.509804 }
+    let Ivory = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 0.941176 }
+    let Khaki = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 0.901961; B = ofFloat 0.549020 }
+    let Lavender = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.901961; G = ofFloat 0.901961; B = ofFloat 0.980392 }
+    let LavenderBlush = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.941176; B = ofFloat 0.960784 }
+    let LawnGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.486275; G = ofFloat 0.988235; B = ofFloat 0.000000 }
+    let LemonChiffon = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.980392; B = ofFloat 0.803922 }
+    let LightBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.678431; G = ofFloat 0.847059; B = ofFloat 0.901961 }
+    let LightCoral = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.941176; G = ofFloat 0.501961; B = ofFloat 0.501961 }
+    let LightCyan = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.878431; G = ofFloat 1.000000; B = ofFloat 1.000000 }
+    let LightGoldenrodYellow = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.980392; B = ofFloat 0.823529 }
+    let LightGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.564706; G = ofFloat 0.933333; B = ofFloat 0.564706 }
+    let LightGray = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.827451; G = ofFloat 0.827451; B = ofFloat 0.827451 }
+    let LightPink = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.713725; B = ofFloat 0.756863 }
+    let LightSalmon = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.627451; B = ofFloat 0.478431 }
+    let LightSeaGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.125490; G = ofFloat 0.698039; B = ofFloat 0.666667 }
+    let LightSkyBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.529412; G = ofFloat 0.807843; B = ofFloat 0.980392 }
+    let LightSlateGray = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.466667; G = ofFloat 0.533333; B = ofFloat 0.600000 }
+    let LightSteelBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.690196; G = ofFloat 0.768627; B = ofFloat 0.870588 }
+    let LightYellow = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 0.878431 }
+    let Lime = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 0.000000 }
+    let LimeGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.196078; G = ofFloat 0.803922; B = ofFloat 0.196078 }
+    let Linen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.941176; B = ofFloat 0.901961 }
+    let Magenta = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.000000; B = ofFloat 1.000000 }
+    let Maroon = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.000000; B = ofFloat 0.000000 }
+    let MediumAquamarine = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.400000; G = ofFloat 0.803922; B = ofFloat 0.666667 }
+    let MediumBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.803922 }
+    let MediumOrchid = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.729412; G = ofFloat 0.333333; B = ofFloat 0.827451 }
+    let MediumPurple = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.576471; G = ofFloat 0.439216; B = ofFloat 0.858824 }
+    let MediumSeaGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.235294; G = ofFloat 0.701961; B = ofFloat 0.443137 }
+    let MediumSlateBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.482353; G = ofFloat 0.407843; B = ofFloat 0.933333 }
+    let MediumSpringGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.980392; B = ofFloat 0.603922 }
+    let MediumTurquoise = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.282353; G = ofFloat 0.819608; B = ofFloat 0.800000 }
+    let MediumVioletRed = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.780392; G = ofFloat 0.082353; B = ofFloat 0.521569 }
+    let MidnightBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.098039; G = ofFloat 0.098039; B = ofFloat 0.439216 }
+    let MintCream = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 1.000000; B = ofFloat 0.980392 }
+    let MistyRose = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.894118; B = ofFloat 0.882353 }
+    let Moccasin = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.894118; B = ofFloat 0.709804 }
+    let NavajoWhite = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.870588; B = ofFloat 0.678431 }
+    let Navy = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.000000; B = ofFloat 0.501961 }
+    let OldLace = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.992157; G = ofFloat 0.960784; B = ofFloat 0.901961 }
+    let Olive = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.501961; B = ofFloat 0.000000 }
+    let OliveDrab = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.419608; G = ofFloat 0.556863; B = ofFloat 0.137255 }
+    let Orange = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.647059; B = ofFloat 0.000000 }
+    let OrangeRed = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.270588; B = ofFloat 0.000000 }
+    let Orchid = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.854902; G = ofFloat 0.439216; B = ofFloat 0.839216 }
+    let PaleGoldenrod = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.933333; G = ofFloat 0.909804; B = ofFloat 0.666667 }
+    let PaleGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.596078; G = ofFloat 0.984314; B = ofFloat 0.596078 }
+    let PaleTurquoise = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.686275; G = ofFloat 0.933333; B = ofFloat 0.933333 }
+    let PaleVioletRed = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.858824; G = ofFloat 0.439216; B = ofFloat 0.576471 }
+    let PapayaWhip = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.937255; B = ofFloat 0.835294 }
+    let PeachPuff = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.854902; B = ofFloat 0.725490 }
+    let Peru = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.803922; G = ofFloat 0.521569; B = ofFloat 0.247059 }
+    let Pink = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.752941; B = ofFloat 0.796078 }
+    let Plum = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.866667; G = ofFloat 0.627451; B = ofFloat 0.866667 }
+    let PowderBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.690196; G = ofFloat 0.878431; B = ofFloat 0.901961 }
+    let Purple = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.501961; G = ofFloat 0.000000; B = ofFloat 0.501961 }
+    let Red = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.000000; B = ofFloat 0.000000 }
+    let RosyBrown = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.737255; G = ofFloat 0.560784; B = ofFloat 0.560784 }
+    let RoyalBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.254902; G = ofFloat 0.411765; B = ofFloat 0.882353 }
+    let SaddleBrown = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.545098; G = ofFloat 0.270588; B = ofFloat 0.074510 }
+    let Salmon = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.980392; G = ofFloat 0.501961; B = ofFloat 0.447059 }
+    let SandyBrown = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.956863; G = ofFloat 0.643137; B = ofFloat 0.376471 }
+    let SeaGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.180392; G = ofFloat 0.545098; B = ofFloat 0.341176 }
+    let SeaShell = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.960784; B = ofFloat 0.933333 }
+    let Sienna = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.627451; G = ofFloat 0.321569; B = ofFloat 0.176471 }
+    let Silver = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.752941; G = ofFloat 0.752941; B = ofFloat 0.752941 }
+    let SkyBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.529412; G = ofFloat 0.807843; B = ofFloat 0.921569 }
+    let SlateBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.415686; G = ofFloat 0.352941; B = ofFloat 0.803922 }
+    let SlateGray = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.439216; G = ofFloat 0.501961; B = ofFloat 0.564706 }
+    let Snow = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.980392; B = ofFloat 0.980392 }
+    let SpringGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 1.000000; B = ofFloat 0.498039 }
+    let SteelBlue = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.274510; G = ofFloat 0.509804; B = ofFloat 0.705882 }
+    let Tan = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.823529; G = ofFloat 0.705882; B = ofFloat 0.549020 }
+    let Teal = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.000000; G = ofFloat 0.501961; B = ofFloat 0.501961 }
+    let Thistle = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.847059; G = ofFloat 0.749020; B = ofFloat 0.847059 }
+    let Tomato = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 0.388235; B = ofFloat 0.278431 }
+    let Turquoise = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.250980; G = ofFloat 0.878431; B = ofFloat 0.815686 }
+    let Violet = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.933333; G = ofFloat 0.509804; B = ofFloat 0.933333 }
+    let Wheat = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 0.870588; B = ofFloat 0.701961 }
+    let White = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }
+    let WhiteSmoke = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.960784; G = ofFloat 0.960784; B = ofFloat 0.960784 }
+    let Yellow = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 0.000000 }
+    let YellowGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.603922; G = ofFloat 0.803922; B = ofFloat 0.196078 }
 
 module Pens =
    let AliceBlue = { Color = Colors.AliceBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Miter }

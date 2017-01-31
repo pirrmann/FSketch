@@ -7,7 +7,11 @@ open System.Drawing
 open System.Drawing.Drawing2D
 
 let toSystemColor (color:FSketch.Color) =
-    Color.FromArgb(int(color.Alpha * 255.0), int(color.R * 255.0), int(color.G * 255.0), int(color.B * 255.0))
+    let argbColor =
+        match color with
+        | ArgbColor c -> c
+        | HslaColor c -> ColorSpaces.HsalToArgb c
+    Color.FromArgb(int(argbColor.Alpha * 255.0), int(argbColor.R * 255.0), int(argbColor.G * 255.0), int(argbColor.B * 255.0))
 
 let toSystemPen (pen:FSketch.Pen) =
     let systemPen = new Pen(pen.Color |> toSystemColor, pen.Thickness |> single)

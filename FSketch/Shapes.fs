@@ -61,7 +61,10 @@ type RefSpace = { transform:TransformMatrix; z:Numeric } with
     member this.y = this.transform.y
     override this.ToString() = sprintf "%A" this
 
-type Color = { Alpha:Numeric; R: Numeric; G: Numeric; B: Numeric}
+type ArgbColor = { Alpha: Numeric; R: Numeric; G: Numeric; B: Numeric}
+type HslaColor = { H: Numeric; S: Numeric; L: Numeric; Alpha: Numeric }
+
+type Color = | ArgbColor of ArgbColor | HslaColor of HslaColor
 
 type [<RequireQualifiedAccess>] LineJoin = | Miter | Round
 

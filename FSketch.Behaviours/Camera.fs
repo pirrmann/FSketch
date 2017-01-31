@@ -19,11 +19,22 @@ module Camera =
             | Bezier (v, t1, t2) -> FSketch.Bezier (evalVector v, evalVector t1, evalVector t2)
             | CompositePath paths -> FSketch.CompositePath (paths |> List.map evalPath)
 
-        let evalColor (color:Color) : FSketch.Color = {
+        let evalArgbColor (color:ArgbColor) : FSketch.ArgbColor = {
             Alpha = eval color.Alpha
             R = eval color.R
             G = eval color.G
             B = eval color.B }
+
+        let evalHslaColor (color:HslaColor) : FSketch.HslaColor = {
+            H = eval color.H
+            S = eval color.S
+            L = eval color.L
+            Alpha = eval color.Alpha }
+
+        let evalColor (color:Color) : FSketch.Color =
+            match color with
+            | ArgbColor color -> FSketch.ArgbColor (evalArgbColor color)
+            | HslaColor color -> FSketch.HslaColor (evalHslaColor color)
 
         let evalLineJoin (lineJoin:LineJoin) : FSketch.LineJoin =
             match lineJoin with

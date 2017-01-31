@@ -57,6 +57,7 @@
     <Compile Include="Shapes.fs" />
     <None Include="ColorsGenerator.fsx" />
     <Compile Include="Colors.fs" />
+    <Compile Include="ColorSpaces.fs" />
     <Compile Include="Builder.fs" />
     <Compile Include="Dsl.fs" />
   </ItemGroup>

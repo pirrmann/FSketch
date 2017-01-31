@@ -6,11 +6,16 @@ open FSketch.Builder
 
 module internal SvgDrawerHelper =
     let toHexaColor color =
-        let r, g, b = int (color.R * 255.0), int (color.G * 255.0), int (color.B * 255.0)
-        if color.Alpha > 0.999 then
+        let argbColor =
+            match color with
+            | ArgbColor c -> c
+            | HslaColor c -> ColorSpaces.HsalToArgb c
+
+        let r, g, b = int (argbColor.R * 255.0), int (argbColor.G * 255.0), int (argbColor.B * 255.0)
+        if argbColor.Alpha > 0.999 then
             sprintf "#%02x%02x%02x" r g b
         else
-            sprintf "rgba(%d, %d, %d, %f)" r g b color.Alpha
+            sprintf "rgba(%d, %d, %d, %f)" r g b argbColor.Alpha
 
     let getPathString (path:Path) =
         let rec getPathStringParts (path:Path) = seq {
