@@ -53,8 +53,8 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="DrawingDebugUtilsTests.fs" />
-    <Compile Include="Program.fs" />
     <Compile Include="HandDrawer.fs" />
+    <Compile Include="Program.fs" />
     <None Include="Samples.fsx" />
     <None Include="ToolsForIntro.fsx" />
     <None Include="Intro.fsx" />
