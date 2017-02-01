@@ -67,31 +67,6 @@ let rec handDrawnPath path = seq {
         yield! pathParts |> Seq.collect handDrawnPath }
 
 let handDrawn (refSpace, { Shape = shape; DrawType = drawType }) =
-    match shape with
-    | Rectangle(Vector(width,height)) ->
-        let path =
-            [
-                Line(Vector(width,0.))
-                Line(Vector(0.,height))
-                Line(Vector(-width,0.))
-                Line(Vector(0.,-height))
-            ] |> CompositePath
-        Some (refSpace, path)
-    | Ellipse(Vector(width,height)) ->
-        let x = width / 2.0
-        let y = height / 2.0
-        let kappa = 0.5522848
-        let ox = x * kappa  // control point offset horizontal
-        let oy = y * kappa // control point offset vertical
-        let path =
-            [
-                Bezier (Vector(x, -y), Vector(0., -oy), Vector(x-ox, -y))
-                Bezier (Vector(x, y), Vector(ox, 0.), Vector(x, y-oy))
-                Bezier (Vector(-x, y), Vector(0., oy), Vector(-x+ox, y))
-                Bezier (Vector(-x, -y), Vector(-ox, 0.), Vector(-x, oy-y))
-            ] |> CompositePath
-        (refSpace, path) |> translatedBy (-x, 0.) |> Some
-    | Path path -> Some (refSpace, path)
-    | Text text -> None
-    |> Option.map (fun (refSpace, path) -> refSpace, handDrawnPath path |> Seq.toList |> CompositePath)
-    |> Option.map (fun (refSpace, path) -> refSpace, { Shape = Path path; DrawType = drawType })
+    let refSpace', path = (refSpace, shape) |> Pathetizer.ConvertToPlacedPath
+    let path' = handDrawnPath path |> Seq.toList |> CompositePath
+    refSpace', { Shape = Path path'; DrawType = drawType }
