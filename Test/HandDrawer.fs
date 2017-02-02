@@ -57,16 +57,23 @@ let rec splitBezier (x, y) (cx1, cy1) (cx2, cy2) =
     else
         Seq.singleton (Bezier(Vector(x, y),Vector(cx1, cy1),Vector(cx2, cy2)))
 
-let rec handDrawnPath path = seq {
-    match path with
+let handDrawnPathPart pathPart =
+    match pathPart with
     | Line(Vector(x, y)) ->
-        yield! splitLine (x, y)
+        splitLine (x, y)
     | Bezier(Vector(x, y), Vector(cx1, cy1), Vector(cx2, cy2)) ->
-        yield! splitBezier (x, y) (cx1, cy1) (cx2, cy2)
-    | CompositePath pathParts ->
-        yield! pathParts |> Seq.collect handDrawnPath }
+        splitBezier (x, y) (cx1, cy1) (cx2, cy2)
+
+let handDrawnSubPath subPath =
+    { subPath with Parts = subPath.Parts |> Seq.collect handDrawnPathPart |> Seq.toList }
+
+let handDrawnPath path =
+    { path with SubPaths = path.SubPaths |> List.map handDrawnSubPath }
 
 let handDrawn (refSpace, { Shape = shape; DrawType = drawType }) =
-    let refSpace', path = (refSpace, shape) |> Pathetizer.ConvertToPlacedPath
-    let path' = handDrawnPath path |> Seq.toList |> CompositePath
-    refSpace', { Shape = Path path'; DrawType = drawType }
+    let shape' =
+        shape
+        |> Pathetizer.ConvertToPath
+        |> handDrawnPath
+        |> Path
+    (refSpace, { Shape = shape'; DrawType = drawType })

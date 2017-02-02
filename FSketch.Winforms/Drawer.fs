@@ -32,9 +32,8 @@ let toSystemPoint (Vector(x, y)) = new PointF(single x, single y)
 let toSystemPath path =
     let offset = ref Vector.Zero
 
-    let rec getPoints path = seq {
-        for segment in path do
-        match segment with
+    let getPathPartPoints pathPart = seq {
+        match pathPart with
         | Line v ->
             offset := !offset + v
             yield !offset, PathPointType.Line
@@ -42,16 +41,27 @@ let toSystemPath path =
             yield !offset + cp1, PathPointType.Bezier
             yield !offset + cp2, PathPointType.Bezier
             offset := !offset + v
-            yield !offset, PathPointType.Bezier
-        | CompositePath (path) ->
-            yield! getPoints path
-    }
+            yield !offset, PathPointType.Bezier }
+
+    let getSubPathPoints subPath =
+        offset := subPath.Start
+        let points =
+            [|
+                yield !offset, PathPointType.Start
+                yield! subPath.Parts |> Seq.collect getPathPartPoints
+            |]
+
+        if subPath.Closed then
+            let lastIndex = points.Length - 1
+            let lastPoint, lastPointType = points.[lastIndex]
+            points.[lastIndex] <- lastPoint, lastPointType ||| PathPointType.CloseSubpath
+
+        points
 
     let allPoints =
-        seq {
-            yield !offset, PathPointType.Start
-            yield! getPoints [path]
-        } |> Seq.toArray
+        path.SubPaths
+        |> Seq.collect getSubPathPoints
+        |> Seq.toArray
 
     let systemPoints = allPoints |> Array.map (fst >> toSystemPoint)
     let pathPointTypes = allPoints |> Array.map (snd >> byte)

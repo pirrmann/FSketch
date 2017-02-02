@@ -64,13 +64,13 @@ shapes {
 shapes {
     yield circle 50. |> at origin |> withFill Brushes.Red
     yield square 100. |> at origin |> withContour Pens.Black
-    yield text "Great" |> at (0., -6.) |> writtenWith Brushes.White
-    yield text "success!" |> withSize 16. |> at (0., 6.) |> writtenWith Brushes.White
+    yield text "Great" |> at (0., -6.) |> writtenWithFill Brushes.White
+    yield text "success!" |> withSize 16. |> at (0., 6.) |> writtenWithFill Brushes.White
 }
 
 shapes {
     yield! coolLogo |> at (-61., -63.)
-    yield text "F# rocks!" |> withSize 16. |> at origin |> writtenWith Brushes.Black
+    yield text "F# rocks!" |> withSize 16. |> at origin |> writtenWithFill Brushes.Black
 }
 
 [|

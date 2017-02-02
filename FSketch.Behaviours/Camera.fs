@@ -13,11 +13,20 @@ module Camera =
 
         let evalVector (Vector(x, y)) = FSketch.Vector(eval x, eval y)
 
-        let rec evalPath (path:Path) : FSketch.Path =
-            match path with
+        let evalPathPart (pathPart:PathPart) : FSketch.PathPart =
+            match pathPart with
             | Line v -> FSketch.Line (evalVector v)
             | Bezier (v, cp1, cp2) -> FSketch.Bezier (evalVector v, evalVector cp1, evalVector cp2)
-            | CompositePath paths -> FSketch.CompositePath (paths |> List.map evalPath)
+
+        let evalSubPath (subPath:SubPath) : FSketch.SubPath =
+            {
+                FSketch.SubPath.Start = evalVector subPath.Start
+                Parts = List.map evalPathPart subPath.Parts
+                Closed = subPath.Closed
+            }
+
+        let evalPath (path:Path) : FSketch.Path =
+            { FSketch.Path.SubPaths = List.map evalSubPath path.SubPaths }
 
         let evalArgbColor (color:ArgbColor) : FSketch.ArgbColor = {
             Alpha = eval color.Alpha

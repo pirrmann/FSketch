@@ -13,16 +13,18 @@ module Dsl =
     let line (x1, y1) (x2, y2) = RefSpace.At(x1, y1), Line(Vector(substract(x2, x1), substract(y2, y1)))
     let lineTo (x, y) = Line(Vector(x, y))
     let bezierTo (x, y) (cx1, cy1) (cx2, cy2) = Bezier(Vector(x, y), Vector(cx1, cy1), Vector(cx2, cy2))
-    let toPath = CompositePath
-    let toClosedPath = CompositePath >> Path
+    let private toPath closed parts = { SubPaths = [{ Start = Vector.Zero; Parts = parts; Closed = closed }] }
+    let toOpenPath = toPath false >> Path
+    let toClosedPath = toPath true >> Path
     let text format = Printf.ksprintf (fun s -> { Text = s; Size = ofFloat 10. }) format
     let withSize size text = { text with Size = size }
 
     let withContour pen (space, shape) = space, { Shape = shape; DrawType = Contour(pen) }
     let withFill brush (space, shape) = space, { Shape = shape; DrawType = Fill(brush) }
     let withContourAndFill (pen, brush) (space, shape) = space, { Shape = shape; DrawType = ContourAndFill(pen, brush) }
-    let writtenWith brush (space, text) = space, { Shape = Text(text); DrawType = Fill(brush) }
-    let writtenWithPen pen (space, text) = space, { Shape = Text(text); DrawType = Contour(pen) }
+    let writtenWithFill brush (space, text) = space, { Shape = Text(text); DrawType = Fill(brush) }
+    let writtenWithContour pen (space, text) = space, { Shape = Text(text); DrawType = Contour(pen) }
+    let writtenWithContourAndFill (pen, brush) (space, text) = space, { Shape = Text(text); DrawType = ContourAndFill(pen, brush) }
 
     let transform matrix refSpace = RefSpace.Transform(matrix) + refSpace
 

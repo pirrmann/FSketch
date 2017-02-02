@@ -18,15 +18,17 @@ module internal SvgDrawerHelper =
             sprintf "rgba(%d, %d, %d, %f)" r g b argbColor.Alpha
 
     let getPathString (path:Path) =
-        let rec getPathStringParts (path:Path) = seq {
-            match path with
+        let getPathPartString (pathPart:PathPart) =
+            match pathPart with
             | Line v ->
-                yield sprintf "l %f,%f" v.X v.Y
+                sprintf "l %f,%f" v.X v.Y
             | Bezier (v, cp1, cp2) ->
-                yield sprintf "c %f,%f %f,%f %f,%f" cp1.X cp1.Y cp2.X cp2.Y v.X v.Y
-            | CompositePath ps ->
-                yield! ps |> Seq.collect getPathStringParts }
-        path |> getPathStringParts |> String.concat " "
+                sprintf "c %f,%f %f,%f %f,%f" cp1.X cp1.Y cp2.X cp2.Y v.X v.Y
+        let getSubPathStringParts (subPath:SubPath) = seq {
+            yield sprintf "M %f,%f" subPath.Start.X subPath.Start.Y
+            yield! subPath.Parts |> Seq.map getPathPartString
+            if subPath.Closed then yield "z" }
+        path.SubPaths |> Seq.collect getSubPathStringParts |> String.concat " "
 
     let toSvgElement (refSpace:RefSpace, styledShape) =
         let transform =
@@ -58,7 +60,7 @@ module internal SvgDrawerHelper =
             sprintf @"<ellipse cx=""0"" cy=""0"" rx=""%f"" ry=""%f"" %s%s/>" (size.X/2.) (size.Y/2.) style transform
         | Path path ->
             let pathString = getPathString path
-            sprintf @"<path d=""m 0,0 %s"" %s%s/>" pathString style transform
+            sprintf @"<path d=""%s"" %s%s/>" pathString style transform
         | Text _ -> failwith "Not supported yet"
 
     let toSvgElements shapesToTranslate =

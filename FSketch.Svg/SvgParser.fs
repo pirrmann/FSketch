@@ -11,11 +11,11 @@ type PathCommand =
     | CurveToRelative
     | ClosePath
 
-type PathState = {
+type SubPathState = {
     StartX: float
     StartY: float
     LastCommand: PathCommand option
-    Parts: Path list }
+    PathParts: PathPart list }
 
 module internal ParsingHelper =
     let stringOfChars s = s |> Seq.toArray |> String
@@ -59,7 +59,7 @@ module internal ParsingHelper =
         | (Some ClosePath, []), _ -> state, true
         | (Some MoveRelative, s), _
         | (None, s), Some MoveRelative ->
-            if state.Parts <> [] then
+            if state.PathParts <> [] then
                 failwithf "Cannot move when the path has already started: %s" (stringOfChars s)
             let (x, y), s = s |> readCoordinates
             let state = { state with LastCommand = Some LineToRelative; StartX = state.StartX + x; StartY = state.StartY + y }
@@ -68,7 +68,7 @@ module internal ParsingHelper =
         | (None, s), Some LineToRelative ->
             let (x, y), s = s |> readCoordinates
             let part = Line(Vector(x, y))
-            let state = { state with LastCommand = Some LineToRelative; Parts = part :: state.Parts }
+            let state = { state with LastCommand = Some LineToRelative; PathParts = part :: state.PathParts }
             s |> parseNextCommand state
         | (Some CurveToRelative, s), _
         | (None, s), Some CurveToRelative ->
@@ -76,24 +76,15 @@ module internal ParsingHelper =
             let (cx2, cy2), s = s |> readCoordinates
             let (x, y), s = s |> readCoordinates
             let part = Bezier(Vector(x, y), Vector(cx1, cy1), Vector(cx2, cy2))
-            let state = { state with LastCommand = Some CurveToRelative; Parts = part :: state.Parts }
+            let state = { state with LastCommand = Some CurveToRelative; PathParts = part :: state.PathParts }
             s |> parseNextCommand state
         | _ -> failwithf "Cannot parse '%s'" (stringOfChars s)
 
     let parsePath (pathDescription:string) =
-        let initialState = { LastCommand = None; StartX = 0.; StartY = 0.; Parts = [] }
+        let initialState = { LastCommand = None; StartX = 0.; StartY = 0.; PathParts = [] }
         let state, closedPath = pathDescription |> Seq.toList |> parseNextCommand initialState
-        let parts =
-            if closedPath then
-                let startPoint = Vector(initialState.StartX, initialState.StartY)
-                let endPoint = state.Parts |> Seq.sumBy (fun p -> p.End)
-                if startPoint <> endPoint then
-                    Line(startPoint - endPoint) :: state.Parts
-                else
-                    state.Parts
-            else
-                state.Parts
-        let path = parts |> List.rev |> CompositePath
+        let pathParts = state.PathParts |> List.rev
+        let path = { SubPaths = [ { Start = Vector.Zero; Parts = pathParts; Closed = closedPath } ] }
         RefSpace.At(state.StartX, state.StartY), path, closedPath
 
     let getCssProperties (s:string) =

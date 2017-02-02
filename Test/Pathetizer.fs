@@ -4,7 +4,7 @@ open FSketch
 open FSketch.Dsl
 open FSketch.Builder
 
-let private closePath (pathParts: Path list) =
+let private closeSubPath (pathParts: PathPart list) =
     let pathEnd = pathParts |> List.map (fun p -> p.End) |> List.sum
     match pathEnd with
     | Vector(x, y) when abs x > 0.1 || abs y > 0.1 ->
@@ -12,32 +12,70 @@ let private closePath (pathParts: Path list) =
     | _ ->
         pathParts
 
-let ConvertToPlacedPath (refSpace, shape) =
+let private convertToSubPath (pathPoints:(System.Drawing.PointF * byte) array, isClosedPath) =
+    let mutable started = false
+    let mutable startPosition = 0., 0.
+    let pathParts =
+        [
+            let mutable lastPoint = new System.Drawing.PointF()
+            let mutable currentIndex = 0
+            while currentIndex < pathPoints.Length do
+                let point, pathType = pathPoints.[currentIndex]
+                match pathType &&& 0x7uy with
+                | 0uy ->
+                    started <- true
+                    startPosition <- float point.X, float point.Y
+                    lastPoint <- point
+                | 1uy ->
+                    yield Line(Vector(float(point.X - lastPoint.X), float(point.Y - lastPoint.Y)))
+                    lastPoint <- point
+                | 3uy ->
+                    let cp1 = point
+                    let cp2 = fst(pathPoints.[currentIndex + 1])
+                    let endPoint = fst(pathPoints.[currentIndex + 2])
+                    currentIndex <- currentIndex + 2
+                    yield Bezier(Vector(float(endPoint.X - lastPoint.X), float(endPoint.Y - lastPoint.Y)),
+                                 Vector(float(cp1.X - lastPoint.X), float(cp1.Y - lastPoint.Y)),
+                                 Vector(float(cp2.X - lastPoint.X), float(cp2.Y - lastPoint.Y)))
+                    lastPoint <- endPoint
+                | _ -> ()
+                currentIndex <- currentIndex + 1
+        ]
+
+    let pathParts' = if isClosedPath then closeSubPath pathParts else pathParts
+
+    { Start = Vector(startPosition); Parts = pathParts'; Closed = isClosedPath }
+
+let ConvertToPath shape =
     match shape with
     | Rectangle(Vector(width,height)) ->
-        let path =
+        let pathParts =
             [
                 Line(Vector(width,0.))
                 Line(Vector(0.,height))
                 Line(Vector(-width,0.))
                 Line(Vector(0.,-height))
-            ] |> CompositePath
-        (refSpace, path)
+            ]
+        { SubPaths = [ { Start = Vector.Zero; Parts = pathParts; Closed = true } ] }
     | Ellipse(Vector(width,height)) ->
         let x = width / 2.0
         let y = height / 2.0
         let kappa = 0.5522848
         let ox = x * kappa  // control point offset horizontal
         let oy = y * kappa // control point offset vertical
-        let path =
+        let pathParts =
             [
                 Bezier (Vector(x, -y), Vector(0., -oy), Vector(x-ox, -y))
                 Bezier (Vector(x, y), Vector(ox, 0.), Vector(x, y-oy))
                 Bezier (Vector(-x, y), Vector(0., oy), Vector(-x+ox, y))
                 Bezier (Vector(-x, -y), Vector(-ox, 0.), Vector(-x, oy-y))
-            ] |> CompositePath
-        (refSpace, path) |> translatedBy (-x, 0.)
-    | Path path -> (refSpace, path)
+            ]
+        { SubPaths = [ { Start = Vector(-x, 0.); Parts = pathParts; Closed = true } ] }
+    | Path path ->
+        let subPaths' =
+            path.SubPaths
+            |> List.map (fun s -> if s.Closed then { s with Parts = closeSubPath s.Parts } else s )
+        { path with SubPaths = subPaths' }
     | Text text ->
         let i = new System.Drawing.Bitmap(1, 1)
         let g = System.Drawing.Graphics.FromImage(i)
@@ -51,27 +89,15 @@ let ConvertToPlacedPath (refSpace, shape) =
         let origin = new System.Drawing.PointF(single(-w/2.), single(-h/2.))
         gp.AddString(text.Text, fontFamily, fontStyle, single text.Size, origin, System.Drawing.StringFormat.GenericTypographic)
 
-        let mutable startPosition = (0., 0.)
-
-        printfn "%A" (Array.zip gp.PathTypes gp.PathPoints)
-
-        let path =
-            [
-                let mutable lastPoint = new System.Drawing.PointF()
-                let mutable currentIndex = 0
-                while currentIndex < gp.PointCount do
-                    match gp.PathTypes.[currentIndex] &&& 0x7uy with
-                    | 0uy ->
-                        lastPoint <- gp.PathPoints.[currentIndex]
-                        startPosition <- float lastPoint.X, float lastPoint.Y
-                    | 1uy ->
-                        let p = gp.PathPoints.[currentIndex]
-                        yield Line(Vector(float(p.X - lastPoint.X), float(p.Y - lastPoint.Y)))
-                        lastPoint <- p
-                    | _ -> ()
-                    currentIndex <- currentIndex + 1
+        let subPathsPoints =
+             [
+                use iterator = new System.Drawing.Drawing2D.GraphicsPathIterator(gp)
+                let subPathCount = iterator.SubpathCount
+                for subPathNumber in 1 .. subPathCount do
+                    let _, startIndex, endIndex, isClosed = iterator.NextSubpath()
+                    let points = gp.PathPoints.[startIndex..endIndex]
+                    let pathTypes = gp.PathTypes.[startIndex..endIndex]
+                    yield Array.zip points pathTypes, isClosed
             ]
-            |> closePath
-            |> CompositePath
-        
-        (refSpace, path) |> translatedBy startPosition
+
+        { SubPaths = subPathsPoints |> List.map convertToSubPath }

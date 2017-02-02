@@ -73,14 +73,21 @@ type Pen = { Color:Color; Thickness:Numeric; LineJoin:LineJoin }
 type Brush = { Color:Color } with
     static member FromColor(color) = { Color = color }
 
-type Path =
+type PathPart =
     | Line of Vector:Vector
     | Bezier of Vector:Vector * cp1:Vector * cp2:Vector
-    | CompositePath of Path list
     with member x.End = match x with
                         | Line v -> v
                         | Bezier (v, _, _) -> v
-                        | CompositePath path -> path |> List.map (fun p -> p.End) |> List.sum
+
+type SubPath = {
+    Start: Vector
+    Parts: PathPart list
+    Closed: bool }
+    with member x.End = if x.Closed then x.Start else x.Parts |> List.map (fun p -> p.End) |> List.sum
+
+type Path = {
+    SubPaths: SubPath list }
 
 type DrawType =
     | Contour of Pen

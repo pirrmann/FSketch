@@ -24,5 +24,5 @@ let simpleShapes = shapes {
 
 let complexShapes = Svg.SvgParser.FromFile @"C:\Users\Pierre\Pictures\Léo\Skull_and_crossbones.svg"
 
-complexShapes |> List.take 2
+complexShapes |> List.take 3
 complexShapes
