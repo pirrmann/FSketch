@@ -25,6 +25,7 @@ let genLines = seq {
     for (name, _, gen) in colors do
         if gen then
             yield sprintf "   let %s = { Color = Colors.%s; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }" name name
+    yield "   let Default = Black"
     yield ""
     yield "module Brushes ="
     for (name, _, gen) in colors do

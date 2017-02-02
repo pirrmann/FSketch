@@ -289,6 +289,7 @@ module Pens =
    let WhiteSmoke = { Color = Colors.WhiteSmoke; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }
    let Yellow = { Color = Colors.Yellow; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }
    let YellowGreen = { Color = Colors.YellowGreen; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }
+   let Default = Black
 
 module Brushes =
    let Solid = { Color = Colors.Transparent }
