@@ -22,44 +22,39 @@ module DrawingUtils =
 
     let minMaxReducer (min1, max1) (min2, max2) = min min1 min2, max max1 max2
 
-    let getPathPoints path =
+    let getPathPoints (path:Path) =
         let offset = ref Vector.Zero
         let toPoint (Vector(x, y)) = x, y
-        let rec getPoints path = seq {
-            for segment in path do
-            match segment with
-            | Line v ->
-                offset := !offset + v
-                yield !offset |> toPoint
-            | Bezier (v, cp1, cp2) ->
-                //TODO: get tighter boundaries for Bezier curves
-                yield !offset + cp1 |> toPoint
-                offset := !offset + v
-                yield !offset + cp2 |> toPoint
-                yield !offset |> toPoint
-            | CompositePath (path) ->
-                yield! getPoints path }
-
         [
-            yield !offset |> toPoint
-            yield! getPoints [path]
+            for subPath in path.SubPaths do
+                offset := subPath.Start
+                yield !offset |> toPoint
+
+                for pathPart in subPath.Parts do
+                match pathPart with
+                | Line v ->
+                    offset := !offset + v
+                    yield !offset |> toPoint
+                | Bezier (v, cp1, cp2) ->
+                    //TODO: get tighter boundaries for Bezier curves
+                    yield !offset + cp1 |> toPoint
+                    yield !offset + cp2 |> toPoint
+                    offset := !offset + v
+                    yield !offset |> toPoint
         ]
 
     let computeBoundingPolygon shape =
         match shape with
-        | ClosedShape (cs, _) ->
-            match cs with
-            | Rectangle(Vector(w, h))
-            | Ellipse(Vector(w, h)) ->
-                [
-                    -w/2., -h/2.
-                    w/2. , -h/2.
-                    w/2. , h/2.
-                    -w/2., h/2.
-                ]
-            | ClosedPath p -> getPathPoints p
-        | Path (p, _) -> getPathPoints p
-        | Text (text, _) ->
+        | Rectangle(Vector(w, h))
+        | Ellipse(Vector(w, h)) ->
+            [
+                -w/2., -h/2.
+                w/2. , -h/2.
+                w/2. , h/2.
+                -w/2., h/2.
+            ]
+        | Path p -> getPathPoints p
+        | Text text ->
             let w, h = measureText text
             [
                 -w/2., -h/2.
@@ -70,7 +65,7 @@ module DrawingUtils =
 
     let computeShapeBoundingBox (refSpace, shape) =
         let boundingPolygon =
-            computeBoundingPolygon shape
+            computeBoundingPolygon shape.Shape
             |> List.map (fun p -> p * refSpace.transform)
 
         (

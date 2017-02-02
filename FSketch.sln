@@ -19,6 +19,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSketch.Behaviours", "FSket
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSketch.Drawing", "FSketch.Drawing\FSketch.Drawing.fsproj", "{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSketch.Svg", "FSketch.Svg\FSketch.Svg.fsproj", "{320E7572-02CA-4333-9047-AC6F13EE3212}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C3DD95-38BC-43D6-AF68-4ACD97F95A7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320E7572-02CA-4333-9047-AC6F13EE3212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320E7572-02CA-4333-9047-AC6F13EE3212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320E7572-02CA-4333-9047-AC6F13EE3212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320E7572-02CA-4333-9047-AC6F13EE3212}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

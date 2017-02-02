@@ -61,27 +61,33 @@ type RefSpace = { transform:TransformMatrix; z:Numeric } with
     member this.y = this.transform.y
     override this.ToString() = sprintf "%A" this
 
-type Color = { Alpha:Numeric; R: Numeric; G: Numeric; B: Numeric}
+type ArgbColor = { Alpha: Numeric; R: Numeric; G: Numeric; B: Numeric}
+type HslaColor = { H: Numeric; S: Numeric; L: Numeric; Alpha: Numeric }
 
-type Pen = { Color:Color; Thickness:Numeric }
+type Color = | ArgbColor of ArgbColor | HslaColor of HslaColor
+
+type [<RequireQualifiedAccess>] LineJoin = | Miter | Round
+
+type Pen = { Color:Color; Thickness:Numeric; LineJoin:LineJoin }
 
 type Brush = { Color:Color } with
     static member FromColor(color) = { Color = color }
 
-type Path =
+type PathPart =
     | Line of Vector:Vector
-    | Bezier of Vector:Vector * tangent1:Vector * tangent2:Vector
-    | CompositePath of Path list
+    | Bezier of Vector:Vector * cp1:Vector * cp2:Vector
     with member x.End = match x with
                         | Line v -> v
                         | Bezier (v, _, _) -> v
-                        | CompositePath path -> path |> List.map (fun p -> p.End) |> List.sum
 
-type ClosedShape =
-    | Rectangle of Size:Vector
-    | Ellipse of Size:Vector
-    | ClosedPath of Path with
-    override this.ToString() = sprintf "%A" this
+type SubPath = {
+    Start: Vector
+    Parts: PathPart list
+    Closed: bool }
+    with member x.End = if x.Closed then x.Start else x.Parts |> List.map (fun p -> p.End) |> List.sum
+
+type Path = {
+    SubPaths: SubPath list }
 
 type DrawType =
     | Contour of Pen
@@ -94,8 +100,14 @@ type DrawType =
 type Text = { Text:string; Size: Numeric }
 
 type Shape =
-    | ClosedShape of ClosedShape * DrawType
-    | Path of Path * Pen
-    | Text of Text * Brush with
+    | Rectangle of Size:Vector
+    | Ellipse of Size:Vector
+    | Path of Path
+    | Text of Text with
     override this.ToString() = sprintf "%A" this
-and Shapes = (RefSpace * Shape) list
+
+type StyledShape = {
+    Shape: Shape
+    DrawType: DrawType }
+
+and Shapes = (RefSpace * StyledShape) list

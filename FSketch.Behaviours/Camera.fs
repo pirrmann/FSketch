@@ -1,7 +1,7 @@
 ﻿namespace FSketch.Behaviours
 
 module Camera =
-    type private CS = FSketch.ClosedShape
+    type private CS = FSketch.Shape
 
     let rec internal takeSnapshot eval (shapes:Shapes) =
         let evalTransformMatrix (TransformMatrix((m11, m12), (m21, m22), (mx, my))) =
@@ -13,30 +13,47 @@ module Camera =
 
         let evalVector (Vector(x, y)) = FSketch.Vector(eval x, eval y)
 
-        let rec evalPath (path:Path) : FSketch.Path =
-            match path with
+        let evalPathPart (pathPart:PathPart) : FSketch.PathPart =
+            match pathPart with
             | Line v -> FSketch.Line (evalVector v)
-            | Bezier (v, t1, t2) -> FSketch.Bezier (evalVector v, evalVector t1, evalVector t2)
-            | CompositePath paths -> FSketch.CompositePath (paths |> List.map evalPath)
+            | Bezier (v, cp1, cp2) -> FSketch.Bezier (evalVector v, evalVector cp1, evalVector cp2)
 
-        let evalClosedShape (closedShape: ClosedShape) : CS =
-            match closedShape with
-            | Rectangle size ->
-                CS.Rectangle(evalVector size)
-            | Ellipse size ->
-                CS.Ellipse(evalVector size)
-            | ClosedPath path ->
-                CS.ClosedPath(evalPath path)
+        let evalSubPath (subPath:SubPath) : FSketch.SubPath =
+            {
+                FSketch.SubPath.Start = evalVector subPath.Start
+                Parts = List.map evalPathPart subPath.Parts
+                Closed = subPath.Closed
+            }
 
-        let evalColor (color:Color) : FSketch.Color = {
+        let evalPath (path:Path) : FSketch.Path =
+            { FSketch.Path.SubPaths = List.map evalSubPath path.SubPaths }
+
+        let evalArgbColor (color:ArgbColor) : FSketch.ArgbColor = {
             Alpha = eval color.Alpha
             R = eval color.R
             G = eval color.G
             B = eval color.B }
 
+        let evalHslaColor (color:HslaColor) : FSketch.HslaColor = {
+            H = eval color.H
+            S = eval color.S
+            L = eval color.L
+            Alpha = eval color.Alpha }
+
+        let evalColor (color:Color) : FSketch.Color =
+            match color with
+            | ArgbColor color -> FSketch.ArgbColor (evalArgbColor color)
+            | HslaColor color -> FSketch.HslaColor (evalHslaColor color)
+
+        let evalLineJoin (lineJoin:LineJoin) : FSketch.LineJoin =
+            match lineJoin with
+            | LineJoin.Miter -> FSketch.LineJoin.Miter
+            | LineJoin.Round -> FSketch.LineJoin.Round
+
         let evalPen (pen:Pen) : FSketch.Pen = {
             Color = evalColor pen.Color
-            Thickness = eval pen.Thickness }
+            Thickness = eval pen.Thickness
+            LineJoin = evalLineJoin pen.LineJoin }
 
         let evalBrush (brush:Brush) : FSketch.Brush = {
             Color = evalColor brush.Color }
@@ -53,15 +70,23 @@ module Camera =
 
         let evalShape (shape:Shape) : FSketch.Shape =
             match shape with
-            | ClosedShape (closedShape, drawType) ->
-                FSketch.Shape.ClosedShape(evalClosedShape closedShape, evalDrawType drawType)
-            | Path (path, pen) ->
-                FSketch.Shape.Path(evalPath path, evalPen pen)
-            | Text (text, brush) ->
-                FSketch.Shape.Text(evalText text, evalBrush brush)
-        
-        let evalPlacedShape (refSpace:RefSpace, shape:Shape) =
-            evalRefSpace refSpace, evalShape shape
+            | Rectangle size ->
+                CS.Rectangle(evalVector size)
+            | Ellipse size ->
+                CS.Ellipse(evalVector size)
+            | Path (path) ->
+                FSketch.Shape.Path(evalPath path)
+            | Text (text) ->
+                FSketch.Shape.Text(evalText text)
+
+        let evalStyledShape (styledShape:StyledShape) =
+            {
+                FSketch.StyledShape.Shape = evalShape styledShape.Shape
+                FSketch.StyledShape.DrawType = evalDrawType styledShape.DrawType
+            }
+
+        let evalPlacedShape (refSpace:RefSpace, styledShape:StyledShape) =
+            evalRefSpace refSpace, evalStyledShape styledShape
 
         shapes |> List.map evalPlacedShape
 

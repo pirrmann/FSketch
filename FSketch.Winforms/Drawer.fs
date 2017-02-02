@@ -3,90 +3,112 @@
 open FSketch
 open FSketch.DrawingUtils
 
-let toSystemColor (color:Color) =
-    System.Drawing.Color.FromArgb(int(color.Alpha * 255.0), int(color.R * 255.0), int(color.G * 255.0), int(color.B * 255.0))
-
-let toSystemPen (pen:Pen) =
-    new System.Drawing.Pen(pen.Color |> toSystemColor, pen.Thickness |> single)
-
-let toSystemBrush (brush:Brush) =    
-    new System.Drawing.SolidBrush(brush.Color |> toSystemColor)
-
-let toSystemTransform (TransformMatrix((m11, m12), (m21, m22), (dx, dy))) =
-    new System.Drawing.Drawing2D.Matrix(float32 m11, float32 m12, float32 m21, float32 m22, float32 dx, float32 dy)
-
 open System.Drawing
 open System.Drawing.Drawing2D
 
+let toSystemColor (color:FSketch.Color) =
+    let argbColor =
+        match color with
+        | ArgbColor c -> c
+        | HslaColor c -> ColorSpaces.HsalToArgb c
+    Color.FromArgb(int(argbColor.Alpha * 255.0), int(argbColor.R * 255.0), int(argbColor.G * 255.0), int(argbColor.B * 255.0))
+
+let toSystemPen (pen:FSketch.Pen) =
+    let systemPen = new Pen(pen.Color |> toSystemColor, pen.Thickness |> single)
+    match pen.LineJoin with
+    | FSketch.LineJoin.Miter -> systemPen.LineJoin <- LineJoin.Miter
+    | FSketch.LineJoin.Round -> systemPen.LineJoin <- LineJoin.Round
+    systemPen
+
+let toSystemBrush (brush:FSketch.Brush) =    
+    new SolidBrush(brush.Color |> toSystemColor)
+
+let toSystemTransform (TransformMatrix((m11, m12), (m21, m22), (dx, dy))) =
+    new Matrix(float32 m11, float32 m12, float32 m21, float32 m22, float32 dx, float32 dy)
+
 let toSystemXY (Vector(x, y)) = single x, single y
-let toSystemPoint (Vector(x, y)) = new System.Drawing.PointF(single x, single y)
+let toSystemPoint (Vector(x, y)) = new PointF(single x, single y)
 
 let toSystemPath path =
     let offset = ref Vector.Zero
 
-    let rec getPoints path = seq {
-        for segment in path do
-        match segment with
+    let getPathPartPoints pathPart = seq {
+        match pathPart with
         | Line v ->
             offset := !offset + v
             yield !offset, PathPointType.Line
-        | Bezier (v, t1, t2) ->
-            yield !offset + t1, PathPointType.Bezier
+        | Bezier (v, cp1, cp2) ->
+            yield !offset + cp1, PathPointType.Bezier
+            yield !offset + cp2, PathPointType.Bezier
             offset := !offset + v
-            yield !offset + t2, PathPointType.Bezier
-            yield !offset, PathPointType.Bezier
-        | CompositePath (path) ->
-            yield! getPoints path
-    }
+            yield !offset, PathPointType.Bezier }
+
+    let getSubPathPoints subPath =
+        offset := subPath.Start
+        let points =
+            [|
+                yield !offset, PathPointType.Start
+                yield! subPath.Parts |> Seq.collect getPathPartPoints
+            |]
+
+        if subPath.Closed then
+            let lastIndex = points.Length - 1
+            let lastPoint, lastPointType = points.[lastIndex]
+            points.[lastIndex] <- lastPoint, lastPointType ||| PathPointType.CloseSubpath
+
+        points
 
     let allPoints =
-        seq {
-            yield !offset, System.Drawing.Drawing2D.PathPointType.Start
-            yield! getPoints [path]
-        } |> Seq.toArray
+        path.SubPaths
+        |> Seq.collect getSubPathPoints
+        |> Seq.toArray
 
     let systemPoints = allPoints |> Array.map (fst >> toSystemPoint)
     let pathPointTypes = allPoints |> Array.map (snd >> byte)
 
-    new System.Drawing.Drawing2D.GraphicsPath(systemPoints, pathPointTypes)
+    new GraphicsPath(systemPoints, pathPointTypes)
 
-let rec getOuterPath shape =
-    match shape with
-    | ClosedPath p -> p |> toSystemPath
-    | Rectangle(Vector(width, height)) ->
-        let path = new System.Drawing.Drawing2D.GraphicsPath()
-        path.AddRectangle(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
-        path
-    | Ellipse(Vector(width, height)) ->
-        let path = new System.Drawing.Drawing2D.GraphicsPath()
-        path.AddEllipse(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
-        path
-
-let rec getRegion shape =
-    match shape with
-    | _ -> new Region(getOuterPath shape)
-
-let drawShape (graphics:Graphics) (space:RefSpace, shape:Shape) =
+let drawShape (graphics:Graphics) (space:RefSpace, styledShape:StyledShape) =
     graphics.MultiplyTransform(space.transform |> toSystemTransform)
-    match shape with
-    | ClosedShape(shape, drawType) ->
+    let drawType = styledShape.DrawType
+    match styledShape.Shape with
+    | Rectangle(size) ->
+        let width, height = size.X, size.Y
+        let graphicsPath = new GraphicsPath()
+        graphicsPath.AddRectangle(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
         drawType.Brush |> Option.iter (fun brush ->
-            let region = getRegion shape
+            let region = new Region(graphicsPath)
             use brush = brush |> toSystemBrush
             graphics.FillRegion(brush, region))
         drawType.Pen |> Option.iter (fun pen ->
-            let path = getOuterPath shape
             use pen = pen |> toSystemPen
-            graphics.DrawPath(pen, path))
-    | Path(path, pen) ->
-        let graphicsPath = path |> toSystemPath 
-        use pen = pen |> toSystemPen
-        graphics.DrawPath(pen, graphicsPath)
-    | Text(text, brush) ->
+            graphics.DrawPath(pen, graphicsPath))
+    | Ellipse(size) ->
+        let width, height = size.X, size.Y
+        let graphicsPath = new GraphicsPath()
+        graphicsPath.AddEllipse(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
+        drawType.Brush |> Option.iter (fun brush ->
+            let region = new Region(graphicsPath)
+            use brush = brush |> toSystemBrush
+            graphics.FillRegion(brush, region))
+        drawType.Pen |> Option.iter (fun pen ->
+            use pen = pen |> toSystemPen
+            graphics.DrawPath(pen, graphicsPath))
+    | Path(path) ->
+        let graphicsPath = path |> toSystemPath
+        drawType.Brush |> Option.iter (fun brush ->
+            let region = new Region(graphicsPath)
+            use brush = brush |> toSystemBrush
+            graphics.FillRegion(brush, region))
+        drawType.Pen |> Option.iter (fun pen ->
+            use pen = pen |> toSystemPen
+            graphics.DrawPath(pen, graphicsPath))
+    | Text(text) ->
         let w, h = measureText text
         use font = new Font("Arial", single text.Size)
-        use brush = brush |> toSystemBrush
-        graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.)))
+        drawType.Brush |> Option.iter (fun brush ->
+            use brush = brush |> toSystemBrush
+            graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.))))
 
 let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
 

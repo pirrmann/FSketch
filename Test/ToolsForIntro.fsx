@@ -6,8 +6,8 @@ open FSketch
 open FSketch.Dsl
 open FSketch.Builder
 
-let lightBlue = { Alpha = 1.000000; R = 0.215686275; G = 0.545098039; B = 0.729411765 }
-let darkBlue = { Alpha = 1.000000; R = 0.188235294; G = 0.725490196; B = 0.858823529 }
+let darkBlue = ArgbColor { Alpha = 1.000000; R = 0.215686275; G = 0.545098039; B = 0.729411765 }
+let lightBlue = ArgbColor { Alpha = 1.000000; R = 0.188235294; G = 0.725490196; B = 0.858823529 }
 
 let coolLogo = shapes {
     yield [
@@ -18,14 +18,14 @@ let coolLogo = shapes {
             lineTo (0., 28.)
         ] |> toClosedPath
         |> at (5., 63.)
-        |> withFill { Color = lightBlue }
+        |> withFill { Color = darkBlue }
 
     yield [
             lineTo (20., -20.)
             lineTo (0., 40.)
         ] |> toClosedPath
         |> at (41., 63.)
-        |> withFill { Color = lightBlue }
+        |> withFill { Color = darkBlue }
 
     yield [
             lineTo (-58., -56.)
@@ -35,7 +35,7 @@ let coolLogo = shapes {
             lineTo (0., 28.)
         ] |> toClosedPath
         |> at (121., 63.)
-        |> withFill { Color = darkBlue }
+        |> withFill { Color = lightBlue }
 }
 
 

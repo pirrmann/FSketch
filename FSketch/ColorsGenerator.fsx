@@ -19,12 +19,13 @@ let genLines = seq {
     yield "module Colors ="
     yield ""
     for (name, (a, r, g, b), _) in colors do
-        yield sprintf "    let %s = { Alpha = ofFloat %f; R = ofFloat %f; G = ofFloat %f; B = ofFloat %f }" name a r g b
+        yield sprintf "    let %s = ArgbColor { Alpha = ofFloat %f; R = ofFloat %f; G = ofFloat %f; B = ofFloat %f }" name a r g b
     yield ""
     yield "module Pens ="
     for (name, _, gen) in colors do
         if gen then
-            yield sprintf "   let %s = { Color = Colors.%s; Thickness = ofFloat 1.0 }" name name
+            yield sprintf "   let %s = { Color = Colors.%s; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }" name name
+    yield "   let Default = Black"
     yield ""
     yield "module Brushes ="
     for (name, _, gen) in colors do

@@ -6,24 +6,25 @@ namespace FSketch
 
 module Dsl =
 
-    let rectangle (width, height) = ClosedShape.Rectangle(Vector(width, height))
-    let square (width) = ClosedShape.Rectangle(Vector(width, width))
-    let ellipse (width, height) = ClosedShape.Ellipse(Vector(width, height))
-    let circle (radius) = ClosedShape.Ellipse(Vector(multiply (radius, ofFloat 2.0), multiply(radius, ofFloat 2.0)))
+    let rectangle (width, height) = Rectangle(Vector(width, height))
+    let square (width) = Rectangle(Vector(width, width))
+    let ellipse (width, height) = Ellipse(Vector(width, height))
+    let circle (radius) = Ellipse(Vector(multiply (radius, ofFloat 2.0), multiply(radius, ofFloat 2.0)))
     let line (x1, y1) (x2, y2) = RefSpace.At(x1, y1), Line(Vector(substract(x2, x1), substract(y2, y1)))
-    let bezier (x1, y1) (x2, y2) (tx1, ty1) (tx2, ty2) = RefSpace.At(x1, y1), Bezier(Vector(substract(x2, x1), substract(y2, y1)), Vector(tx1, ty1), Vector(tx2, ty2))
     let lineTo (x, y) = Line(Vector(x, y))
-    let bezierTo (x, y) (tx1, ty1) (tx2, ty2) = Bezier(Vector(x, y), Vector(tx1, ty1), Vector(tx2, ty2))
-    let toPath = CompositePath
-    let toClosedPath = CompositePath >> ClosedPath
+    let bezierTo (x, y) (cx1, cy1) (cx2, cy2) = Bezier(Vector(x, y), Vector(cx1, cy1), Vector(cx2, cy2))
+    let private toPath closed parts = { SubPaths = [{ Start = Vector.Zero; Parts = parts; Closed = closed }] }
+    let toOpenPath = toPath false >> Path
+    let toClosedPath = toPath true >> Path
     let text format = Printf.ksprintf (fun s -> { Text = s; Size = ofFloat 10. }) format
     let withSize size text = { text with Size = size }
 
-    let withContour pen (space, shape) = space, ClosedShape(shape, Contour(pen))
-    let withFill brush (space, shape) = space, ClosedShape(shape, Fill(brush))
-    let withContourAndFill (pen, brush) (space, shape) = space, ClosedShape(shape, ContourAndFill(pen, brush))
-    let withPen pen (space, path) = space, Path(path, pen)
-    let writtenWith brush (space, text) = space, Text(text, brush)
+    let withContour pen (space, shape) = space, { Shape = shape; DrawType = Contour(pen) }
+    let withFill brush (space, shape) = space, { Shape = shape; DrawType = Fill(brush) }
+    let withContourAndFill (pen, brush) (space, shape) = space, { Shape = shape; DrawType = ContourAndFill(pen, brush) }
+    let writtenWithFill brush (space, text) = space, { Shape = Text(text); DrawType = Fill(brush) }
+    let writtenWithContour pen (space, text) = space, { Shape = Text(text); DrawType = Contour(pen) }
+    let writtenWithContourAndFill (pen, brush) (space, text) = space, { Shape = Text(text); DrawType = ContourAndFill(pen, brush) }
 
     let transform matrix refSpace = RefSpace.Transform(matrix) + refSpace
 

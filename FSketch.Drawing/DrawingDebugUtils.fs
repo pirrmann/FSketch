@@ -116,26 +116,27 @@ module internal DrawingDebugUtilsInternal =
 
     let fromShapes mapper (options:ListDrawerOptions) = mapper
 
-    let fromShape mapper (options:ListDrawerOptions) =
+    let fromStyledShape mapper (options:ListDrawerOptions) =
         mapper >> at origin >> List.singleton
 
     let fromPath mapper (options:ListDrawerOptions) =
-        mapper >> (fun p -> Path(p, options.DefaultPen)) >> at origin >> List.singleton
+        mapper >> (fun p -> { Shape = Path p; DrawType = Contour options.DefaultPen }) >> at origin >> List.singleton
 
-    let toShape (options:ListDrawerOptions) closedShape =
-        match closedShape with
+    let withDefaultStyle (options:ListDrawerOptions) shape =
+        match shape with
         | Rectangle _
-        | Ellipse _ -> ClosedShape(closedShape, Fill options.DefaultBrush)
-        | ClosedPath _ -> ClosedShape(closedShape, Contour options.DefaultPen)
+        | Ellipse _
+        | Text _ -> { Shape = shape; DrawType = Fill options.DefaultBrush }
+        | Path _ -> { Shape = shape; DrawType = Contour options.DefaultPen }
 
-    let fromClosedShape mapper (options:ListDrawerOptions) =
-        mapper >> toShape options >> (at origin) >> List.singleton
+    let fromShape mapper (options:ListDrawerOptions) =
+        mapper >> withDefaultStyle options >> at origin >> List.singleton
 
-    let defaultFormatter o = Text(text "%A" o, Brushes.Black)
+    let defaultFormatter o = { Shape = Text(text "%A" o); DrawType = Fill Brushes.Black }
     let defaultDebugShapes o =
         match box o with
-        | :? string as s -> [RefSpace.Origin, Text(text "%s" s, Brushes.Black)]
-        | :? char as c -> [RefSpace.Origin, Text(text "%O" c, Brushes.Black)]
+        | :? string as s -> [RefSpace.Origin, { Shape = Text(text "%s" s); DrawType = Fill Brushes.Black }]
+        | :? char as c -> [RefSpace.Origin, { Shape = Text(text "%O" c); DrawType = Fill Brushes.Black }]
         | _ -> [RefSpace.Origin, defaultFormatter o]
 
 open DrawingDebugUtilsInternal
@@ -148,14 +149,14 @@ type DrawingDebugUtils =
     static member FromList<'a> (mapper: 'a -> Shapes, ?options: ListDrawerOptions) =
         Transform options (fromShapes mapper)
 
-    static member FromList<'a> (mapper: 'a -> Shape, ?options: ListDrawerOptions) =
-        Transform options (fromShape mapper)
+    static member FromList<'a> (mapper: 'a -> StyledShape, ?options: ListDrawerOptions) =
+        Transform options (fromStyledShape mapper)
 
     static member FromList<'a> (mapper: 'a -> Path, ?options: ListDrawerOptions) =
         Transform options (fromPath mapper)
 
-    static member FromList<'a> (mapper: 'a -> ClosedShape, ?options: ListDrawerOptions) =
-        Transform options (fromClosedShape mapper)
+    static member FromList<'a> (mapper: 'a -> Shape, ?options: ListDrawerOptions) =
+        Transform options (fromShape mapper)
 
     static member FromArray2D<'a> (?options: ListDrawerOptions) : 'a[,] -> Shapes =
         Transform2D options (fromShapes defaultDebugShapes)
@@ -163,14 +164,14 @@ type DrawingDebugUtils =
     static member FromArray2D<'a> (mapper: 'a -> Shapes, ?options: ListDrawerOptions) =
         Transform2D options (fromShapes mapper)
 
-    static member FromArray2D<'a> (mapper: 'a -> Shape, ?options: ListDrawerOptions) =
-        Transform2D options (fromShape mapper)
+    static member FromArray2D<'a> (mapper: 'a -> StyledShape, ?options: ListDrawerOptions) =
+        Transform2D options (fromStyledShape mapper)
 
     static member FromArray2D<'a> (mapper: 'a -> Path, ?options: ListDrawerOptions) =
         Transform2D options (fromPath mapper)
 
-    static member FromArray2D<'a> (mapper: 'a -> ClosedShape, ?options: ListDrawerOptions) =
-        Transform2D options (fromClosedShape mapper)
+    static member FromArray2D<'a> (mapper: 'a -> Shape, ?options: ListDrawerOptions) =
+        Transform2D options (fromShape mapper)
 
     static member AutoDraw(list) = DrawingDebugUtils.FromList() list
     static member AutoDraw(array2D) = DrawingDebugUtils.FromArray2D() array2D

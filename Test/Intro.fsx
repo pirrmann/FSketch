@@ -25,10 +25,11 @@ open FSketch.Builder
     "Low-level verbose (but composable) stuff"
 |]
 
-let redCircle = RefSpace.Origin, ClosedShape(Ellipse(Vector(100., 100.)), Fill(Brushes.Red))
+let redCircle = RefSpace.Origin, { Shape = Ellipse(Vector(100., 100.)); DrawType = Fill Brushes.Red }
+
 [redCircle]
 
-let blackSquare = RefSpace.Origin, ClosedShape(Rectangle(Vector(100., 100.)), Contour(Pens.Black))
+let blackSquare = RefSpace.Origin, { Shape = Rectangle(Vector(100., 100.)); DrawType = Contour Pens.Black }
 [blackSquare]
 
 // And now... composition!
@@ -45,7 +46,7 @@ shapes {
     yield blackSquare
 }
 
-let success = RefSpace.Origin, Text({Text = "Great success!"; Size = 10.}, Brushes.Black)
+let success = RefSpace.Origin, { Shape = Text({Text = "Great success!"; Size = 10.}); DrawType = Fill Brushes.Black }
 [success]
 
 // Composition again!
@@ -63,13 +64,13 @@ shapes {
 shapes {
     yield circle 50. |> at origin |> withFill Brushes.Red
     yield square 100. |> at origin |> withContour Pens.Black
-    yield text "Great" |> at (0., -6.) |> writtenWith Brushes.White
-    yield text "success!" |> withSize 16. |> at (0., 6.) |> writtenWith Brushes.White
+    yield text "Great" |> at (0., -6.) |> writtenWithFill Brushes.White
+    yield text "success!" |> withSize 16. |> at (0., 6.) |> writtenWithFill Brushes.White
 }
 
 shapes {
     yield! coolLogo |> at (-61., -63.)
-    yield text "F# rocks!" |> withSize 16. |> at origin |> writtenWith Brushes.Black
+    yield text "F# rocks!" |> withSize 16. |> at origin |> writtenWithFill Brushes.Black
 }
 
 [|
