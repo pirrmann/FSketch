@@ -1,13 +1,6 @@
-﻿#r "bin/debug/FSketch.dll"
-#r "bin/debug/FSketch.Drawing.dll"
-#r "bin/debug/FSketch.Winforms.dll"
+﻿#load "References.fsx"
 
 open FSketch
-
-fsi.AddPrintTransformer(fun (shapes:Shapes) ->
-                            shapes |> Winforms.WinformsDrawer.Draw |> ignore
-                            null)
-
 open FSketch.Dsl
 open FSketch.Builder
 

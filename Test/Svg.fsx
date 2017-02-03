@@ -1,21 +1,8 @@
-﻿#r "bin/debug/FSketch.dll"
-#r "bin/debug/FSketch.Svg.dll"
-#r "bin/debug/FSketch.Drawing.dll"
+﻿#load "References.fsx"
 
 open FSketch
 open FSketch.Dsl
 open FSketch.Builder
-
-#if HAS_FSI_ADDHTMLPRINTER
-fsi.AddHtmlPrinter(fun (shapes:Shapes) ->
-                        let svg = FSketch.Svg.SvgDrawer.Draw shapes
-                        Seq.empty, svg)
-#else
-#r "bin/debug/FSketch.Winforms.dll"
-fsi.AddPrintTransformer(fun (shapes:Shapes) ->
-                            shapes |> FSketch.Winforms.WinformsDrawer.Draw |> ignore
-                            null)
-#endif
 
 let simpleShapes = shapes {
     yield ellipse (200., 200.) |> at origin |> withFill Brushes.Blue
