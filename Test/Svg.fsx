@@ -1,4 +1,5 @@
 ﻿#load "References.fsx"
+References.RegisterPrinters()
 
 open FSketch
 open FSketch.Dsl

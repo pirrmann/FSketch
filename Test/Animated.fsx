@@ -1,15 +1,9 @@
-﻿#r "bin/debug/FSketch.dll"
-#r "bin/debug/FSketch.Behaviours.dll"
-#r "bin/debug/FSketch.Drawing.dll"
-#r "bin/debug/FSketch.Winforms.dll"
+﻿#load "References.fsx"
+References.RegisterPrinters()
 
 open FSketch.Behaviours
 open FSketch.Behaviours.Dsl
 open FSketch.Behaviours.Builder
-
-fsi.AddPrintTransformer(fun (scene: FSketch.Behaviours.Scene) ->
-                            scene |> FSketch.Winforms.WinformsDrawer.Play |> ignore
-                            null)
 
 let bouncingCircle = shapes {
     yield square (forever 10.) |> at origin |> withContour Pens.Black

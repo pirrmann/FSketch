@@ -29,6 +29,7 @@ module Dsl =
     let transform matrix refSpace = RefSpace.Transform(matrix) + refSpace
 
     let at (x, y) element = RefSpace.At(x, y), element
+    let atPos (Vector(x, y)) element = RefSpace.At(x, y), element
     let withZ z (refSpace, element) = { refSpace with z = z }, element
     let translatedBy (x, y) (refSpace:RefSpace, element) = ({refSpace with transform = (refSpace.transform * Transforms.translate (x, y))}, element)
     let rotatedBy alpha (refSpace:RefSpace, element) = ({refSpace with transform = refSpace.transform * (Transforms.rotate alpha)}, element)
