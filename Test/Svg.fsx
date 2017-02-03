@@ -9,7 +9,8 @@ let simpleShapes = shapes {
     yield rectangle (150., 50.) |> at origin |> rotatedBy (Pi/3.) |> withContourAndFill (Pens.Black, Brushes.DarkGreen)
 }
 
-let complexShapes = Svg.SvgParser.FromFile @"C:\Users\Pierre\Pictures\Léo\Skull_and_crossbones.svg"
+let svgPath = System.IO.Path.Combine(__SOURCE_DIRECTORY__, "Crossbones.svg")
+let complexShapes = Svg.SvgParser.FromFile svgPath
 
 complexShapes |> List.take 3
 complexShapes
