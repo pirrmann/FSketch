@@ -69,7 +69,7 @@ shapes {
 }
 
 shapes {
-    yield! coolLogo |> at (-61., -63.)
+    yield! FSharpLogo.Logo |> at (-61., -63.)
     yield text "F# rocks!" |> withSize 16. |> at origin |> writtenWithFill Brushes.Black
 }
 

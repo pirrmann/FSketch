@@ -53,10 +53,9 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="DrawingDebugUtilsTests.fs" />
-    <Compile Include="Pathetizer.fs" />
-    <Compile Include="HandDrawer.fs" />
     <Compile Include="Program.fs" />
     <None Include="Samples.fsx" />
+    <None Include="FSharpLogo.fsx" />
     <None Include="ToolsForIntro.fsx" />
     <None Include="Intro.fsx" />
     <None Include="Sandbox.fsx" />

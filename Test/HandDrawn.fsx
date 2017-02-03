@@ -17,41 +17,6 @@ fsi.AddPrintTransformer(fun (shapes:Shapes) ->
                             null)
 #endif
 
-#load "Pathetizer.fs"
-#load "HandDrawer.fs"
-
-let darkBlue = ArgbColor { Alpha = 1.000000; R = 0.215686275; G = 0.545098039; B = 0.729411765 }
-let lightBlue = ArgbColor { Alpha = 1.000000; R = 0.188235294; G = 0.725490196; B = 0.858823529 }
-
-let coolLogo = shapes {
-    yield [
-            lineTo (56., -56.)
-            lineTo (0., 28.)
-            lineTo (-28., 28.)
-            lineTo (28., 28.)
-            lineTo (0., 28.)
-        ] |> toClosedPath
-        |> at (5., 63.)
-        |> withContour { Pens.Black with Color = darkBlue }
-
-    yield [
-            lineTo (20., -20.)
-            lineTo (0., 40.)
-        ] |> toClosedPath
-        |> at (41., 63.)
-        |> withContour { Pens.Black with Color = darkBlue }
-
-    yield [
-            lineTo (-58., -56.)
-            lineTo (0., 28.)
-            lineTo (28., 28.)
-            lineTo (-28., 28.)
-            lineTo (0., 28.)
-        ] |> toClosedPath
-        |> at (121., 63.)
-        |> withContour { Pens.Black with Color = lightBlue }
-}
-
 let simpleShapes = shapes {
   yield rectangle (150., 50.) |> at origin |> withContour Pens.Black
   yield ellipse (140., 40.) |> at (75., 25.) |> withContourAndFill (Pens.Blue, Brushes.LightBlue)
@@ -59,10 +24,12 @@ let simpleShapes = shapes {
   yield ellipse (140., 40.) |> at (275., 25.) |> withContourAndFill (Pens.Red, Brushes.LightPink)
 }
 
+#load "FSharpLogo.fsx"
+
 let fSharpAdvert = shapes {
-  yield! coolLogo |> at origin
-  yield text "F# rocks" |> withSize 48. |> at (110., 150.) |> writtenWithContourAndFill (Pens.Black, Brush.FromColor darkBlue)
-  yield text "it just worked the 1st time" |> withSize 24. |> at (120., 180.) |> writtenWithContour {Pens.Default with Color = lightBlue}
+  yield! FSharpLogo.Logo |> at origin
+  yield text "F# rocks" |> withSize 48. |> at (110., 150.) |> writtenWithContourAndFill (Pens.Black, Brush.FromColor FSharpLogo.DarkBlue)
+  yield text "it just worked the 1st time" |> withSize 24. |> at (120., 180.) |> writtenWithContour {Pens.Default with Color = FSharpLogo.LightBlue}
 }
 
-fSharpAdvert |> List.map HandDrawer.handDrawn
+fSharpAdvert |> List.map HandDrawer.RedrawByHand

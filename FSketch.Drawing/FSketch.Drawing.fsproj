@@ -46,6 +46,8 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="DrawingUtils.fs" />
     <Compile Include="DrawingDebugUtils.fs" />
+    <Compile Include="Pathetizer.fs" />
+    <Compile Include="HandDrawer.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FSketch\FSketch.fsproj">
