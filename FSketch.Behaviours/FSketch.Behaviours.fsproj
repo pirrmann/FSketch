@@ -65,6 +65,7 @@
     <Compile Include="..\FSketch\Dsl.fs">
       <Link>Dsl.fs</Link>
     </Compile>
+    <Compile Include="Constant.fs" />
     <Compile Include="Scene.fs" />
     <Compile Include="Camera.fs" />
   </ItemGroup>
