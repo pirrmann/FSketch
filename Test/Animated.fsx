@@ -93,3 +93,22 @@ let scene4 = {
         yield! circlesBasedAt (x, y) offset backwards |> at origin
     }
 }
+
+let radius = time >>> (fun t -> (let a = cos (t * System.Math.PI) in if a > 0. then a else 0.) * 20.)
+
+let scene5 = {
+    Duration = 2.
+    TimeTransform = id
+    Shapes =
+        let circles =
+            shapes {
+                for i in 0..11 do
+                    let x = cos (float i / 6. * System.Math.PI)
+                    let y = sin (float i / 6. * System.Math.PI)
+                    yield! circleAt (radius >*> forever x, radius >*> forever y) |> at origin
+            }
+        shapes {
+            yield rectangle (forever 100., forever 100.) |> at origin |> withContour Pens.Black
+            yield! circles |> at origin  |> rotatedBy (time >>> (fun t -> t * System.Math.PI * 2.))
+        }
+}
