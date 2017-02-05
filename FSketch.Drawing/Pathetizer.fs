@@ -54,7 +54,7 @@ module Pathetizer =
                     Line(Vector(-width,0.))
                     Line(Vector(0.,-height))
                 ]
-            { SubPaths = [ { Start = Vector.Zero; Parts = pathParts; Closed = true } ] }
+            { SubPaths = [ { Start = Vector(-width/2.,-height/2.); Parts = pathParts; Closed = true } ] }
         | Ellipse(Vector(width,height)) ->
             let x = width / 2.0
             let y = height / 2.0

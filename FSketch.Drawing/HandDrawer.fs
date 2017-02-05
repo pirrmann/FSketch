@@ -68,10 +68,12 @@ module HandDrawer =
     let private handDrawnPath path =
         { path with SubPaths = path.SubPaths |> List.map handDrawnSubPath }
 
-    let RedrawByHand (refSpace, { Shape = shape; DrawType = drawType }) =
-        let shape' =
-            shape
-            |> Pathetizer.ConvertToPath
-            |> handDrawnPath
-            |> Path
-        (refSpace, { Shape = shape'; DrawType = drawType })
+    let RedrawByHand shapes =
+        shapes
+        |> List.map (fun (refSpace, { Shape = shape; DrawType = drawType }) ->
+            let shape' =
+                shape
+                |> Pathetizer.ConvertToPath
+                |> handDrawnPath
+                |> Path
+            (refSpace, { Shape = shape'; DrawType = drawType }))
