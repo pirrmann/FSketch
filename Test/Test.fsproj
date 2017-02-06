@@ -62,6 +62,7 @@
     <None Include="Crossbones.svg" />
     <None Include="Svg.fsx" />
     <None Include="HandDrawn.fsx" />
+    <None Include="Behaviours.fsx" />
     <None Include="Animated.fsx" />
     <None Include="Stickman.fsx" />
     <None Include="Walk.fsx" />
