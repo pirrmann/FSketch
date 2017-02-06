@@ -59,6 +59,9 @@
     <Compile Include="..\FSketch\Colors.fs">
       <Link>Colors.fs</Link>
     </Compile>
+    <Compile Include="..\FSketch\Viewport.fs">
+      <Link>Viewport.fs</Link>
+    </Compile>
     <Compile Include="..\FSketch\Builder.fs">
       <Link>Builder.fs</Link>
     </Compile>

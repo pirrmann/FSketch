@@ -110,11 +110,20 @@ let drawShape (graphics:Graphics) (space:RefSpace, styledShape:StyledShape) =
             use brush = brush |> toSystemBrush
             graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.))))
 
-let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
+let Draw (graphics:Graphics) (width:int, height:int) (viewport: Viewport option) (shapes:Shapes) =
 
     match computeBoundingBox false shapes with
     | None -> ()
     | Some (left, top, right, bottom) -> 
+
+        let left, top, right, bottom =
+            match viewport with
+             | Some viewPort ->
+                viewPort.Center.X - viewPort.ViewSize.X / 2.,
+                viewPort.Center.Y - viewPort.ViewSize.Y / 2.,
+                viewPort.Center.X + viewPort.ViewSize.X / 2.,
+                viewPort.Center.Y + viewPort.ViewSize.Y / 2.
+             | None -> left, top, right, bottom
 
         let displayWidth, displayHeight = width - 50, height - 50
         let scaleRatio =
@@ -132,4 +141,21 @@ let Draw (graphics:Graphics) (width:int, height:int) (shapes:Shapes) =
             graphics.ScaleTransform(single scaleRatio, single scaleRatio)
             graphics.TranslateTransform(-(single left + single right)/2.f, -(single top + single bottom)/2.f)
             shape |> drawShape graphics
+
+        match viewport with
+        | Some viewport ->
+            graphics.ResetTransform()
+            graphics.TranslateTransform(single width/2.f, single height/2.f)
+            graphics.ScaleTransform(single scaleRatio, single scaleRatio)
+            graphics.TranslateTransform(-(single left + single right)/2.f, -(single top + single bottom)/2.f)
+            graphics.TranslateTransform(single viewport.Center.X, single viewport.Center.Y)
+            let graphicsPath = new GraphicsPath()
+            graphicsPath.AddRectangle(new RectangleF(-(single viewport.ViewSize.X) / 2.f, -(single viewport.ViewSize.Y) / 2.f, single viewport.ViewSize.X, single viewport.ViewSize.Y))
+            let region = new Region()
+            region.MakeInfinite()
+            region.Exclude(graphicsPath)
+            use brush = Brushes.White |> toSystemBrush
+            graphics.FillRegion(brush, region)
+        | None -> ()
+
         graphics.ResetTransform()

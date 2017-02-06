@@ -3,7 +3,7 @@
 module Camera =
     type private CS = FSketch.Shape
 
-    let rec internal takeSnapshot eval (shapes:Shapes) =
+    let rec internal takeSnapshot eval (shapes:Shapes, viewport: Viewport option) =
         let evalTransformMatrix (TransformMatrix((m11, m12), (m21, m22), (mx, my))) =
             FSketch.TransformMatrix ((eval m11, eval m12), (eval m21, eval m22), (eval mx, eval my))
 
@@ -88,16 +88,23 @@ module Camera =
         let evalPlacedShape (refSpace:RefSpace, styledShape:StyledShape) =
             evalRefSpace refSpace, evalStyledShape styledShape
 
-        shapes |> List.map evalPlacedShape
+        let evalViewport (viewport:Viewport) =
+            {
+                FSketch.Viewport.Center = evalVector viewport.Center
+                FSketch.Viewport.ViewSize = evalVector viewport.ViewSize
+            }
 
-    let atTime time (shapes:Shapes) =
+        shapes |> List.map evalPlacedShape,
+        viewport |> Option.map evalViewport
+
+    let atTime time (shapes:Shapes, viewport: Viewport option) =
         let context = { Time = time }
         let eval (Behaviour(f)) = f context
-        shapes |> takeSnapshot eval
+        (shapes, viewport) |> takeSnapshot eval
 
     let toFrames (frameRate:int) (scene:Scene) = seq {
         let framesCount = scene.Duration * float frameRate |> floor |> int
         for index in 0 .. framesCount - 1 do
         let time = (float index / float (framesCount - 1)) |> scene.TimeTransform
-        yield scene.Shapes |> atTime time
+        yield (scene.Shapes, scene.Viewport) |> atTime time
     }

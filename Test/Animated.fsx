@@ -15,6 +15,7 @@ let scene1 = {
     Duration = 2.
     TimeTransform = id
     Shapes = bouncingCircle
+    Viewport = None
 }
 
 let ratio = sqrt 2. / 2.
@@ -29,6 +30,7 @@ let scene2 = {
     Duration = 3.
     TimeTransform = fun t -> t / 3.
     Shapes = fractal 100.
+    Viewport = None
 }
 
 let rotatingCircle offset =
@@ -48,6 +50,7 @@ let scene3 = {
         for y in -9 .. 9 do
         yield! rotatingCircle (float (x + y)) |> at (forever (float x*10.), forever(float y*10.))
     }
+    Viewport = None
 }
 
 let circleAt (x, y) =
@@ -92,6 +95,7 @@ let scene4 = {
         let backwards = (step % 2) = 0
         yield! circlesBasedAt (x, y) offset backwards |> at origin
     }
+    Viewport = None
 }
 
 let radius = time >>> (fun t -> (let a = cos (t * System.Math.PI) in if a > 0. then a else 0.) * 20.)
@@ -108,7 +112,10 @@ let scene5 = {
                     yield! circleAt (radius >*> forever x, radius >*> forever y) |> at origin
             }
         shapes {
-            yield rectangle (forever 100., forever 100.) |> at origin |> withContour Pens.Black
             yield! circles |> at origin  |> rotatedBy (time >>> (fun t -> t * System.Math.PI * 2.))
         }
+    Viewport = Some {
+        Center = Vector.Zero
+        ViewSize = Vector(forever 100., forever 100.)
+    }
 }

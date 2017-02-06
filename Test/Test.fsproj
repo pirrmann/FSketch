@@ -64,7 +64,7 @@
     <None Include="HandDrawn.fsx" />
     <None Include="Behaviours.fsx" />
     <None Include="Animated.fsx" />
-    <None Include="Stickman.fsx" />
+    <None Include="Perspective.fsx" />
     <None Include="Walk.fsx" />
     <None Include="paket.references" />
   </ItemGroup>

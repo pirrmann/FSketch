@@ -28,13 +28,13 @@ type CanvasForm () as this =
     let repaint (o:obj) (e:PaintEventArgs) =
         let graphics = e.Graphics
         graphics.Clear(Color.White)
-        let shapes =
+        let shapes, viewport =
             match thingsToDisplay with
-            | Shapes shapes -> shapes
+            | Shapes shapes -> shapes, None
             | Scene scene ->
                 let time = (System.DateTime.Now - startTime).TotalSeconds % scene.Duration |> scene.TimeTransform
-                scene.Shapes |> FSketch.Behaviours.Camera.atTime time
-        shapes |> Drawer.Draw graphics (canvas.Width, canvas.Height)
+                (scene.Shapes, scene.Viewport) |> FSketch.Behaviours.Camera.atTime time
+        shapes |> Drawer.Draw graphics (canvas.Width, canvas.Height) viewport
 
     do
         this.MinimumSize <- new Size(400, 400)
