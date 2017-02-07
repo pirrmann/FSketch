@@ -7,12 +7,13 @@
 open FSketch
 
 fsi.AddPrintTransformer(fun (shapes:Shapes) ->
-                            shapes |> Winforms.WinformsDrawer.Draw |> ignore
+                            shapes |> Frame.FromShapes |> Winforms.WinformsDrawer.Draw |> ignore
                             null)
 
 fsi.AddPrintTransformer(fun (strings:string array) ->
                             Array2D.init strings.Length 1 (fun i _ -> strings.[i])
                             |> DrawingDebugUtils.FromArray2D(ListDrawerOptions(bordersEnabled = false, gridCellSizes = Unconstrained))
+                            |> Frame.FromShapes
                             |> Winforms.WinformsDrawer.Draw
                             |> ignore
                             null)

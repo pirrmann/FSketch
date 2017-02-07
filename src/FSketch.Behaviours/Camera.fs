@@ -1,8 +1,6 @@
 ﻿namespace FSketch.Behaviours
 
 module Camera =
-    type private CS = FSketch.Shape
-
     let rec internal takeSnapshot eval (shapes:Shapes, viewport: Viewport option) =
         let evalTransformMatrix (TransformMatrix((m11, m12), (m21, m22), (mx, my))) =
             FSketch.TransformMatrix ((eval m11, eval m12), (eval m21, eval m22), (eval mx, eval my))
@@ -20,13 +18,13 @@ module Camera =
 
         let evalSubPath (subPath:SubPath) : FSketch.SubPath =
             {
-                FSketch.SubPath.Start = evalVector subPath.Start
+                Start = evalVector subPath.Start
                 Parts = List.map evalPathPart subPath.Parts
                 Closed = subPath.Closed
             }
 
         let evalPath (path:Path) : FSketch.Path =
-            { FSketch.Path.SubPaths = List.map evalSubPath path.SubPaths }
+            { SubPaths = List.map evalSubPath path.SubPaths }
 
         let evalArgbColor (color:ArgbColor) : FSketch.ArgbColor = {
             Alpha = eval color.Alpha
@@ -71,27 +69,27 @@ module Camera =
         let evalShape (shape:Shape) : FSketch.Shape =
             match shape with
             | Rectangle size ->
-                CS.Rectangle(evalVector size)
+                FSketch.Shape.Rectangle(evalVector size)
             | Ellipse size ->
-                CS.Ellipse(evalVector size)
+                FSketch.Shape.Ellipse(evalVector size)
             | Path (path) ->
                 FSketch.Shape.Path(evalPath path)
             | Text (text) ->
                 FSketch.Shape.Text(evalText text)
 
-        let evalStyledShape (styledShape:StyledShape) =
+        let evalStyledShape (styledShape:StyledShape) : FSketch.StyledShape =
             {
-                FSketch.StyledShape.Shape = evalShape styledShape.Shape
-                FSketch.StyledShape.DrawType = evalDrawType styledShape.DrawType
+                Shape = evalShape styledShape.Shape
+                DrawType = evalDrawType styledShape.DrawType
             }
 
         let evalPlacedShape (refSpace:RefSpace, styledShape:StyledShape) =
             evalRefSpace refSpace, evalStyledShape styledShape
 
-        let evalViewport (viewport:Viewport) =
+        let evalViewport (viewport:Viewport) : FSketch.Viewport =
             {
-                FSketch.Viewport.Center = evalVector viewport.Center
-                FSketch.Viewport.ViewSize = evalVector viewport.ViewSize
+                Center = evalVector viewport.Center
+                ViewSize = evalVector viewport.ViewSize
             }
 
         shapes |> List.map evalPlacedShape,

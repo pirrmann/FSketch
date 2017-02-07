@@ -59,6 +59,7 @@
     <Compile Include="Colors.fs" />
     <Compile Include="ColorSpaces.fs" />
     <Compile Include="Viewport.fs" />
+    <Compile Include="Frame.fs" />
     <Compile Include="Builder.fs" />
     <Compile Include="Dsl.fs" />
   </ItemGroup>

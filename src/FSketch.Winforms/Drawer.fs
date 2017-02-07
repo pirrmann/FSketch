@@ -110,14 +110,14 @@ let drawShape (graphics:Graphics) (space:RefSpace, styledShape:StyledShape) =
             use brush = brush |> toSystemBrush
             graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.))))
 
-let Draw (graphics:Graphics) (width:int, height:int) (viewport: Viewport option) (shapes:Shapes) =
+let Draw (graphics:Graphics) (width:int, height:int) (frame:Frame) =
 
-    match computeBoundingBox false shapes with
+    match computeBoundingBox false frame.Shapes with
     | None -> ()
     | Some (left, top, right, bottom) -> 
 
         let left, top, right, bottom =
-            match viewport with
+            match frame.Viewport with
              | Some viewPort ->
                 viewPort.Center.X - viewPort.ViewSize.X / 2.,
                 viewPort.Center.Y - viewPort.ViewSize.Y / 2.,
@@ -135,14 +135,14 @@ let Draw (graphics:Graphics) (width:int, height:int) (viewport: Viewport option)
         graphics.SmoothingMode <- SmoothingMode.HighQuality
         graphics.TextRenderingHint <- Text.TextRenderingHint.AntiAlias
 
-        for shape in shapes |> Seq.sortBy (fun (s, _) -> s.z) do
+        for shape in frame.Shapes |> Seq.sortBy (fun (s, _) -> s.z) do
             graphics.ResetTransform()
             graphics.TranslateTransform(single width/2.f, single height/2.f)
             graphics.ScaleTransform(single scaleRatio, single scaleRatio)
             graphics.TranslateTransform(-(single left + single right)/2.f, -(single top + single bottom)/2.f)
             shape |> drawShape graphics
 
-        match viewport with
+        match frame.Viewport with
         | Some viewport ->
             graphics.ResetTransform()
             graphics.TranslateTransform(single width/2.f, single height/2.f)

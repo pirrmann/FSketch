@@ -11,7 +11,11 @@ let RegisterPrinters () =
                             Seq.empty, svg)
 #else
     fsi.AddPrintTransformer(fun (shapes:FSketch.Shapes) ->
-                                shapes |> FSketch.Winforms.WinformsDrawer.Draw |> ignore
+                                shapes |> FSketch.Frame.FromShapes |> FSketch.Winforms.WinformsDrawer.Draw |> ignore
+                                null)
+
+    fsi.AddPrintTransformer(fun (frame:FSketch.Frame) ->
+                                frame |> FSketch.Winforms.WinformsDrawer.Draw |> ignore
                                 null)
 
     fsi.AddPrintTransformer(fun (scene: FSketch.Behaviours.Scene) ->

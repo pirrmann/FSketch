@@ -5,7 +5,7 @@ open System.Drawing
 open System.Windows.Forms
 
 type ThingsToDisplay =
-    | Shapes of Shapes
+    | Frame of Frame
     | Scene of FSketch.Behaviours.Scene
 
 type private Canvas() =
@@ -20,7 +20,7 @@ type CanvasForm () as this =
     inherit Form()
 
     let canvas = new Canvas()
-    let mutable thingsToDisplay:ThingsToDisplay = ThingsToDisplay.Shapes([])
+    let mutable thingsToDisplay:ThingsToDisplay = ThingsToDisplay.Frame { Shapes = []; Viewport = None}
     let mutable startTime = System.DateTime.Now
 
     let timer = new System.Windows.Forms.Timer()
@@ -28,13 +28,17 @@ type CanvasForm () as this =
     let repaint (o:obj) (e:PaintEventArgs) =
         let graphics = e.Graphics
         graphics.Clear(Color.White)
-        let shapes, viewport =
+        let frame =
             match thingsToDisplay with
-            | Shapes shapes -> shapes, None
+            | Frame frame -> frame
             | Scene scene ->
                 let time = (System.DateTime.Now - startTime).TotalSeconds % scene.Duration |> scene.TimeTransform
-                (scene.Shapes, scene.Viewport) |> FSketch.Behaviours.Camera.atTime time
-        shapes |> Drawer.Draw graphics (canvas.Width, canvas.Height) viewport
+                let shapes, viewport = (scene.Shapes, scene.Viewport) |> FSketch.Behaviours.Camera.atTime time
+                {
+                    Shapes = shapes
+                    Viewport = viewport
+                }
+        frame |> Drawer.Draw graphics (canvas.Width, canvas.Height)
 
     do
         this.MinimumSize <- new Size(400, 400)
@@ -74,9 +78,9 @@ module WinformsDrawer =
             window.Show()
         window
 
-    let Draw (shapes:Shapes) =
+    let Draw (frame:Frame) =
         let window = ensureWindowExists()
-        window.ThingsToDisplay <- ThingsToDisplay.Shapes shapes
+        window.ThingsToDisplay <- ThingsToDisplay.Frame frame
         window.StopTimer()
         window
 
