@@ -1,5 +1,5 @@
 ﻿#load "References.fsx"
-References.RegisterPrinters()
+References.RegisterPrinters(References.PrinterRegistration.Shapes)
 
 type Camera = {
     Zoom: float

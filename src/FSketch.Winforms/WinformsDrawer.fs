@@ -6,7 +6,7 @@ open System.Windows.Forms
 
 type ThingsToDisplay =
     | Frame of Frame
-    | Scene of FSketch.Behaviours.Scene
+    | RenderedScene of RenderedScene
 
 type private Canvas() =
     inherit Control()
@@ -31,13 +31,9 @@ type CanvasForm () as this =
         let frame =
             match thingsToDisplay with
             | Frame frame -> frame
-            | Scene scene ->
-                let time = (System.DateTime.Now - startTime).TotalSeconds % scene.Duration |> scene.TimeTransform
-                let shapes, viewport = (scene.Shapes, scene.Viewport) |> FSketch.Behaviours.Camera.atTime time
-                {
-                    Shapes = shapes
-                    Viewport = viewport
-                }
+            | RenderedScene scene ->
+                let frameIndex = int((System.DateTime.Now - startTime).TotalSeconds / scene.FrameDuration) % scene.Frames.Length
+                scene.Frames.[frameIndex]
         frame |> Drawer.Draw graphics (canvas.Width, canvas.Height)
 
     do
@@ -84,8 +80,8 @@ module WinformsDrawer =
         window.StopTimer()
         window
 
-    let Play (scene:FSketch.Behaviours.Scene) =
+    let Play (scene:RenderedScene) =
         let window = ensureWindowExists()
-        window.ThingsToDisplay <- ThingsToDisplay.Scene scene
+        window.ThingsToDisplay <- ThingsToDisplay.RenderedScene scene
         window.RestartTimer()
         window

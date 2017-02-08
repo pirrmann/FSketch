@@ -1,7 +1,7 @@
 ﻿namespace FSketch.Behaviours
 
 module Camera =
-    let rec internal takeSnapshot eval (shapes:Shapes, viewport: Viewport option) =
+    let rec internal takeSnapshot eval (shapes:Shapes, viewport: Viewport option) : FSketch.Frame =
         let evalTransformMatrix (TransformMatrix((m11, m12), (m21, m22), (mx, my))) =
             FSketch.TransformMatrix ((eval m11, eval m12), (eval m21, eval m22), (eval mx, eval my))
 
@@ -92,17 +92,27 @@ module Camera =
                 ViewSize = evalVector viewport.ViewSize
             }
 
-        shapes |> List.map evalPlacedShape,
-        viewport |> Option.map evalViewport
+        {
+            Shapes = shapes |> List.map evalPlacedShape
+            Viewport = viewport |> Option.map evalViewport
+        }
 
     let atTime time (shapes:Shapes, viewport: Viewport option) =
         let context = { Time = time }
         let eval (Behaviour(f)) = f context
         (shapes, viewport) |> takeSnapshot eval
 
-    let toFrames (frameRate:int) (scene:Scene) = seq {
-        let framesCount = scene.Duration * float frameRate |> floor |> int
-        for index in 0 .. framesCount - 1 do
-        let time = (float index / float (framesCount - 1)) |> scene.TimeTransform
-        yield (scene.Shapes, scene.Viewport) |> atTime time
-    }
+    let toFrames (frameDuration:float) (scene:Scene) =
+        let framesCount = (scene.Duration / frameDuration) |> floor |> int
+        seq {
+            for index in 0 .. framesCount - 1 do
+            let time = float index * frameDuration |> scene.TimeTransform
+            yield (scene.Shapes, scene.Viewport) |> atTime time
+        }
+
+    let record (frameRate:int) scenes : FSketch.RenderedScene =
+        let frameDuration = 1. / float frameRate
+        {
+            FrameDuration = frameDuration
+            Frames = scenes |> Seq.collect (toFrames frameDuration) |> Seq.toArray
+        }

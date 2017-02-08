@@ -1,5 +1,5 @@
 ﻿#load "References.fsx"
-References.RegisterPrinters()
+References.RegisterPrinters(References.PrinterRegistration.Scene)
 
 open FSketch.Behaviours
 open FSketch.Behaviours.Dsl
@@ -101,7 +101,7 @@ let scene4 = {
 let radius = time >>> (fun t -> (let a = cos (t * System.Math.PI) in if a > 0. then a else 0.) * 20.)
 
 let scene5 = {
-    Duration = 2.
+    Duration = 1.
     TimeTransform = id
     Shapes =
         let circles =

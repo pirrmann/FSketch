@@ -1,5 +1,5 @@
 ﻿#load "References.fsx"
-References.RegisterPrinters()
+References.RegisterPrinters(References.PrinterRegistration.Scene)
 
 module Background =
     open FSketch
@@ -77,12 +77,13 @@ let walkingStickman = shapes {
     yield! leg 0.5 |> toLegShapes pen |> at origin |> rotatedBy (Pi >/> forever 2.)
 }
 
-let scene1 = {
-    Duration = 3.
-    TimeTransform = id
-    Shapes = walkingStickman
-    Viewport = Some {
-        Center = Vector(forever 0., forever -5.8)
-        ViewSize = Vector(forever 100., forever 40.)
+let scene1 =
+    {
+        Duration = 3.
+        TimeTransform = id
+        Shapes = walkingStickman
+        Viewport = Some {
+            Center = Vector(forever 0., forever -5.8)
+            ViewSize = Vector(forever 100., forever 40.)
+        }
     }
-}
