@@ -1,8 +1,8 @@
 ﻿namespace FSketch
 
 type Numeric = float
-[<AutoOpen>]
-module internal NumericOps =
+
+module NumericOps =
     let Zero = 0.
     let One = 1.
     let inline negate (x:Numeric) = -x

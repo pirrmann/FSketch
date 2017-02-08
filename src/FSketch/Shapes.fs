@@ -5,6 +5,7 @@ namespace FSketch
 #endif
 
 open Microsoft.FSharp.Math
+open NumericOps
 
 type Vector = Vector of Numeric * Numeric with
     static member Zero = Vector (Zero, Zero)

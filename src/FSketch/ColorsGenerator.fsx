@@ -16,6 +16,8 @@ let genLines = seq {
     yield "namespace FSketch"
     yield "#endif"
     yield ""
+    yield "open NumericOps"
+    yield ""
     yield "module Colors ="
     yield ""
     for (name, (a, r, g, b), _) in colors do

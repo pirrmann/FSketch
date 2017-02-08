@@ -4,6 +4,8 @@ namespace FSketch.Behaviours
 namespace FSketch
 #endif
 
+open NumericOps
+
 module Colors =
 
     let Transparent = ArgbColor { Alpha = ofFloat 0.000000; R = ofFloat 1.000000; G = ofFloat 1.000000; B = ofFloat 1.000000 }

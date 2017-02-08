@@ -1,8 +1,8 @@
 ﻿namespace FSketch.Behaviours
 
 type Numeric = Behaviour
-[<AutoOpen>]
-module internal NumericOps =
+
+module NumericOps =
     let Zero = forever 0.
     let One = forever 1.
 

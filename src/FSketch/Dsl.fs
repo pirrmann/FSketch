@@ -4,6 +4,8 @@ namespace FSketch.Behaviours
 namespace FSketch
 #endif
 
+open NumericOps
+
 module Dsl =
 
     let rectangle (width, height) = Rectangle(Vector(width, height))
