@@ -66,6 +66,7 @@
     <None Include="Perspective.fsx" />
     <None Include="Walk.fsx" />
     <None Include="Scenes.fsx" />
+    <None Include="Flying.fsx" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ module HandDrawer =
 
     let rec private splitLine (x, y) =
         let length = sqrt (x*x + y*y)
-        if length > 10. then
+        if length > 10. && length < 1000. then
             let splitDistance = 4. + rand.NextDouble() * 2.
             let thX, thY = x * splitDistance / length, y * splitDistance / length
             let x' = thX + (-1. + rand.NextDouble() * 2.) * moveRatio
@@ -77,3 +77,10 @@ module HandDrawer =
                 |> handDrawnPath
                 |> Path
             (refSpace, { Shape = shape'; DrawType = drawType }))
+
+    let RedrawAllFrames (scene:RenderedScene) =
+        let frames' =
+            scene.Frames
+            |> Array.map (fun f -> { f with Shapes = RedrawByHand f.Shapes })
+
+        { scene with Frames = frames' }

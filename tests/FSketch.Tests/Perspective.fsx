@@ -11,7 +11,7 @@ type Camera = {
         if ratio = 0. then 0. else len / ratio * this.Zoom
 
     member this.map3dTo2d (x3d, y3d, z3d) =
-        let convertLength'  = this.convertLength z3d
+        let convertLength' = this.convertLength z3d
         let x2d = (convertLength' (x3d - this.X))
         let y2d = (convertLength' (y3d - this.Y))
         (x2d, y2d)
