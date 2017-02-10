@@ -49,6 +49,8 @@ let squares = shapes {
         yield lines |> toClosedPath |> at (List.head points) |> withContour Pens.Black }
 
 let scene = {
+    Duration = 3.
+    TimeTransform = (fun t -> t * 2.)
     Shapes = squares
     Viewport = Some {
         Center = Vector.Zero
