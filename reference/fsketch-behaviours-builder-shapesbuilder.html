@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>ShapesBuilder - FSketch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content="Pierre Irrmann"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/FSketch/content/style.css" />
+    <script type="text/javascript" src="/FSketch/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="https://github.com/pirrmann/FSketch">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/FSketch/index.html">FSketch</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>ShapesBuilder</h1>
+<p>
+  <span>Namespace: FSketch.Behaviours</span><br />
+  <span>Parent Module: <a href="fsketch-behaviours-builder.html">Builder</a></span>
+</p>
+<div class="xmldoc">
+</div>
+  <h3>Constructors</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Constructor</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1079', 1079)" onmouseover="showTip(event, '1079', 1079)">
+            new()
+          </code>
+          <div class="tip" id="1079">
+            <strong>Signature:</strong> unit -&gt; ShapesBuilder<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/pirrmann/FSketch/tree/master/src/FSketch/Builder.fs#L8-8" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>.ctor</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Instance members</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Instance member</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1080', 1080)" onmouseover="showTip(event, '1080', 1080)">
+            Combine(f1, f2)
+          </code>
+          <div class="tip" id="1080">
+            <strong>Signature:</strong> (f1:&#39;?8369 list * f2:&#39;?8369 list) -&gt; &#39;?8369 list<br />
+                          <strong>Type parameters:</strong> '?8369          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/pirrmann/FSketch/tree/master/src/FSketch/Builder.fs#L13-13" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1081', 1081)" onmouseover="showTip(event, '1081', 1081)">
+            Delay(f)
+          </code>
+          <div class="tip" id="1081">
+            <strong>Signature:</strong> (f:(unit -&gt; &#39;?8367)) -&gt; &#39;?8367<br />
+                          <strong>Type parameters:</strong> '?8367          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/pirrmann/FSketch/tree/master/src/FSketch/Builder.fs#L12-12" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1082', 1082)" onmouseover="showTip(event, '1082', 1082)">
+            For(s, f)
+          </code>
+          <div class="tip" id="1082">
+            <strong>Signature:</strong> (s:seq&lt;&#39;T&gt; * f:(&#39;T -&gt; (RefSpace * StyledShape) list)) -&gt; (RefSpace * StyledShape) list<br />
+                          <strong>Type parameters:</strong> 'T          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/pirrmann/FSketch/tree/master/src/FSketch/Builder.fs#L14-14" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1083', 1083)" onmouseover="showTip(event, '1083', 1083)">
+            Yield(placedAndStyledShape)
+          </code>
+          <div class="tip" id="1083">
+            <strong>Signature:</strong> (placedAndStyledShape:(RefSpace * StyledShape)) -&gt; (RefSpace * StyledShape) list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/pirrmann/FSketch/tree/master/src/FSketch/Builder.fs#L10-10" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1084', 1084)" onmouseover="showTip(event, '1084', 1084)">
+            YieldFrom(space, shapes)
+          </code>
+          <div class="tip" id="1084">
+            <strong>Signature:</strong> (space:RefSpace * shapes:Shapes) -&gt; (RefSpace * StyledShape) list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/pirrmann/FSketch/tree/master/src/FSketch/Builder.fs#L11-11" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '1085', 1085)" onmouseover="showTip(event, '1085', 1085)">
+            Zero()
+          </code>
+          <div class="tip" id="1085">
+            <strong>Signature:</strong> unit -&gt; &#39;?8363 list<br />
+                          <strong>Type parameters:</strong> '?8363          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/pirrmann/FSketch/tree/master/src/FSketch/Builder.fs#L9-9" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <img src="/FSketch/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">FSketch</li>
+            <li><a href="/FSketch/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/FSketch">Get Library via NuGet</a></li>
+            <li><a href="https://github.com/pirrmann/FSketch">Source Code on GitHub</a></li>
+            <li><a href="/FSketch/license.html">License</a></li>
+            <li><a href="/FSketch/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+            <li><a href="/FSketch/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/FSketch/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/pirrmann/FSketch"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
