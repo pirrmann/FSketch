@@ -7,8 +7,6 @@
 FSketch
 ======================
 
-Documentation
-
 <div class="row">
   <div class="span1"></div>
   <div class="span6">
@@ -39,8 +37,6 @@ let simpleShapes = shapes {
 }
 
 (**
-Some more info
-
 Samples & documentation
 -----------------------
 
