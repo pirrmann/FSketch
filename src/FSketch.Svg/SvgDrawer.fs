@@ -43,7 +43,10 @@ module internal SvgDrawerHelper =
         let fill =
             match drawType with
             | Fill brush
-            | ContourAndFill (_, brush) -> sprintf "fill:%s" (toHexaColor brush.Color)
+            | ContourAndFill (_, brush) ->
+                match brush with
+                | SolidBrush color ->
+                    sprintf "fill:%s" (toHexaColor color)
             | Contour _ -> "fill:none"
         let stroke =
             match drawType with

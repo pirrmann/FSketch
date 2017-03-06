@@ -67,6 +67,7 @@
     <None Include="Walk.fsx" />
     <None Include="Scenes.fsx" />
     <None Include="Flying.fsx" />
+    <None Include="Colors.fsx" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

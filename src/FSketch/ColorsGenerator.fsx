@@ -32,9 +32,9 @@ let genLines = seq {
     yield "module Brushes ="
     for (name, _, gen) in colors do
         if gen then
-            yield sprintf "   let %s = { Color = Colors.%s }" name name
+            yield sprintf "   let %s = SolidBrush (Colors.%s)" name name
         else
-            yield sprintf "   let %s = { Color = Colors.%s }" "Solid" name
+            yield sprintf "   let %s = SolidBrush (Colors.%s)" "Solid" name
 }
 
 System.IO.File.WriteAllLines(

@@ -294,144 +294,144 @@ module Pens =
    let Default = Black
 
 module Brushes =
-   let Solid = { Color = Colors.Transparent }
-   let AliceBlue = { Color = Colors.AliceBlue }
-   let AntiqueWhite = { Color = Colors.AntiqueWhite }
-   let Aqua = { Color = Colors.Aqua }
-   let Aquamarine = { Color = Colors.Aquamarine }
-   let Azure = { Color = Colors.Azure }
-   let Beige = { Color = Colors.Beige }
-   let Bisque = { Color = Colors.Bisque }
-   let Black = { Color = Colors.Black }
-   let BlanchedAlmond = { Color = Colors.BlanchedAlmond }
-   let Blue = { Color = Colors.Blue }
-   let BlueViolet = { Color = Colors.BlueViolet }
-   let Brown = { Color = Colors.Brown }
-   let BurlyWood = { Color = Colors.BurlyWood }
-   let CadetBlue = { Color = Colors.CadetBlue }
-   let Chartreuse = { Color = Colors.Chartreuse }
-   let Chocolate = { Color = Colors.Chocolate }
-   let Coral = { Color = Colors.Coral }
-   let CornflowerBlue = { Color = Colors.CornflowerBlue }
-   let Cornsilk = { Color = Colors.Cornsilk }
-   let Crimson = { Color = Colors.Crimson }
-   let Cyan = { Color = Colors.Cyan }
-   let DarkBlue = { Color = Colors.DarkBlue }
-   let DarkCyan = { Color = Colors.DarkCyan }
-   let DarkGoldenrod = { Color = Colors.DarkGoldenrod }
-   let DarkGray = { Color = Colors.DarkGray }
-   let DarkGreen = { Color = Colors.DarkGreen }
-   let DarkKhaki = { Color = Colors.DarkKhaki }
-   let DarkMagenta = { Color = Colors.DarkMagenta }
-   let DarkOliveGreen = { Color = Colors.DarkOliveGreen }
-   let DarkOrange = { Color = Colors.DarkOrange }
-   let DarkOrchid = { Color = Colors.DarkOrchid }
-   let DarkRed = { Color = Colors.DarkRed }
-   let DarkSalmon = { Color = Colors.DarkSalmon }
-   let DarkSeaGreen = { Color = Colors.DarkSeaGreen }
-   let DarkSlateBlue = { Color = Colors.DarkSlateBlue }
-   let DarkSlateGray = { Color = Colors.DarkSlateGray }
-   let DarkTurquoise = { Color = Colors.DarkTurquoise }
-   let DarkViolet = { Color = Colors.DarkViolet }
-   let DeepPink = { Color = Colors.DeepPink }
-   let DeepSkyBlue = { Color = Colors.DeepSkyBlue }
-   let DimGray = { Color = Colors.DimGray }
-   let DodgerBlue = { Color = Colors.DodgerBlue }
-   let Firebrick = { Color = Colors.Firebrick }
-   let FloralWhite = { Color = Colors.FloralWhite }
-   let ForestGreen = { Color = Colors.ForestGreen }
-   let Fuchsia = { Color = Colors.Fuchsia }
-   let Gainsboro = { Color = Colors.Gainsboro }
-   let GhostWhite = { Color = Colors.GhostWhite }
-   let Gold = { Color = Colors.Gold }
-   let Goldenrod = { Color = Colors.Goldenrod }
-   let Gray = { Color = Colors.Gray }
-   let Green = { Color = Colors.Green }
-   let GreenYellow = { Color = Colors.GreenYellow }
-   let Honeydew = { Color = Colors.Honeydew }
-   let HotPink = { Color = Colors.HotPink }
-   let IndianRed = { Color = Colors.IndianRed }
-   let Indigo = { Color = Colors.Indigo }
-   let Ivory = { Color = Colors.Ivory }
-   let Khaki = { Color = Colors.Khaki }
-   let Lavender = { Color = Colors.Lavender }
-   let LavenderBlush = { Color = Colors.LavenderBlush }
-   let LawnGreen = { Color = Colors.LawnGreen }
-   let LemonChiffon = { Color = Colors.LemonChiffon }
-   let LightBlue = { Color = Colors.LightBlue }
-   let LightCoral = { Color = Colors.LightCoral }
-   let LightCyan = { Color = Colors.LightCyan }
-   let LightGoldenrodYellow = { Color = Colors.LightGoldenrodYellow }
-   let LightGreen = { Color = Colors.LightGreen }
-   let LightGray = { Color = Colors.LightGray }
-   let LightPink = { Color = Colors.LightPink }
-   let LightSalmon = { Color = Colors.LightSalmon }
-   let LightSeaGreen = { Color = Colors.LightSeaGreen }
-   let LightSkyBlue = { Color = Colors.LightSkyBlue }
-   let LightSlateGray = { Color = Colors.LightSlateGray }
-   let LightSteelBlue = { Color = Colors.LightSteelBlue }
-   let LightYellow = { Color = Colors.LightYellow }
-   let Lime = { Color = Colors.Lime }
-   let LimeGreen = { Color = Colors.LimeGreen }
-   let Linen = { Color = Colors.Linen }
-   let Magenta = { Color = Colors.Magenta }
-   let Maroon = { Color = Colors.Maroon }
-   let MediumAquamarine = { Color = Colors.MediumAquamarine }
-   let MediumBlue = { Color = Colors.MediumBlue }
-   let MediumOrchid = { Color = Colors.MediumOrchid }
-   let MediumPurple = { Color = Colors.MediumPurple }
-   let MediumSeaGreen = { Color = Colors.MediumSeaGreen }
-   let MediumSlateBlue = { Color = Colors.MediumSlateBlue }
-   let MediumSpringGreen = { Color = Colors.MediumSpringGreen }
-   let MediumTurquoise = { Color = Colors.MediumTurquoise }
-   let MediumVioletRed = { Color = Colors.MediumVioletRed }
-   let MidnightBlue = { Color = Colors.MidnightBlue }
-   let MintCream = { Color = Colors.MintCream }
-   let MistyRose = { Color = Colors.MistyRose }
-   let Moccasin = { Color = Colors.Moccasin }
-   let NavajoWhite = { Color = Colors.NavajoWhite }
-   let Navy = { Color = Colors.Navy }
-   let OldLace = { Color = Colors.OldLace }
-   let Olive = { Color = Colors.Olive }
-   let OliveDrab = { Color = Colors.OliveDrab }
-   let Orange = { Color = Colors.Orange }
-   let OrangeRed = { Color = Colors.OrangeRed }
-   let Orchid = { Color = Colors.Orchid }
-   let PaleGoldenrod = { Color = Colors.PaleGoldenrod }
-   let PaleGreen = { Color = Colors.PaleGreen }
-   let PaleTurquoise = { Color = Colors.PaleTurquoise }
-   let PaleVioletRed = { Color = Colors.PaleVioletRed }
-   let PapayaWhip = { Color = Colors.PapayaWhip }
-   let PeachPuff = { Color = Colors.PeachPuff }
-   let Peru = { Color = Colors.Peru }
-   let Pink = { Color = Colors.Pink }
-   let Plum = { Color = Colors.Plum }
-   let PowderBlue = { Color = Colors.PowderBlue }
-   let Purple = { Color = Colors.Purple }
-   let Red = { Color = Colors.Red }
-   let RosyBrown = { Color = Colors.RosyBrown }
-   let RoyalBlue = { Color = Colors.RoyalBlue }
-   let SaddleBrown = { Color = Colors.SaddleBrown }
-   let Salmon = { Color = Colors.Salmon }
-   let SandyBrown = { Color = Colors.SandyBrown }
-   let SeaGreen = { Color = Colors.SeaGreen }
-   let SeaShell = { Color = Colors.SeaShell }
-   let Sienna = { Color = Colors.Sienna }
-   let Silver = { Color = Colors.Silver }
-   let SkyBlue = { Color = Colors.SkyBlue }
-   let SlateBlue = { Color = Colors.SlateBlue }
-   let SlateGray = { Color = Colors.SlateGray }
-   let Snow = { Color = Colors.Snow }
-   let SpringGreen = { Color = Colors.SpringGreen }
-   let SteelBlue = { Color = Colors.SteelBlue }
-   let Tan = { Color = Colors.Tan }
-   let Teal = { Color = Colors.Teal }
-   let Thistle = { Color = Colors.Thistle }
-   let Tomato = { Color = Colors.Tomato }
-   let Turquoise = { Color = Colors.Turquoise }
-   let Violet = { Color = Colors.Violet }
-   let Wheat = { Color = Colors.Wheat }
-   let White = { Color = Colors.White }
-   let WhiteSmoke = { Color = Colors.WhiteSmoke }
-   let Yellow = { Color = Colors.Yellow }
-   let YellowGreen = { Color = Colors.YellowGreen }
+   let Solid = SolidBrush (Colors.Transparent)
+   let AliceBlue = SolidBrush (Colors.AliceBlue)
+   let AntiqueWhite = SolidBrush (Colors.AntiqueWhite)
+   let Aqua = SolidBrush (Colors.Aqua)
+   let Aquamarine = SolidBrush (Colors.Aquamarine)
+   let Azure = SolidBrush (Colors.Azure)
+   let Beige = SolidBrush (Colors.Beige)
+   let Bisque = SolidBrush (Colors.Bisque)
+   let Black = SolidBrush (Colors.Black)
+   let BlanchedAlmond = SolidBrush (Colors.BlanchedAlmond)
+   let Blue = SolidBrush (Colors.Blue)
+   let BlueViolet = SolidBrush (Colors.BlueViolet)
+   let Brown = SolidBrush (Colors.Brown)
+   let BurlyWood = SolidBrush (Colors.BurlyWood)
+   let CadetBlue = SolidBrush (Colors.CadetBlue)
+   let Chartreuse = SolidBrush (Colors.Chartreuse)
+   let Chocolate = SolidBrush (Colors.Chocolate)
+   let Coral = SolidBrush (Colors.Coral)
+   let CornflowerBlue = SolidBrush (Colors.CornflowerBlue)
+   let Cornsilk = SolidBrush (Colors.Cornsilk)
+   let Crimson = SolidBrush (Colors.Crimson)
+   let Cyan = SolidBrush (Colors.Cyan)
+   let DarkBlue = SolidBrush (Colors.DarkBlue)
+   let DarkCyan = SolidBrush (Colors.DarkCyan)
+   let DarkGoldenrod = SolidBrush (Colors.DarkGoldenrod)
+   let DarkGray = SolidBrush (Colors.DarkGray)
+   let DarkGreen = SolidBrush (Colors.DarkGreen)
+   let DarkKhaki = SolidBrush (Colors.DarkKhaki)
+   let DarkMagenta = SolidBrush (Colors.DarkMagenta)
+   let DarkOliveGreen = SolidBrush (Colors.DarkOliveGreen)
+   let DarkOrange = SolidBrush (Colors.DarkOrange)
+   let DarkOrchid = SolidBrush (Colors.DarkOrchid)
+   let DarkRed = SolidBrush (Colors.DarkRed)
+   let DarkSalmon = SolidBrush (Colors.DarkSalmon)
+   let DarkSeaGreen = SolidBrush (Colors.DarkSeaGreen)
+   let DarkSlateBlue = SolidBrush (Colors.DarkSlateBlue)
+   let DarkSlateGray = SolidBrush (Colors.DarkSlateGray)
+   let DarkTurquoise = SolidBrush (Colors.DarkTurquoise)
+   let DarkViolet = SolidBrush (Colors.DarkViolet)
+   let DeepPink = SolidBrush (Colors.DeepPink)
+   let DeepSkyBlue = SolidBrush (Colors.DeepSkyBlue)
+   let DimGray = SolidBrush (Colors.DimGray)
+   let DodgerBlue = SolidBrush (Colors.DodgerBlue)
+   let Firebrick = SolidBrush (Colors.Firebrick)
+   let FloralWhite = SolidBrush (Colors.FloralWhite)
+   let ForestGreen = SolidBrush (Colors.ForestGreen)
+   let Fuchsia = SolidBrush (Colors.Fuchsia)
+   let Gainsboro = SolidBrush (Colors.Gainsboro)
+   let GhostWhite = SolidBrush (Colors.GhostWhite)
+   let Gold = SolidBrush (Colors.Gold)
+   let Goldenrod = SolidBrush (Colors.Goldenrod)
+   let Gray = SolidBrush (Colors.Gray)
+   let Green = SolidBrush (Colors.Green)
+   let GreenYellow = SolidBrush (Colors.GreenYellow)
+   let Honeydew = SolidBrush (Colors.Honeydew)
+   let HotPink = SolidBrush (Colors.HotPink)
+   let IndianRed = SolidBrush (Colors.IndianRed)
+   let Indigo = SolidBrush (Colors.Indigo)
+   let Ivory = SolidBrush (Colors.Ivory)
+   let Khaki = SolidBrush (Colors.Khaki)
+   let Lavender = SolidBrush (Colors.Lavender)
+   let LavenderBlush = SolidBrush (Colors.LavenderBlush)
+   let LawnGreen = SolidBrush (Colors.LawnGreen)
+   let LemonChiffon = SolidBrush (Colors.LemonChiffon)
+   let LightBlue = SolidBrush (Colors.LightBlue)
+   let LightCoral = SolidBrush (Colors.LightCoral)
+   let LightCyan = SolidBrush (Colors.LightCyan)
+   let LightGoldenrodYellow = SolidBrush (Colors.LightGoldenrodYellow)
+   let LightGreen = SolidBrush (Colors.LightGreen)
+   let LightGray = SolidBrush (Colors.LightGray)
+   let LightPink = SolidBrush (Colors.LightPink)
+   let LightSalmon = SolidBrush (Colors.LightSalmon)
+   let LightSeaGreen = SolidBrush (Colors.LightSeaGreen)
+   let LightSkyBlue = SolidBrush (Colors.LightSkyBlue)
+   let LightSlateGray = SolidBrush (Colors.LightSlateGray)
+   let LightSteelBlue = SolidBrush (Colors.LightSteelBlue)
+   let LightYellow = SolidBrush (Colors.LightYellow)
+   let Lime = SolidBrush (Colors.Lime)
+   let LimeGreen = SolidBrush (Colors.LimeGreen)
+   let Linen = SolidBrush (Colors.Linen)
+   let Magenta = SolidBrush (Colors.Magenta)
+   let Maroon = SolidBrush (Colors.Maroon)
+   let MediumAquamarine = SolidBrush (Colors.MediumAquamarine)
+   let MediumBlue = SolidBrush (Colors.MediumBlue)
+   let MediumOrchid = SolidBrush (Colors.MediumOrchid)
+   let MediumPurple = SolidBrush (Colors.MediumPurple)
+   let MediumSeaGreen = SolidBrush (Colors.MediumSeaGreen)
+   let MediumSlateBlue = SolidBrush (Colors.MediumSlateBlue)
+   let MediumSpringGreen = SolidBrush (Colors.MediumSpringGreen)
+   let MediumTurquoise = SolidBrush (Colors.MediumTurquoise)
+   let MediumVioletRed = SolidBrush (Colors.MediumVioletRed)
+   let MidnightBlue = SolidBrush (Colors.MidnightBlue)
+   let MintCream = SolidBrush (Colors.MintCream)
+   let MistyRose = SolidBrush (Colors.MistyRose)
+   let Moccasin = SolidBrush (Colors.Moccasin)
+   let NavajoWhite = SolidBrush (Colors.NavajoWhite)
+   let Navy = SolidBrush (Colors.Navy)
+   let OldLace = SolidBrush (Colors.OldLace)
+   let Olive = SolidBrush (Colors.Olive)
+   let OliveDrab = SolidBrush (Colors.OliveDrab)
+   let Orange = SolidBrush (Colors.Orange)
+   let OrangeRed = SolidBrush (Colors.OrangeRed)
+   let Orchid = SolidBrush (Colors.Orchid)
+   let PaleGoldenrod = SolidBrush (Colors.PaleGoldenrod)
+   let PaleGreen = SolidBrush (Colors.PaleGreen)
+   let PaleTurquoise = SolidBrush (Colors.PaleTurquoise)
+   let PaleVioletRed = SolidBrush (Colors.PaleVioletRed)
+   let PapayaWhip = SolidBrush (Colors.PapayaWhip)
+   let PeachPuff = SolidBrush (Colors.PeachPuff)
+   let Peru = SolidBrush (Colors.Peru)
+   let Pink = SolidBrush (Colors.Pink)
+   let Plum = SolidBrush (Colors.Plum)
+   let PowderBlue = SolidBrush (Colors.PowderBlue)
+   let Purple = SolidBrush (Colors.Purple)
+   let Red = SolidBrush (Colors.Red)
+   let RosyBrown = SolidBrush (Colors.RosyBrown)
+   let RoyalBlue = SolidBrush (Colors.RoyalBlue)
+   let SaddleBrown = SolidBrush (Colors.SaddleBrown)
+   let Salmon = SolidBrush (Colors.Salmon)
+   let SandyBrown = SolidBrush (Colors.SandyBrown)
+   let SeaGreen = SolidBrush (Colors.SeaGreen)
+   let SeaShell = SolidBrush (Colors.SeaShell)
+   let Sienna = SolidBrush (Colors.Sienna)
+   let Silver = SolidBrush (Colors.Silver)
+   let SkyBlue = SolidBrush (Colors.SkyBlue)
+   let SlateBlue = SolidBrush (Colors.SlateBlue)
+   let SlateGray = SolidBrush (Colors.SlateGray)
+   let Snow = SolidBrush (Colors.Snow)
+   let SpringGreen = SolidBrush (Colors.SpringGreen)
+   let SteelBlue = SolidBrush (Colors.SteelBlue)
+   let Tan = SolidBrush (Colors.Tan)
+   let Teal = SolidBrush (Colors.Teal)
+   let Thistle = SolidBrush (Colors.Thistle)
+   let Tomato = SolidBrush (Colors.Tomato)
+   let Turquoise = SolidBrush (Colors.Turquoise)
+   let Violet = SolidBrush (Colors.Violet)
+   let Wheat = SolidBrush (Colors.Wheat)
+   let White = SolidBrush (Colors.White)
+   let WhiteSmoke = SolidBrush (Colors.WhiteSmoke)
+   let Yellow = SolidBrush (Colors.Yellow)
+   let YellowGreen = SolidBrush (Colors.YellowGreen)

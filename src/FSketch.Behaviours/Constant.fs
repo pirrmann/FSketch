@@ -63,8 +63,9 @@ module Constant =
                    | FSketch.LineJoin.Miter -> LineJoin.Miter
                    | FSketch.LineJoin.Round -> LineJoin.Round }
 
-    let Brush (brush:FSketch.Brush) = {
-        Color = Color brush.Color }
+    let Brush (brush:FSketch.Brush) =
+        match brush with
+        | FSketch.SolidBrush color -> SolidBrush (Color color)
 
     let DrawType (drawType:FSketch.DrawType) =
         match drawType with

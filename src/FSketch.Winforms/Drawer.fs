@@ -20,8 +20,9 @@ let toSystemPen (pen:FSketch.Pen) =
     | FSketch.LineJoin.Round -> systemPen.LineJoin <- LineJoin.Round
     systemPen
 
-let toSystemBrush (brush:FSketch.Brush) =    
-    new SolidBrush(brush.Color |> toSystemColor)
+let toSystemBrush (brush:FSketch.Brush) =
+    match brush with
+    | SolidBrush color -> new SolidBrush(color |> toSystemColor)
 
 let toSystemTransform (TransformMatrix((m11, m12), (m21, m22), (dx, dy))) =
     new Matrix(float32 m11, float32 m12, float32 m21, float32 m22, float32 dx, float32 dy)

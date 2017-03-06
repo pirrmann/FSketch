@@ -133,7 +133,7 @@ module internal ParsingHelper =
                 | None -> strokeColor
 
             let pen = strokeColor |> Option.map (fun c -> {Color = c; Thickness = defaultArg strokeWidth 1.; LineJoin = defaultArg strokeLineJoin LineJoin.Miter })
-            let brush = fillColor |> Option.map (fun c -> {Color = c})
+            let brush = fillColor |> Option.map (fun c -> SolidBrush c)
             pen, brush
         with _ -> failwithf "Cannot parse properties %A" properties
 

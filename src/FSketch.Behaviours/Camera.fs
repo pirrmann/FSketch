@@ -53,8 +53,9 @@ module Camera =
             Thickness = eval pen.Thickness
             LineJoin = evalLineJoin pen.LineJoin }
 
-        let evalBrush (brush:Brush) : FSketch.Brush = {
-            Color = evalColor brush.Color }
+        let evalBrush (brush:Brush) : FSketch.Brush =
+            match brush with
+            | SolidBrush color -> FSketch.SolidBrush (evalColor color)
 
         let evalDrawType (drawType:DrawType) : FSketch.DrawType =
             match drawType with

@@ -71,8 +71,9 @@ type [<RequireQualifiedAccess>] LineJoin = | Miter | Round
 
 type Pen = { Color:Color; Thickness:Numeric; LineJoin:LineJoin }
 
-type Brush = { Color:Color } with
-    static member FromColor(color) = { Color = color }
+type Brush =
+    | SolidBrush of Color with
+    static member FromColor(color) = SolidBrush color
 
 type PathPart =
     | Line of Vector:Vector

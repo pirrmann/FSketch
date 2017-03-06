@@ -45,12 +45,14 @@ let scene3 = {
     Duration = 3.
     TimeTransform = fun t -> t / 3.
     Shapes = shapes {
-        yield rectangle (forever 210., forever 210.) |> at origin |> withContour Pens.Black
-        for x in -9 .. 9 do
-        for y in -9 .. 9 do
+        for x in -10 .. 10 do
+        for y in -10 .. 10 do
         yield! rotatingCircle (float (x + y)) |> at (forever (float x*10.), forever(float y*10.))
     }
-    Viewport = None
+    Viewport = Some {
+        Center = Vector.Zero
+        ViewSize = Vector(forever 200., forever 200.)
+    }
 }
 
 let circleAt (x, y) =
@@ -63,7 +65,7 @@ let circleAt (x, y) =
             Alpha = forever 1. }
 
     shapes {
-        yield circle (forever 10.) |> at (x, y) |> withFill { Brushes.Black with Color = color }
+        yield circle (forever 10.) |> at (x, y) |> withFill (SolidBrush color)
     }
 
 let circlesBasedAt (x, y) offset backwards =
