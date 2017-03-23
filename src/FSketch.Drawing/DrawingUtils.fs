@@ -8,7 +8,7 @@ module DrawingUtils =
         g.TextRenderingHint <- System.Drawing.Text.TextRenderingHint.AntiAlias
 
         fun text ->
-            use font = new System.Drawing.Font("Arial", single text.Size)
+            use font = new System.Drawing.Font(text.Font.FontName, single text.Size)
             let size = g.MeasureString(text.Text, font)
             float size.Width, float size.Height
 

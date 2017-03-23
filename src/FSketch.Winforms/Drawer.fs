@@ -72,44 +72,15 @@ let toSystemPath path =
 let drawShape (graphics:Graphics) (space:RefSpace, styledShape:StyledShape) =
     graphics.MultiplyTransform(space.transform |> toSystemTransform)
     let drawType = styledShape.DrawType
-    match styledShape.Shape with
-    | Rectangle(size) ->
-        let width, height = size.X, size.Y
-        let graphicsPath = new GraphicsPath()
-        graphicsPath.AddRectangle(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
-        drawType.Brush |> Option.iter (fun brush ->
-            let region = new Region(graphicsPath)
-            use brush = brush |> toSystemBrush
-            graphics.FillRegion(brush, region))
-        drawType.Pen |> Option.iter (fun pen ->
-            use pen = pen |> toSystemPen
-            graphics.DrawPath(pen, graphicsPath))
-    | Ellipse(size) ->
-        let width, height = size.X, size.Y
-        let graphicsPath = new GraphicsPath()
-        graphicsPath.AddEllipse(new RectangleF(- width/2.0 |> float32, - height/2.0 |> float32, width |> float32, height |> float32))
-        drawType.Brush |> Option.iter (fun brush ->
-            let region = new Region(graphicsPath)
-            use brush = brush |> toSystemBrush
-            graphics.FillRegion(brush, region))
-        drawType.Pen |> Option.iter (fun pen ->
-            use pen = pen |> toSystemPen
-            graphics.DrawPath(pen, graphicsPath))
-    | Path(path) ->
-        let graphicsPath = path |> toSystemPath
-        drawType.Brush |> Option.iter (fun brush ->
-            let region = new Region(graphicsPath)
-            use brush = brush |> toSystemBrush
-            graphics.FillRegion(brush, region))
-        drawType.Pen |> Option.iter (fun pen ->
-            use pen = pen |> toSystemPen
-            graphics.DrawPath(pen, graphicsPath))
-    | Text(text) ->
-        let w, h = measureText text
-        use font = new Font("Arial", single text.Size)
-        drawType.Brush |> Option.iter (fun brush ->
-            use brush = brush |> toSystemBrush
-            graphics.DrawString(text.Text, font, brush, new PointF(single(-w/2.), single(-h/2.))))
+    let path = Pathetizer.ConvertToPath styledShape.Shape
+    let graphicsPath = path |> toSystemPath
+    drawType.Brush |> Option.iter (fun brush ->
+        let region = new Region(graphicsPath)
+        use brush = brush |> toSystemBrush
+        graphics.FillRegion(brush, region))
+    drawType.Pen |> Option.iter (fun pen ->
+        use pen = pen |> toSystemPen
+        graphics.DrawPath(pen, graphicsPath))
 
 let Draw (graphics:Graphics) (width:int, height:int) (frame:Frame) =
 

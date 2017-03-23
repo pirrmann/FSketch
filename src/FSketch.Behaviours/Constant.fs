@@ -29,8 +29,13 @@ module Constant =
     let Path (path:FSketch.Path) =
         { SubPaths = List.map SubPath path.SubPaths }
 
+    let Font (font:FSketch.Font) =
+        match font with
+        | FSketch.Font.Arial -> Font.Arial
+        | FSketch.Font.MachineToolSanSerif -> Font.MachineToolSanSerif
+
     let Text (text:FSketch.Text) =
-        { Text = text.Text; Size = forever text.Size }
+        { Text = text.Text; Size = forever text.Size; Font = Font text.Font }
 
     let Shape (shape:FSketch.Shape) =
         match shape with

@@ -18,8 +18,9 @@ module Dsl =
     let private toPath closed parts = { SubPaths = [{ Start = Vector.Zero; Parts = parts; Closed = closed }] }
     let toOpenPath = toPath false >> Path
     let toClosedPath = toPath true >> Path
-    let text format = Printf.ksprintf (fun s -> { Text = s; Size = ofFloat 10. }) format
+    let text format = Printf.ksprintf (fun s -> { Text = s; Size = ofFloat 10.; Font = Font.Arial }) format
     let withSize size text = { text with Size = size }
+    let withFont font text = { text with Font = font }
 
     let withContour pen (space, shape) = space, { Shape = shape; DrawType = Contour(pen) }
     let withFill brush (space, shape) = space, { Shape = shape; DrawType = Fill(brush) }

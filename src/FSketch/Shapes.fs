@@ -99,7 +99,20 @@ type DrawType =
     member x.Brush = match x with | Fill(b) | ContourAndFill(_, b) -> Some b | _ -> None
     override this.ToString() = sprintf "%A" this
 
-type Text = { Text:string; Size: Numeric }
+[<RequireQualifiedAccess>]
+type Font =
+    | Arial
+    | MachineToolSanSerif with
+    member this.FontName =
+        match this with
+        | Font.Arial -> "Arial"
+        | Font.MachineToolSanSerif -> "Machine Tool SanSerif"
+    member this.IsUnclosedSinglePath =
+        match this with
+        | Font.Arial -> false
+        | Font.MachineToolSanSerif -> true
+
+type Text = { Text: string; Size: Numeric; Font: Font }
 
 type Shape =
     | Rectangle of Size:Vector

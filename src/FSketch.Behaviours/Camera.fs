@@ -63,9 +63,15 @@ module Camera =
             | Fill brush -> FSketch.Fill (evalBrush brush)
             | ContourAndFill (pen, brush) -> FSketch.ContourAndFill(evalPen pen, evalBrush brush)
 
+        let evalFont (font:Font) : FSketch.Font =
+            match font with
+            | Font.Arial -> FSketch.Font.Arial
+            | Font.MachineToolSanSerif -> FSketch.Font.MachineToolSanSerif
+
         let evalText (text:Text) : FSketch.Text = {
             Text = text.Text
-            Size = eval text.Size }
+            Size = eval text.Size
+            Font = evalFont text.Font }
 
         let evalShape (shape:Shape) : FSketch.Shape =
             match shape with
