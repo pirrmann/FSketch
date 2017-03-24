@@ -66,7 +66,7 @@ module Camera =
         let evalFont (font:Font) : FSketch.Font =
             match font with
             | Font.Arial -> FSketch.Font.Arial
-            | Font.MachineToolSanSerif -> FSketch.Font.MachineToolSanSerif
+            | Font.UnclosedSinglePathFont fontName -> FSketch.Font.UnclosedSinglePathFont fontName
 
         let evalText (text:Text) : FSketch.Text = {
             Text = text.Text

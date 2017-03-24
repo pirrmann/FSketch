@@ -102,15 +102,15 @@ type DrawType =
 [<RequireQualifiedAccess>]
 type Font =
     | Arial
-    | MachineToolSanSerif with
+    | UnclosedSinglePathFont of string with
     member this.FontName =
         match this with
         | Font.Arial -> "Arial"
-        | Font.MachineToolSanSerif -> "Machine Tool SanSerif"
+        | Font.UnclosedSinglePathFont name -> name
     member this.IsUnclosedSinglePath =
         match this with
         | Font.Arial -> false
-        | Font.MachineToolSanSerif -> true
+        | Font.UnclosedSinglePathFont _ -> true
 
 type Text = { Text: string; Size: Numeric; Font: Font }
 

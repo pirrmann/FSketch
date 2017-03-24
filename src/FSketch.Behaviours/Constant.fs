@@ -32,7 +32,7 @@ module Constant =
     let Font (font:FSketch.Font) =
         match font with
         | FSketch.Font.Arial -> Font.Arial
-        | FSketch.Font.MachineToolSanSerif -> Font.MachineToolSanSerif
+        | FSketch.Font.UnclosedSinglePathFont fontName -> Font.UnclosedSinglePathFont fontName
 
     let Text (text:FSketch.Text) =
         { Text = text.Text; Size = forever text.Size; Font = Font text.Font }
