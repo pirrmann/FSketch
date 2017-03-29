@@ -1,6 +1,6 @@
 type project
 title
-    FSketch
+    FSketch.Winforms
 owners
     Pierre Irrmann
 authors 

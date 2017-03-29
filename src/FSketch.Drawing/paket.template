@@ -1,6 +1,6 @@
 type project
 title
-    FSketch
+    FSketch.Drawing
 owners
     Pierre Irrmann
 authors 

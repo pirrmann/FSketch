@@ -1,6 +1,6 @@
 type project
 title
-    FSketch
+    FSketch.Behaviours
 owners
     Pierre Irrmann
 authors 
