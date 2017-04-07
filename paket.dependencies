@@ -1,5 +1,6 @@
 source https://nuget.org/api/v2
 
+framework: net46
 nuget FSharp.Core
 
 group Build
