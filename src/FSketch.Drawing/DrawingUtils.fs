@@ -2,16 +2,6 @@
 
 module DrawingUtils =
 
-    let measureText =    
-        let i = new System.Drawing.Bitmap(1, 1)
-        let g = System.Drawing.Graphics.FromImage(i)
-        g.TextRenderingHint <- System.Drawing.Text.TextRenderingHint.AntiAlias
-
-        fun text ->
-            use font = new System.Drawing.Font(text.Font.FontName, single text.Size)
-            let size = g.MeasureString(text.Text, font)
-            float size.Width, float size.Height
-
     let boundariesReducer b1 b2 =
         match b1, b2 with
         | Some (left1, top1, right1, bottom1), Some (left2, top2, right2, bottom2) ->
@@ -44,24 +34,9 @@ module DrawingUtils =
         ]
 
     let computeBoundingPolygon shape =
-        match shape with
-        | Rectangle(Vector(w, h))
-        | Ellipse(Vector(w, h)) ->
-            [
-                -w/2., -h/2.
-                w/2. , -h/2.
-                w/2. , h/2.
-                -w/2., h/2.
-            ]
-        | Path p -> getPathPoints p
-        | Text text ->
-            let w, h = measureText text
-            [
-                -w/2., -h/2.
-                w/2. , -h/2.
-                w/2. , h/2.
-                -w/2., h/2.
-            ]        
+        shape
+        |> Pathetizer.ConvertToPath
+        |> getPathPoints
 
     let computeShapeBoundingBox (refSpace, shape) =
         let boundingPolygon =

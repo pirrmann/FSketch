@@ -64,7 +64,10 @@ module internal SvgDrawerHelper =
         | Path path ->
             let pathString = getPathString path
             sprintf @"<path d=""%s"" %s%s/>" pathString style transform
-        | Text _ -> failwith "Not supported yet"
+        | Text t as s ->
+            let path = Pathetizer.ConvertToPath s
+            let pathString = getPathString path
+            sprintf @"<path d=""%s"" %s%s/>" pathString style transform
 
     let toSvgElements shapesToTranslate =
         match shapesToTranslate |> DrawingUtils.computeBoundingBox false with
