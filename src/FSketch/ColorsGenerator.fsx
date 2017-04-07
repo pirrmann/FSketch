@@ -6,7 +6,7 @@ let colors =
     |> Seq.map(fun m ->
         let color = m.GetMethod.Invoke(null, [||]) :?> System.Drawing.Color
         let toRelative x = (double x) / 255.0
-        m.Name, (color.A |> toRelative, color.R |> toRelative, color.G |> toRelative, color.B |> toRelative), color.A <> 0uy)
+        m.Name, (color.A |> toRelative, color.R |> toRelative, color.G |> toRelative, color.B |> toRelative))
     |> Seq.toList
 
 let genLines = seq {
@@ -20,21 +20,17 @@ let genLines = seq {
     yield ""
     yield "module Colors ="
     yield ""
-    for (name, (a, r, g, b), _) in colors do
+    for (name, (a, r, g, b)) in colors do
         yield sprintf "    let %s = ArgbColor { Alpha = ofFloat %f; R = ofFloat %f; G = ofFloat %f; B = ofFloat %f }" name a r g b
     yield ""
     yield "module Pens ="
-    for (name, _, gen) in colors do
-        if gen then
-            yield sprintf "   let %s = { Color = Colors.%s; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }" name name
+    for (name, _) in colors do
+        yield sprintf "   let %s = { Color = Colors.%s; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }" name name
     yield "   let Default = Black"
     yield ""
     yield "module Brushes ="
-    for (name, _, gen) in colors do
-        if gen then
-            yield sprintf "   let %s = SolidBrush (Colors.%s)" name name
-        else
-            yield sprintf "   let %s = SolidBrush (Colors.%s)" "Solid" name
+    for (name, _) in colors do
+        yield sprintf "   let %s = SolidBrush (Colors.%s)" name name
 }
 
 System.IO.File.WriteAllLines(
