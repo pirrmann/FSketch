@@ -12,6 +12,16 @@ module DrawingUtils =
 
     let minMaxReducer (min1, max1) (min2, max2) = min min1 min2, max max1 max2
 
+    let getBezierPointAt t ((xD, yD) as D, B, C) =
+        let inline interpolateLine (x1, y1) (x2, y2) =
+            x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
+        let ((xE, yE) as E) = interpolateLine (0., 0.) B
+        let ((xF, yF) as F) = interpolateLine B C
+        let ((xG, yG) as G) = interpolateLine C D
+        let ((xH, yH) as H) = interpolateLine E F
+        let ((xJ, yJ) as J) = interpolateLine F G
+        interpolateLine H J
+
     let getPathPoints (path:Path) =
         let offset = ref Vector.Zero
         let toPoint (Vector(x, y)) = x, y
@@ -25,10 +35,10 @@ module DrawingUtils =
                 | Line v ->
                     offset := !offset + v
                     yield !offset |> toPoint
-                | Bezier (v, cp1, cp2) ->
-                    //TODO: get tighter boundaries for Bezier curves
-                    yield !offset + cp1 |> toPoint
-                    yield !offset + cp2 |> toPoint
+                | Bezier ((Vector(vx, vy) as v), (Vector(cx1, cy1) as cp1), (Vector(cx2, cy2) as cp2)) ->
+                    for t in 0.0 .. 0.05 .. 1.0 do
+                        let p = getBezierPointAt t ((vx, vy), (cx1, cy1), (cx2, cy2))
+                        yield !offset + (Vector p) |> toPoint
                     offset := !offset + v
                     yield !offset |> toPoint
         ]

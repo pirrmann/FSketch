@@ -60,6 +60,7 @@
     <None Include="Samples.fsx" />
     <None Include="Crossbones.svg" />
     <None Include="Svg.fsx" />
+    <None Include="BoundingBoxes.fsx" />
     <None Include="HandDrawn.fsx" />
     <None Include="Behaviours.fsx" />
     <None Include="Animated.fsx" />

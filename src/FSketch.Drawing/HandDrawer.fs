@@ -20,7 +20,7 @@ module HandDrawer =
             Seq.singleton (Line(Vector(x, y)))
 
     let private splitBezierAt t ((xD, yD) as D, B, C) =
-        let interpolateLine (x1, y1) (x2, y2) =
+        let inline interpolateLine (x1, y1) (x2, y2) =
             x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
         let ((xE, yE) as E) = interpolateLine (0., 0.) B
         let ((xF, yF) as F) = interpolateLine B C

@@ -79,12 +79,10 @@ module Pathetizer =
             let g = System.Drawing.Graphics.FromImage(i)
             g.TextRenderingHint <- System.Drawing.Text.TextRenderingHint.AntiAlias
             use font = new System.Drawing.Font(text.Font.FontName, single text.Size)
-            let size = g.MeasureString(text.Text, font)
-            let w, h = float size.Width, float size.Height
             let gp = new System.Drawing.Drawing2D.GraphicsPath()
             let fontFamily = new System.Drawing.FontFamily(text.Font.FontName)
             let fontStyle = int System.Drawing.FontStyle.Regular
-            let origin = new System.Drawing.PointF(single(-w/2.), single(-h/2.))
+            let origin = new System.Drawing.PointF(0.f, 0.f)
             gp.AddString(text.Text, fontFamily, fontStyle, single text.Size, origin, System.Drawing.StringFormat.GenericTypographic)
 
             let isUnclosedSinglePathFont = text.Font.IsUnclosedSinglePath

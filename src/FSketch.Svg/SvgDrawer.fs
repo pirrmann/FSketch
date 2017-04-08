@@ -72,7 +72,7 @@ module internal SvgDrawerHelper =
     let toSvgElements shapesToTranslate =
         match shapesToTranslate |> DrawingUtils.computeBoundingBox false with
         | Some (left, top, right, bottom) ->
-            let transletedShapes = shapes { yield! shapesToTranslate |> at (-left, -top) }
+            let translatedShapes = shapes { yield! shapesToTranslate |> at (-left, -top) }
             seq {
                 yield  @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""no""?>"
                 yield @"<svg"
@@ -84,7 +84,7 @@ module internal SvgDrawerHelper =
                 yield sprintf @"width=""%f""" (right-left)
                 yield sprintf @"height=""%f""" (bottom-top)
                 yield @"version=""1.0"">"
-                yield! transletedShapes |> Seq.map toSvgElement
+                yield! translatedShapes |> Seq.map toSvgElement
                 yield "</svg>" }
         | None -> Seq.empty
 
