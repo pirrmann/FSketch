@@ -34,8 +34,24 @@ module Constant =
         | FSketch.Font.Arial -> Font.Arial
         | FSketch.Font.UnclosedSinglePathFont fontName -> Font.UnclosedSinglePathFont fontName
 
-    let Text (text:FSketch.Text) =
-        { Text = text.Text; Size = forever text.Size; Font = Font text.Font }
+    let HorizontalAlign (align:FSketch.HorizontalAlign) =
+        match align with
+        | FSketch.HorizontalAlign.Left -> Left
+        | FSketch.HorizontalAlign.Center -> Center
+        | FSketch.HorizontalAlign.Right -> Right
+
+    let VerticalAlign (align:FSketch.VerticalAlign) =
+        match align with
+        | FSketch.VerticalAlign.Top -> Top
+        | FSketch.VerticalAlign.Middle -> Middle
+        | FSketch.VerticalAlign.Bottom -> Bottom
+
+    let Text (text:FSketch.Text) = {
+        Text = text.Text
+        Size = forever text.Size
+        Font = Font text.Font
+        HorizontalAlign = HorizontalAlign text.HorizontalAlign
+        VerticalAlign = VerticalAlign text.VerticalAlign }
 
     let Shape (shape:FSketch.Shape) =
         match shape with

@@ -112,7 +112,14 @@ type Font =
         | Font.Arial -> false
         | Font.UnclosedSinglePathFont _ -> true
 
-type Text = { Text: string; Size: Numeric; Font: Font }
+type HorizontalAlign = | Left | Center | Right
+type VerticalAlign = | Top | Middle | Bottom
+type Text = {
+    Text: string
+    Size: Numeric
+    Font: Font
+    VerticalAlign: VerticalAlign
+    HorizontalAlign: HorizontalAlign }
 
 type Shape =
     | Rectangle of Size:Vector

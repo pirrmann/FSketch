@@ -44,6 +44,37 @@ module Pathetizer =
 
         { Start = Vector(startPosition); Parts = pathParts'; Closed = isClosedPath }
 
+    let getBezierPointAt t ((xD, yD) as D, B, C) =
+        let inline interpolateLine (x1, y1) (x2, y2) =
+            x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
+        let ((xE, yE) as E) = interpolateLine (0., 0.) B
+        let ((xF, yF) as F) = interpolateLine B C
+        let ((xG, yG) as G) = interpolateLine C D
+        let ((xH, yH) as H) = interpolateLine E F
+        let ((xJ, yJ) as J) = interpolateLine F G
+        interpolateLine H J
+
+    let GetPathPoints (path:Path) =
+        let offset = ref Vector.Zero
+        let toPoint (Vector(x, y)) = x, y
+        [
+            for subPath in path.SubPaths do
+                offset := subPath.Start
+                yield !offset |> toPoint
+
+                for pathPart in subPath.Parts do
+                match pathPart with
+                | Line v ->
+                    offset := !offset + v
+                    yield !offset |> toPoint
+                | Bezier ((Vector(vx, vy) as v), (Vector(cx1, cy1) as cp1), (Vector(cx2, cy2) as cp2)) ->
+                    for t in 0.0 .. 0.05 .. 1.0 do
+                        let p = getBezierPointAt t ((vx, vy), (cx1, cy1), (cx2, cy2))
+                        yield !offset + (Vector p) |> toPoint
+                    offset := !offset + v
+                    yield !offset |> toPoint
+        ]
+
     let ConvertToPath shape =
         match shape with
         | Rectangle(Vector(width,height)) ->
@@ -83,7 +114,18 @@ module Pathetizer =
             let fontFamily = new System.Drawing.FontFamily(text.Font.FontName)
             let fontStyle = int System.Drawing.FontStyle.Regular
             let origin = new System.Drawing.PointF(0.f, 0.f)
-            gp.AddString(text.Text, fontFamily, fontStyle, single text.Size, origin, System.Drawing.StringFormat.GenericTypographic)
+            let stringFormat = System.Drawing.StringFormat.GenericTypographic
+            stringFormat.Alignment <-
+                match text.HorizontalAlign with
+                | Left -> System.Drawing.StringAlignment.Near
+                | Center -> System.Drawing.StringAlignment.Center
+                | Right -> System.Drawing.StringAlignment.Far
+            stringFormat.LineAlignment <-
+                match text.VerticalAlign with
+                | Top -> System.Drawing.StringAlignment.Near
+                | Middle -> System.Drawing.StringAlignment.Center
+                | Bottom -> System.Drawing.StringAlignment.Far
+            gp.AddString(text.Text, fontFamily, fontStyle, single text.Size, origin, stringFormat)
 
             let isUnclosedSinglePathFont = text.Font.IsUnclosedSinglePath
             let subPathsPoints =
@@ -97,4 +139,27 @@ module Pathetizer =
                         yield Array.zip points pathTypes, (isClosed && not isUnclosedSinglePathFont)
                 ]
 
-            { SubPaths = subPathsPoints |> List.map convertToSubPath }
+            let path = { SubPaths = subPathsPoints |> List.map convertToSubPath }
+
+            let boundingPolygon = GetPathPoints path
+
+            let xMin = boundingPolygon |> Seq.map fst |> Seq.min
+            let yMin = boundingPolygon |> Seq.map snd |> Seq.min
+            let xMax = boundingPolygon |> Seq.map fst |> Seq.max
+            let yMax = boundingPolygon |> Seq.map snd |> Seq.max
+
+            let xTranslate =
+                match text.HorizontalAlign with
+                | Left -> -xMin
+                | Center -> -(xMin + xMax) / 2.0
+                | Right -> -xMax
+
+            let yTranslate =
+                match text.VerticalAlign with
+                | Top -> -yMin
+                | Middle -> -(yMin + yMax) / 2.0
+                | Bottom -> -yMax
+
+            let translation = Vector(xTranslate, yTranslate)
+
+            { SubPaths = path.SubPaths |> List.map (fun sp -> { sp with Start = sp.Start + translation }) }

@@ -15,9 +15,9 @@ let simpleShapes = shapes {
 #load "FSharpLogo.fsx"
 
 let fSharpAdvert = shapes {
-  yield! FSharpLogo.Logo |> at origin
-  yield text "F# rocks" |> withSize 48. |> at (110., 150.) |> writtenWithContourAndFill (Pens.Black, Brush.FromColor FSharpLogo.DarkBlue)
-  yield text "it just worked the 1st time" |> withSize 24. |> at (120., 180.) |> writtenWithContour {Pens.Default with Color = FSharpLogo.LightBlue}
+  yield! FSharpLogo.Logo |> at (-63., 0.)
+  yield text "F# rocks" |> withSize 48. |> at (0., 140.) |> writtenWithContourAndFill (Pens.Black, Brush.FromColor FSharpLogo.DarkBlue)
+  yield text "it just worked the 1st time" |> withSize 24. |> at (0., 170.) |> writtenWithContour {Pens.Default with Color = FSharpLogo.LightBlue}
 }
 
 fSharpAdvert |> HandDrawer.RedrawByHand

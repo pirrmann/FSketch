@@ -7,23 +7,20 @@ open ToolsForIntro
     "I'm happy to see you there"
 |]
 
-[|
-    "@pirrmann"
-    "Blah blah blah"
-    "Computation expressions"
-    "DSLs"
-    "Blah blah blah"
-    "Type providers"
-    "(actually not this time)"
-|]
+Array.singleton """@pirrmann
+Blah blah blah
+Computation expressions
+DSLs
+Blah blah blah
+Type providers
+(actually not this time)"""
 
 open FSketch.Dsl
 open FSketch.Builder
 
-[|
-    "Step 1"
-    "Low-level verbose (but composable) stuff"
-|]
+Array.singleton """Step 1
+Low-level verbose stuff
+(but composable)"""
 
 let redCircle = RefSpace.Origin, { Shape = Ellipse(Vector(100., 100.)); DrawType = Fill Brushes.Red }
 
@@ -35,10 +32,8 @@ let blackSquare = RefSpace.Origin, { Shape = Rectangle(Vector(100., 100.)); Draw
 // And now... composition!
 [redCircle;blackSquare]
 
-[|
-    "Step 2"
-    "Improving the language"
-|]
+Array.singleton """Step 2
+Improving the language"""
 
 // Computation expression!
 shapes {
@@ -46,7 +41,7 @@ shapes {
     yield blackSquare
 }
 
-let success = RefSpace.Origin, { Shape = Text({Text = "Great success!"; Size = 10.}); DrawType = Fill Brushes.Black }
+let success = RefSpace.Origin, { Shape = Text({Text = "Great success!"; Size = 10.; Font = Font.Arial; VerticalAlign = Top; HorizontalAlign = Left}); DrawType = Fill Brushes.Black }
 [success]
 
 // Composition again!
@@ -56,10 +51,8 @@ shapes {
     yield success
 }
 
-[|
-    "Step 3"
-    "Domain Specific Language"
-|]
+Array.singleton """Step 3
+Domain Specific Language"""
 
 shapes {
     yield circle 50. |> at origin |> withFill Brushes.Red
@@ -69,15 +62,13 @@ shapes {
 }
 
 shapes {
-    yield! FSharpLogo.Logo |> at (-61., -63.)
-    yield text "F# rocks!" |> withSize 16. |> at origin |> writtenWithFill Brushes.Black
+    yield! FSharpLogo.Logo |> at (-62., -63.)
+    yield text "F# rocks!" |> withSize 16. |> at (0., 65.) |> writtenWithFill Brushes.Black
 }
 
-[|
-    "Step 4"
-    "Wire things up"
-    "and get data to draw"
-|]
+Array.singleton """Step 4
+Wire things up
+and get data to draw"""
 
 // just a list
 [1..10] |> DrawingDebugUtils.AutoDraw
@@ -86,11 +77,9 @@ shapes {
 Array2D.init 10 10 (fun x y -> x, y) |> DrawingDebugUtils.AutoDraw
 
 // alice in Wonderland cypher table
-Array2D.init 27 27 (fun x y -> if x = 0 && y = 0 then ' ' else (x + y - 1) % 26 + (int 'A') |> char) |> DrawingDebugUtils.AutoDraw
+Array2D.init 27 27 (fun x y -> if x = 0 && y = 0 then '*' else (x + y - 1) % 26 + (int 'A') |> char) |> DrawingDebugUtils.AutoDraw
 
-[|
-    "Step 5"
-    "Use this to actually"
-    "draw what I wanted to"
-    "draw in the first place..."
-|]
+Array.singleton """Step 5
+Use this to actually
+draw what I wanted to
+draw in the first place..."""

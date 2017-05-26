@@ -54,7 +54,7 @@ let testWithDefaultFormatter =
     |> DrawingDebugUtils.AutoDraw
 
 let aliceWonderlandCypherTable =
-    Array2D.init 27 27 (fun x y -> if x = 0 && y = 0 then ' ' else (x + y - 1) % 26 + (int 'A') |> char)
+    Array2D.init 27 27 (fun x y -> if x = 0 && y = 0 then '.' else (x + y - 1) % 26 + (int 'A') |> char)
     |> DrawingDebugUtils.AutoDraw
 
 let testWithTextSizes = 
