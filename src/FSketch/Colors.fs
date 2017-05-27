@@ -151,6 +151,7 @@ module Colors =
     let YellowGreen = ArgbColor { Alpha = ofFloat 1.000000; R = ofFloat 0.603922; G = ofFloat 0.803922; B = ofFloat 0.196078 }
 
 module Pens =
+   let Transparent = { Color = Colors.Transparent; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }
    let AliceBlue = { Color = Colors.AliceBlue; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }
    let AntiqueWhite = { Color = Colors.AntiqueWhite; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }
    let Aqua = { Color = Colors.Aqua; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }
@@ -294,7 +295,7 @@ module Pens =
    let Default = Black
 
 module Brushes =
-   let Solid = SolidBrush (Colors.Transparent)
+   let Transparent = SolidBrush (Colors.Transparent)
    let AliceBlue = SolidBrush (Colors.AliceBlue)
    let AntiqueWhite = SolidBrush (Colors.AntiqueWhite)
    let Aqua = SolidBrush (Colors.Aqua)

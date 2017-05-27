@@ -64,12 +64,15 @@ module internal SvgDrawerHelper =
         | Path path ->
             let pathString = getPathString path
             sprintf @"<path d=""%s"" %s%s/>" pathString style transform
-        | Text _ -> failwith "Not supported yet"
+        | Text t as s ->
+            let path = Pathetizer.ConvertToPath s
+            let pathString = getPathString path
+            sprintf @"<path d=""%s"" %s%s/>" pathString style transform
 
     let toSvgElements shapesToTranslate =
         match shapesToTranslate |> DrawingUtils.computeBoundingBox false with
         | Some (left, top, right, bottom) ->
-            let transletedShapes = shapes { yield! shapesToTranslate |> at (-left, -top) }
+            let translatedShapes = shapes { yield! shapesToTranslate |> at (-left, -top) }
             seq {
                 yield  @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""no""?>"
                 yield @"<svg"
@@ -81,7 +84,7 @@ module internal SvgDrawerHelper =
                 yield sprintf @"width=""%f""" (right-left)
                 yield sprintf @"height=""%f""" (bottom-top)
                 yield @"version=""1.0"">"
-                yield! transletedShapes |> Seq.map toSvgElement
+                yield! translatedShapes |> Seq.map toSvgElement
                 yield "</svg>" }
         | None -> Seq.empty
 

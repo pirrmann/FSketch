@@ -68,10 +68,24 @@ module Camera =
             | Font.Arial -> FSketch.Font.Arial
             | Font.UnclosedSinglePathFont fontName -> FSketch.Font.UnclosedSinglePathFont fontName
 
+        let evalHorizontalAlign (align:HorizontalAlign) : FSketch.HorizontalAlign =
+            match align with
+            | Left -> FSketch.HorizontalAlign.Left
+            | Center -> FSketch.HorizontalAlign.Center
+            | Right -> FSketch.HorizontalAlign.Right
+
+        let evalVerticalAlign (align:VerticalAlign) : FSketch.VerticalAlign =
+            match align with
+            | Top -> FSketch.VerticalAlign.Top
+            | Middle -> FSketch.VerticalAlign.Middle
+            | Bottom -> FSketch.VerticalAlign.Bottom
+
         let evalText (text:Text) : FSketch.Text = {
             Text = text.Text
             Size = eval text.Size
-            Font = evalFont text.Font }
+            Font = evalFont text.Font
+            HorizontalAlign = evalHorizontalAlign text.HorizontalAlign
+            VerticalAlign = evalVerticalAlign text.VerticalAlign }
 
         let evalShape (shape:Shape) : FSketch.Shape =
             match shape with
