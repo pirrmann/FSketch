@@ -5,8 +5,8 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("FSketch")>]
 [<assembly: AssemblyProductAttribute("FSketch")>]
 [<assembly: AssemblyDescriptionAttribute("Yet another drawing DSL in F#")>]
-[<assembly: AssemblyVersionAttribute("0.0.4")>]
-[<assembly: AssemblyFileVersionAttribute("0.0.4")>]
+[<assembly: AssemblyVersionAttribute("0.0.5")>]
+[<assembly: AssemblyFileVersionAttribute("0.0.5")>]
 [<assembly: AssemblyConfigurationAttribute("Release")>]
 do ()
 
@@ -14,6 +14,6 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "FSketch"
     let [<Literal>] AssemblyProduct = "FSketch"
     let [<Literal>] AssemblyDescription = "Yet another drawing DSL in F#"
-    let [<Literal>] AssemblyVersion = "0.0.4"
-    let [<Literal>] AssemblyFileVersion = "0.0.4"
+    let [<Literal>] AssemblyVersion = "0.0.5"
+    let [<Literal>] AssemblyFileVersion = "0.0.5"
     let [<Literal>] AssemblyConfiguration = "Release"

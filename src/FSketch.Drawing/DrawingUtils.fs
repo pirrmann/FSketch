@@ -44,3 +44,11 @@ module DrawingUtils =
                         -x, -y, x, y
                     else
                         left, top, right, bottom)
+
+    let recenter (shapes:Shapes) =
+        match computeBoundingBox false shapes with
+        | Some (left, top, right, bottom) ->
+            let x = (left + right) / 2.
+            let y = (top + bottom) / 2.
+            shapes |> List.map (Dsl.translatedBy (-x, -y))
+        | None -> shapes
