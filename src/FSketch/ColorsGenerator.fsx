@@ -23,6 +23,17 @@ let genLines = seq {
     for (name, (a, r, g, b)) in colors do
         yield sprintf "    let %s = ArgbColor { Alpha = ofFloat %f; R = ofFloat %f; G = ofFloat %f; B = ofFloat %f }" name a r g b
     yield ""
+    yield "    let internal colorNames ="
+    yield "        ["
+    for (name, _) in colors do
+        yield sprintf "            \"%s\", %s" (name.ToLowerInvariant()) name
+    yield "        ] |> Map.ofList"
+
+    yield ""
+    yield "module NamedColor ="
+    yield "     let FromName name = Colors.colorNames.[name]"
+
+    yield ""
     yield "module Pens ="
     for (name, _) in colors do
         yield sprintf "   let %s = { Color = Colors.%s; Thickness = ofFloat 1.0; LineJoin = LineJoin.Round }" name name

@@ -1,5 +1,5 @@
-#### 0.0.6-beta - Unreleased
-* Who knows?
+#### 0.0.6-beta - June 12th 2017
+* Svg parsing improvements
 
 #### 0.0.5-beta - June 10th 2017
 * Svg parsing improvements

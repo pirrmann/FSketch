@@ -95,16 +95,33 @@ module internal ParsingHelper =
             | _ -> failwithf "Cannot parse style %s" s)
         |> Map.ofSeq
 
+    let private parseHex s = System.Int32.Parse(s, System.Globalization.NumberStyles.HexNumber)
+
     let parseColor (s:string) =
-        // TODO
-        match s with
-        | "none" -> Colors.Transparent
-        | "#fff"
-        | "#ffffff"
-        | "#FFF"
-        | "#FFFFFF"
-        | "white" -> Colors.White
-        | _ -> Colors.Black
+        match s.ToLowerInvariant() with
+        | "none" | "null" -> Colors.Transparent
+        | hexaPattern when hexaPattern.StartsWith("#") ->
+            let hexa = hexaPattern.Substring(1)
+            let r, g, b =
+                if hexa.Length = 3 then
+                    try parseHex(hexa.Substring(0, 1)) * 17, parseHex(hexa.Substring(1, 1)) * 17, parseHex(hexa.Substring(2, 1)) * 17
+                    with _ -> failwithf "Invalid hexa pattern %s" s
+                elif hexa.Length = 6 then
+                    try parseHex(hexa.Substring(0, 2)), parseHex(hexa.Substring(2, 2)), parseHex(hexa.Substring(4, 2))
+                    with _ -> failwithf "Invalid hexa pattern %s" s
+                else
+                    failwithf "Invalid hexa pattern %s" s
+            Color.ArgbColor { ArgbColor.Alpha = 1.; R = float r / 255.; G = float g / 255.; B = float b / 255. }
+        | rgbaPattern when rgbaPattern.StartsWith("rgba(") && rgbaPattern.EndsWith(")") ->
+            let middle = rgbaPattern.Substring(5, rgbaPattern.Length - 6)
+            match middle.Split(',') |> Array.map (fun s -> s.Trim()) with
+            | [| r; g; b; a |] ->
+                try
+                    let r, g, b, a = System.Double.Parse r, System.Double.Parse g, System.Double.Parse b, System.Double.Parse a
+                    Color.ArgbColor { ArgbColor.Alpha = a; R = r / 255.; G = g / 255.; B = b / 255. }
+                with _ -> failwithf "Invalid rgba(r, g, b, a) pattern %s" s
+            | _ -> failwithf "Invalid rgba(r, g, b, a) pattern %s" s
+        | name -> NamedColor.FromName s
 
     let parseSize (s:string) =
         if s.EndsWith("pt") then
@@ -138,30 +155,49 @@ module internal ParsingHelper =
             Contour(pen)
         | _ -> failwith "Cannot build a draw type with no pen nor brush"
 
-    let parseDrawType s =
-        let properties = getCssProperties s
-        try
-            let fillColor = properties.TryFind("fill") |> Option.map parseColor
-            let strokeColor = properties.TryFind("stroke") |> Option.map parseColor
-            let strokeWidth = properties.TryFind("stroke-width") |> Option.map parseSize
-            let strokeLineJoin = properties.TryFind("stroke-linejoin") |> Option.map parseLineJoin
-            buildDrawType fillColor strokeColor strokeWidth strokeLineJoin
-        with _ -> failwithf "Cannot parse properties %A" properties
-
     let inline xName name = XName.Get name
 
     let parseAttributeWith parseFunction attributeName (e:XElement) =
-        let attributeValue = e.Attribute(xName attributeName).Value
+        match e.Attribute(xName attributeName) with
+        | null -> failwithf "Missing attribute %s" attributeName
+        | attribute -> 
+            try
+                parseFunction attribute.Value
+            with e -> failwithf "Cannot parse attribute %s with value was %s: %O" attributeName attribute.Value e 
+
+    let parseOptionalAttributeWith parseFunction attributeName (e:XElement) =
+        match e.Attribute(xName attributeName) with
+        | null -> None
+        | attribute -> 
+            try
+                parseFunction attribute.Value |> Some
+            with e -> failwithf "Cannot parse attribute %s with value was %s: %O" attributeName attribute.Value e 
+
+    let parseDrawType (e:XElement) defaults =
+        let properties = seq {
+            for name in ["fill"; "stroke"; "stroke-width"; "stroke-linejoin"] do
+                match parseOptionalAttributeWith id name e with
+                | Some value -> yield name, value
+                | None -> ()
+
+            match parseOptionalAttributeWith getCssProperties "style" e with
+            | Some map -> yield! map |> Map.toSeq
+            | None -> ()
+        }
+        let mergedProperties = properties |> Seq.fold (fun m (k, v) -> Map.add k v m) (Map.ofSeq defaults)
         try
-            parseFunction attributeValue
-        with e -> failwithf "Cannot parse attribute %s with value was %s: %O" attributeName attributeValue e 
+            let fillColor = mergedProperties.TryFind("fill") |> Option.map parseColor
+            let strokeColor = mergedProperties.TryFind("stroke") |> Option.map parseColor
+            let strokeWidth = mergedProperties.TryFind("stroke-width") |> Option.map parseSize
+            let strokeLineJoin = mergedProperties.TryFind("stroke-linejoin") |> Option.map parseLineJoin
+            buildDrawType fillColor strokeColor strokeWidth strokeLineJoin
+        with _ -> failwithf "Cannot parse properties %A" mergedProperties
 
     let parseSvgElement (e:XElement) =
         match e.Name.LocalName with
         | "path" ->
             let origin, path, closed = e.Attribute(xName "d").Value |> parsePath
-            let style = e.Attribute(xName "style").Value
-            let drawType = parseDrawType style
+            let drawType = parseDrawType e []
 
             origin, { Shape = Path(path); DrawType = drawType }
 
@@ -171,15 +207,7 @@ module internal ParsingHelper =
             let y1 = parseAttributeWith parseFloat "y1" e
             let y2 = parseAttributeWith parseFloat "y2" e
 
-            let strokeColor =
-                match e.Attribute(xName "stroke").Value |> Option.ofObj with
-                | Some color -> parseColor color
-                | _ -> Colors.Black
-
-            let strokeWidth = e.Attribute(xName "stroke-width").Value |> Option.ofObj |> Option.map parseSize
-            let strokeLineJoin = e.Attribute(xName "stroke-linejoin").Value |> Option.ofObj |> Option.map parseLineJoin
-
-            let drawType = buildDrawType None (Some strokeColor) strokeWidth strokeLineJoin
+            let drawType = parseDrawType e ["stroke","black"]
 
             let line = {
                 Start = Vector(x1, y1)
@@ -194,11 +222,7 @@ module internal ParsingHelper =
             let rx = parseAttributeWith parseFloat "rx" e
             let ry = parseAttributeWith parseFloat "ry" e
 
-            let fillColor = e.Attribute(xName "fill").Value |> Option.ofObj |> Option.map parseColor
-            let strokeColor = e.Attribute(xName "stroke").Value |> Option.ofObj |> Option.map parseColor
-            let strokeWidth = e.Attribute(xName "stroke-width").Value |> Option.ofObj |> Option.map parseSize
-
-            let drawType = buildDrawType fillColor strokeColor strokeWidth None
+            let drawType = parseDrawType e []
 
             RefSpace.At(cx, cy), { Shape = Ellipse(Vector(rx * 2., ry * 2. )); DrawType = drawType }
 
