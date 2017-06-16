@@ -35,9 +35,8 @@ let addBoundingBox2 shapes =
         | None -> ()
     ]
 
-let timeline = Svg.SvgParser.FromFile @"C:\Users\Pierre\Downloads\csharponly\timeline.svg" |> DrawingUtils.recenter
-let smallMe = Svg.SvgParser.FromFile @"C:\Users\Pierre\Downloads\csharponly\small-me.svg" |> DrawingUtils.recenter
 let what = Svg.SvgParser.FromFile @"C:\Code\FSharp\CSharpOnly\sketches\what.svg" |> DrawingUtils.recenter
+let archiClassique = Svg.SvgParser.FromFile @"C:\Code\FSharp\CSharpOnly\sketches\archi-classique.svg" |> DrawingUtils.recenter |> HandDrawer.RedrawByHand
 
 shapes {
     yield! timeline |> at origin

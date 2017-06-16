@@ -1,3 +1,6 @@
+#### 0.0.7-beta - June 16th 2017
+* Svg parsing improvements
+
 #### 0.0.6-beta - June 12th 2017
 * Svg parsing improvements
 

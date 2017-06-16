@@ -226,6 +226,16 @@ module internal ParsingHelper =
 
             RefSpace.At(cx, cy), { Shape = Ellipse(Vector(rx * 2., ry * 2. )); DrawType = drawType }
 
+        | "rect" ->
+            let x = parseAttributeWith parseFloat "x" e
+            let y = parseAttributeWith parseFloat "y" e
+            let width = parseAttributeWith parseFloat "width" e
+            let height = parseAttributeWith parseFloat "height" e
+
+            let drawType = parseDrawType e []
+
+            RefSpace.At(x + width / 2., y + height / 2.), { Shape = Rectangle(Vector(width, height)); DrawType = drawType }
+
         | name -> failwithf "Cannot parse element %s" name
 
 module SvgParser =
