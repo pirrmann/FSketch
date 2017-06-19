@@ -18,6 +18,9 @@ type SubPathState = {
     PathParts: PathPart list }
 
 module internal ParsingHelper =
+    let emptyValues = Set.ofList ["null"; "none"; "undefined"]
+    let (|EmptyValue|_|) v = if emptyValues.Contains v then Some v else None
+
     let stringOfChars s = s |> Seq.toArray |> String
     let skipSpacesIfAny = List.skipWhile Char.IsWhiteSpace
     let skipChar c s =
@@ -99,7 +102,7 @@ module internal ParsingHelper =
 
     let parseColor (s:string) =
         match s.ToLowerInvariant() with
-        | "none" | "null" -> Colors.Transparent
+        | EmptyValue _ -> Colors.Transparent
         | hexaPattern when hexaPattern.StartsWith("#") ->
             let hexa = hexaPattern.Substring(1)
             let r, g, b =
@@ -133,7 +136,7 @@ module internal ParsingHelper =
     let parseLineJoin (s:string) =
         match s with
         | "round" -> LineJoin.Round
-        | "null" -> LineJoin.Miter
+        | EmptyValue _ -> LineJoin.Miter
         | _ -> failwithf "Cannot parse linejoin value '%s'" s
 
     let buildDrawType fillColor strokeColor strokeWidth strokeLineJoin =
