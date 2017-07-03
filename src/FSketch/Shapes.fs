@@ -9,8 +9,11 @@ open NumericOps
 
 type Vector = Vector of Numeric * Numeric with
     static member Zero = Vector (Zero, Zero)
+    static member (~-) (Vector(x1, y1)) = Vector(negate x1, negate y1)
     static member (+) (Vector(x1, y1) , Vector(x2, y2)) = Vector(add(x1, x2), add(y1, y2))
     static member (-) (Vector(x1, y1) , Vector(x2, y2)) = Vector(substract(x1, x2), substract(y1, y2))
+    static member (*) (Vector(x1, y1) , ratio) = Vector(multiply(ratio, x1), multiply(ratio, y1))
+    static member (*) (ratio, Vector(x1, y1)) = Vector(multiply(ratio, x1), multiply(ratio, y1))
     member this.X = match this with | Vector(x, _) -> x
     member this.Y = match this with | Vector(_, y) -> y
     override this.ToString() = sprintf "%A" this

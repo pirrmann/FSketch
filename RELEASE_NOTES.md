@@ -1,3 +1,6 @@
+#### 0.0.9-beta - July 3rd 2017
+* Missing vector operators
+
 #### 0.0.8-beta - June 19th 2017
 * Svg parsing improvements
 
